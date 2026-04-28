@@ -5,11 +5,11 @@ Este trimestre se enfoca en el estudio profundo de la Programación Orientada a 
 ---
 
 ## 📅 Trimestre 1: Lógica de Objetos e Interfaz (Unidades 1 a 5, 7 y 8)
+**Periodo:** 26/01/2026 al 25/04/2026
 
 ### 📝 Evaluación 1: Paradigma de POO, Clases y Objetos (Unidad 1 y 2)
 **Objetivo:** Comprender y aplicar los fundamentos del paradigma orientado a objetos y el modelado de sistemas.
 - Paradigma de la Programación Orientada a Objetos (POO).
-- Modelado UML (Lenguaje Unificado de Modelado).
 - Definición de Lenguaje de POO: Clases y Objetos.
 - Atributos y Métodos.
 - Constructores y Destructores.

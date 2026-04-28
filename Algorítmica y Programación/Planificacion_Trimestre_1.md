@@ -5,6 +5,7 @@ Este documento detalla la planificación del Trimestre 1, dividido en 4 evaluaci
 ---
 
 ## 📅 Trimestre 1: Fundamentos y Lógica con JavaScript
+**Periodo:** 26/01/2026 al 25/04/2026
 
 ### 📝 Evaluación 1: Fundamentos de Programación y Lógica Básica
 ## Examen escrito 

@@ -5,6 +5,7 @@ Este trimestre se enfoca en la Fase 2 del contenido programático (Unidades 6 y 
 ---
 
 ## 📅 Trimestre 2: Arquitectura y Programación Web (Unidades 6 y 8)
+**Periodo:** 04/05/2026 al 17/07/2026
 
 ### 📝 Evaluación 1: Arquitectura Cliente-Servidor con Express.js (Unidad 6 y 9)
 **Objetivo:** Implementar la arquitectura de 3 capas mediante un servidor profesional.

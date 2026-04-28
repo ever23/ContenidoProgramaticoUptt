@@ -5,6 +5,7 @@ Este documento detalla la planificación del tercer trimestre, adaptando los con
 ---
 
 ## 📅 Trimestre 3: Referencias, Recursividad y Estructuras Dinámicas
+**Periodo:** 21/09/2026 al 28/11/2026
 
 ### 📝 Evaluación 1: Punteros y Gestión de Memoria (Unidad 11)
 **Objetivo:** Comprender cómo se gestiona la memoria en la computadora y la diferencia entre valores y referencias.

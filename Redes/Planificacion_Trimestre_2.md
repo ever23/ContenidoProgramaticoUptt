@@ -1,33 +1,41 @@
-# Planificación Académica: Redes (Trimestre 2) - Enfoque Práctico
+# Planificación Académica: Redes (Trimestre 2)
 
-Tras un primer trimestre teórico, este periodo se enfoca en la implementación, configuración y diseño práctico de redes locales.
+Este trimestre cubre la segunda mitad del contenido programático (Unidades 7 a la 12). Aquí los alumnos pasan de la teoría física a la **configuración lógica, administración y seguridad** de las redes.
 
 ---
 
-## 📅 Trimestre 2: Laboratorio y Diseño de Redes
+## 📅 Trimestre 2: Administración, Enrutamiento y Seguridad (Unidades 7 a 12)
+**Periodo:** 04/05/2026 al 17/07/2026
 
-### 📝 Evaluación 1: Laboratorio de Conectividad y Estándares (Unidad 12)
-**Objetivo:** Consolidar el conocimiento físico mediante la construcción de cables y pruebas de señal.
-- **Práctica Real:** Ponchado de cables UTP (Normas 568A y 568B).
-- **Pruebas de Continuidad:** Uso de testers de red para verificar el correcto funcionamiento.
-- **Análisis de Señal:** Identificación de problemas comunes (ruido, atenuación y diafonía).
+### 📝 Evaluación 1: Planeación y Estándares de Red (Unidades 7 y 12)
+**Objetivo:** Diseñar redes locales aplicando los estándares de la industria.
+- **Planeación LAN:** Diseño e instalación de la infraestructura de red.
+- **Estándares IEEE:** Clasificación y aplicación práctica.
+- **Ethernet y Wi-Fi:** Estándares 802.3 (Cableado) y 802.11 (Inalámbrico).
+- **Actividad:** **Proyecto de Diseño de Red / Laboratorio.** (25%)
 
-### 📝 Evaluación 2: Simulación de Redes y Protocolos (Unidad 5 y 6)
-**Objetivo:** Visualizar el flujo de datos y los modelos OSI/TCP-IP mediante software de simulación.
-- **Uso de Simuladores:** Introducción a herramientas como *Cisco Packet Tracer* o similares.
-- **Laboratorio Virtual:** Crear una red simple (PC-Switch-PC) y observar el intercambio de paquetes (ICMP/Ping).
-- **Análisis de Capas:** Ver cómo se encapsula la información en cada capa del modelo OSI durante la simulación.
+### 📝 Evaluación 2: Direccionamiento, Enrutamiento y Subredes (Unidades 10 y 11)
+**Objetivo:** Dominar el esquema lógico de direcciones y la segmentación de redes.
+- **Enrutamiento:** Protocolos enrutados vs de enrutamiento. Topologías lógicas.
+- **Subredes (Subnetting):** Cálculos de segmentación y razones para implementarlas.
+- **Protocolo IP:** IPv4 (Generalidades, clases, ejercicios) e IPv6.
+- **Actividad:** **Examen Práctico / Ejercicios de Subnetting.** (25%)
 
-### 📝 Evaluación 3: Direccionamiento Práctico e IPv6
-**Objetivo:** Configurar identidades en una red y entender el salto a IPv6.
-- **Configuración IP:** Asignación manual de IPs, Máscaras y Gateways en estaciones de trabajo.
-- **Práctica de Conectividad:** Comandos de consola (`ipconfig`, `ping`, `tracert`).
-- **IPv6:** Configuración básica y diferencias visuales con IPv4.
+### 📝 Evaluación 3: Administración y Servicios de Red (Unidad 8)
+**Objetivo:** Configurar y administrar servicios vitales en un entorno de red (Sistemas Linux/Windows).
+- **Configuración Base:** TCP/IP, Tarjeta de red y demonios de red (inetd/xinetd).
+- **Servicios de Transferencia:** FTP, SFTP, SCP. Acceso remoto con SSH/Telnet.
+- **Servicios de Resolución y Web:** DNS, HTTP (Apache), NFS/Samba.
+- **Actividad:** **Laboratorio Práctico de Configuración de Servidores.** (25%)
 
-### 📝 Evaluación 4: Proyecto Final: Diseño y Simulación de una LAN (Unidad 7)
-**Objetivo:** Diseñar y validar una red completa para un caso real.
-- **El Proyecto consistirá en:**
-    1. **Diseño Físico:** Plano de ubicación de equipos y cableado.
-    2. **Diseño Lógico:** Esquema de direccionamiento IP para todos los nodos.
-    3. **Simulación:** Entregar el archivo de la red funcionando en el simulador.
-    4. **Presupuesto:** Listado de materiales y hardware necesario.
+### 📝 Evaluación 4: Seguridad Perimetral y VPNs (Unidad 9)
+**Objetivo:** Proteger la infraestructura de red contra accesos no autorizados.
+- **Filtrado y Firewalls:** Configuración de Iptables/Ipchains.
+- **Control de Acceso:** Configuración de Proxy, TCP_wrappers y PAM.
+- **Túneles Seguros:** Implementación de VPNs usando IPsec / Kerberos.
+- **Actividad:** **Laboratorio Práctico de Seguridad / Defensa Final.** (25%)
+
+---
+
+## ✅ Resumen del Trimestre
+Este es el trimestre más práctico y profesionalizante. Las evaluaciones progresan lógicamente: primero **diseñan** la red (Eval 1), luego calculan las **direcciones lógicas** (Eval 2), después le instalan los **servicios** (Eval 3) y finalmente la **aseguran** contra ataques externos (Eval 4).

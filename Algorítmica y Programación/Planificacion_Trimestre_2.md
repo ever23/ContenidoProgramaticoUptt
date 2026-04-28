@@ -5,6 +5,7 @@ Este documento detalla la planificación del segundo trimestre, enfocado en modu
 ---
 
 ## 📅 Trimestre 2: Modularidad, Arreglos y Persistencia
+**Periodo:** 04/05/2026 al 17/07/2026
 
 ### 📝 Evaluación 1: Programación Modular (Unidad 6)
 ## evaluacion en el laboratorio
