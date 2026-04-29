@@ -115,7 +115,10 @@ El concepto de ámbito (scope) en JavaScript es quizás el aspecto más crítico
 Node.js ha perfeccionado la aplicación de estos conceptos mediante la implementación de sistemas de módulos robustos y patrones de diseño orientados a la escalabilidad.
 
 ### Sistemas de Módulos: CommonJS vs. ES Modules
-CommonJS (CJS) utiliza `require` y `module.exports`, cargando los módulos de forma síncrona. ES Modules (ESM) utiliza `import` y `export`, permitiendo un análisis estático del código y optimizaciones de rendimiento.
+Un sistema de módulos es el estándar que dicta cómo el código escrito en un archivo (módulo) puede ser encapsulado, exportado y posteriormente importado por otro archivo. En el ecosistema de Node.js, la arquitectura se divide históricamente en dos grandes estándares:
+
+- **CommonJS (CJS):** Es el sistema de módulos original y tradicional que le dio vida a Node.js. Su característica técnica principal es que su mecanismo de carga es **síncrono**; es decir, el hilo de ejecución se bloquea hasta que el módulo requerido es leído y cargado completamente desde el disco duro a la memoria RAM. Utiliza la función `require()` para importar dependencias y el objeto `module.exports` para exponer la lógica. Dado su diseño síncrono, es altamente eficiente para arquitecturas de servidor (backend), pero inoperante en entornos de navegador web.
+- **ECMAScript Modules (ESM):** Es el estándar oficial moderno introducido en la especificación ES6. A diferencia de CommonJS, el sistema ESM es **asíncrono** y de análisis estático. Esto significa que el motor de JavaScript (como V8) puede analizar el árbol de dependencias *antes* de ejecutar el código, habilitando optimizaciones críticas a nivel de compilación, como el *tree-shaking* (la eliminación automática de código que fue exportado pero nunca utilizado). Utiliza las palabras clave `import` y `export`. ESM representa la unificación definitiva del lenguaje, ya que es soportado nativamente tanto por Node.js como por los navegadores web modernos.
 
 **Ejemplo CommonJS:**
 ```javascript
