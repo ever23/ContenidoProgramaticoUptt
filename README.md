@@ -50,3 +50,42 @@ Los archivos generados se guardan automáticamente en:
   }
 }
 ```
+
+## 📚 Mapa de Lecturas de Cátedra (Materiales de Estudio)
+A continuación, los enlaces directos a los manuales de estudio profundos (Manuales de Cátedra) generados para cada unidad curricular y trimestre:
+
+### Trayecto I
+- **Algorítmica y Programación (Trimestre 1)**
+  - [Evaluación 1: Metodología de las 4 Fases y Algoritmia Base](./Algorítmica%20y%20Programación/documentacion/I-I/Lectura_Catedra_Evaluacion_1.md)
+- **Algorítmica y Programación (Trimestre 2)**
+  - [Evaluación 1: Arquitectura Modular, Funciones y Ámbitos](./Algorítmica%20y%20Programación/documentacion/I-II/Lectura_Catedra_Evaluacion_1.md)
+
+### Trayecto II
+- **Programación II (Trimestre 5)**
+  - [Evaluación 1: Arquitectura Cliente-Servidor, Capas y Express.js](./programacion%20II/documentacion/II-V/Lectura_Catedra_Evaluacion_1.md)
+- **Redes de Computadoras (Trimestre 5)**
+  - [Evaluación 1: Planeación LAN, Topologías y Estándares IEEE](./Redes/documentacion/II-V/Lectura_Catedra_Evaluacion_1.md)
+
+---
+
+## 📅 Mapa de Planificaciones y Contenidos Programáticos
+A continuación, los enlaces a los documentos rectores que definen los objetivos, unidades y estrategias de evaluación por trimestre:
+
+### Trayecto I: Algorítmica y Programación
+- [Propuesta de Contenido Programático 2026](./Algorítmica%20y%20Programación/Propuesta_Contenido_Programatico_2026.md)
+- [Contenido Programático Base](./Algorítmica%20y%20Programación/Contenido_Programatico.md)
+- [Planificación Trimestre 1 (I-I)](./Algorítmica%20y%20Programación/Planificacion_Trimestre_I-I.md)
+- [Planificación Trimestre 2 (I-II)](./Algorítmica%20y%20Programación/Planificacion_Trimestre_I-II.md)
+- [Planificación Trimestre 3 (I-III)](./Algorítmica%20y%20Programación/Planificacion_Trimestre_I-III.md)
+
+### Trayecto II: Programación II
+- [Propuesta de Contenido Programático 2026](./programacion%20II/Propuesta_Contenido_Programatico_2026.md)
+- [Contenido Programático Base](./programacion%20II/Contenido_Programatico.md)
+- [Planificación Trimestre 4 (II-IV)](./programacion%20II/Planificacion_Trimestre_II-IV.md)
+- [Planificación Trimestre 5 (II-V)](./programacion%20II/Planificacion_Trimestre_II-V.md)
+- [Planificación Trimestre 6 (II-VI)](./programacion%20II/Planificacion_Trimestre_II-VI.md)
+
+### Trayecto II: Redes de Computadoras
+- [Contenido Programático](./Redes/Contenido_Programatico.md)
+- [Planificación Trimestre 4 (II-IV)](./Redes/Planificacion_Trimestre_II-IV.md)
+- [Planificación Trimestre 5 (II-V)](./Redes/Planificacion_Trimestre_II-V.md)
