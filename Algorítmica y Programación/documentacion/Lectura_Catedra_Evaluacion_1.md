@@ -66,7 +66,7 @@ Para resolver cualquier problema computacional de manera estructurada y evitar e
 Antes de procesar información, necesitamos dónde guardarla. En esta fase identificamos y "reservamos" los espacios necesarios en la memoria RAM (las variables). Es como preparar los recipientes (boles, sartenes) antes de empezar a cocinar. Si tu programa calculará la edad de alguien, necesitas declarar un espacio para el "año de nacimiento" y otro para el "año actual".
 
 ### 2. FASE DE ENTRADA (Adquisición de Insumos)
-La computadora no es adivina; necesita que el mundo exterior le provea los datos. En esta fase, capturamos la información necesaria a través de interfaces de usuario (teclado, clics, archivos). Utilizamos instrucciones en pseudocódigo como `Leer` o funciones como `prompt` para solicitar los "ingredientes" de nuestra receta.
+La computadora no es adivina; necesita que el mundo exterior le provea los datos. En esta fase, capturamos la información necesaria a través del teclado. Para que tu transición al lenguaje JavaScript sea natural y sin choques lógicos, utilizaremos una sintaxis de asignación funcional en nuestro pseudocódigo: `variable = Leer()`. Esto preparará tu cerebro para cuando uses instrucciones reales como `variable = prompt()`.
 
 ### 3. FASE DE CÁLCULO (Transformación)
 Es el núcleo del algoritmo. Aquí interviene la Unidad Aritmético Lógica (ALU) del procesador. Los datos capturados en la entrada se someten a operaciones matemáticas (sumas, multiplicaciones) o lógicas (comparaciones) para transformarlos en nueva información. Es el acto de cocinar los ingredientes.
@@ -74,11 +74,30 @@ Es el núcleo del algoritmo. Aquí interviene la Unidad Aritmético Lógica (ALU
 ### 4. FASE DE SALIDA (Retroalimentación)
 Un algoritmo que calcula un resultado y se lo guarda en su memoria es inútil. La fase final consiste en devolver el resultado procesado al usuario o al sistema que lo solicitó. Usamos instrucciones como `Escribir` o `console.log` para mostrar el plato terminado.
 
-> **Ejemplo Aplicado: Algoritmo para calcular el Índice de Masa Corporal (IMC)**
-> * **Fase 1 (Declaración):** Declarar variables `peso_kg`, `estatura_m`, `imc`.
-> * **Fase 2 (Entrada):** Pedir al usuario: "Ingrese su peso en kilogramos" (Leer `peso_kg`). Pedir al usuario: "Ingrese su estatura en metros" (Leer `estatura_m`).
-> * **Fase 3 (Cálculo):** `imc = peso_kg / (estatura_m * estatura_m)`.
-> * **Fase 4 (Salida):** Escribir en pantalla: "Su Índice de Masa Corporal es: " + `imc`.
+> **Ejemplo Aplicado (Caso de Estudio): Calculadora de Masas para Arepas**
+> **Problema:** Queremos saber cuántas tazas de harina y agua necesitamos según el número de personas.
+
+```text
+Algoritmo CalcularMasaArepas
+
+  // Fase 1: Declaración de Variables
+  Variable personas Entero;
+  Variable tazas_harina, tazas_agua Real;
+
+  // Fase 2: Entrada
+  Escribir "Ingresa la cantidad de personas:";
+   personas = Leer();
+
+  // Fase 3: Proceso (Cálculo)
+  tazas_harina = personas * 0.5;
+  tazas_agua = personas * 0.6;
+
+  // Fase 4: Salida
+  Escribir "Necesitas ", tazas_harina, " tazas de harina.";
+  Escribir "Necesitas ", tazas_agua, " tazas de agua.";
+
+Fin
+```
 
 ---
 
