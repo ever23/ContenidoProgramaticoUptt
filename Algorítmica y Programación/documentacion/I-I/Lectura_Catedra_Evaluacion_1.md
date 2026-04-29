@@ -79,6 +79,7 @@ Un algoritmo que calcula un resultado y se lo guarda en su memoria es inútil. L
 
 ```text
 Algoritmo CalcularMasaArepas
+Inicio
 
   // Fase 1: Declaración de Variables
   Variable personas Entero;
