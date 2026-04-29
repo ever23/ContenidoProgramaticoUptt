@@ -17,7 +17,7 @@ Este documento establece los criterios y reglas pedagógicas para la generación
 - **Cierre del Trimestre:** La última evaluación (Eval 4) debe ser preferiblemente en la última semana efectiva de clases (Semana 11 o 12).
 
 ## 4. Metodología de Contenido
-- **Mapping de Unidades:** Los contenidos deben extraerse de los archivos `Planificacion_Trimestre_X.md` de cada materia.
+- **Mapeo de Unidades:** Los contenidos deben extraerse de los archivos `Planificacion_Trimestre_X.md`. Cada evaluación debe cubrir unidades específicas (Relación 1:1 o 1:N).
 - **Las 4 Fases:** En materias de programación, los contenidos deben seguir la estructura: Declaración, Entrada, Cálculo y Salida.
 
 ## 5. Automatización (MCP)
