@@ -57,8 +57,14 @@ A continuación, los enlaces directos a los manuales de estudio profundos (Manua
 ### Trayecto I
 - **Algorítmica y Programación (Trimestre 1)**
   - [Evaluación 1: Metodología de las 4 Fases y Algoritmia Base](./Algorítmica%20y%20Programación/documentacion/I-I/Lectura_Catedra_Evaluacion_1.md)
+  - [Evaluación 2: Entornos de Desarrollo, CLI, Node.js y Diagramas](./Algorítmica%20y%20Programación/documentacion/I-I/Lectura_Catedra_Evaluacion_2.md)
+  - [Evaluación 3: Arquitectura de la Lógica de Control (Condicionales)](./Algorítmica%20y%20Programación/documentacion/I-I/Lectura_Catedra_Evaluacion_3.md)
+  - [Evaluación 4: Arquitectura de Control Iterativo (Bucles)](./Algorítmica%20y%20Programación/documentacion/I-I/Lectura_Catedra_Evaluacion_4.md)
 - **Algorítmica y Programación (Trimestre 2)**
   - [Evaluación 1: Arquitectura Modular, Funciones y Ámbitos](./Algorítmica%20y%20Programación/documentacion/I-II/Lectura_Catedra_Evaluacion_1.md)
+  - [Evaluación 2: Arreglos Unidimensionales y Procesamiento](./Algorítmica%20y%20Programación/documentacion/I-II/Lectura_Catedra_Evaluacion_2.md)
+  - [Evaluación 3: Matrices Bidimensionales y Cadenas](./Algorítmica%20y%20Programación/documentacion/I-II/Lectura_Catedra_Evaluacion_3.md)
+  - [Evaluación 4: Estructuras de Registros (Objetos) y Persistencia (Archivos)](./Algorítmica%20y%20Programación/documentacion/I-II/Lectura_Catedra_Evaluacion_4.md)
 
 ### Trayecto II
 - **Programación II (Trimestre 5)**

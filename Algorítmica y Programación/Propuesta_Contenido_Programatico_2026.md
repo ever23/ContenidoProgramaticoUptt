@@ -24,6 +24,17 @@ El curso se desarrolla íntegramente en la **Terminal de Comandos**, priorizando
 
 ---
 
+## 🏫 Metodología de Impartición: Clase Invertida (Flipped Classroom)
+Para maximizar la eficiencia del tiempo presencial y fomentar la autonomía intelectual del estudiante, esta cátedra adopta el modelo pedagógico de **Clase Invertida**:
+1. **Apropiación Teórica Previa:** El estudiante recibe un *Manual de Estudio Profundo* (Lecturas de Cátedra) antes de cada evaluación. Este material centraliza toda la teoría, conceptos abstractos y procesos de instalación del entorno.
+2. **El Aula como Laboratorio Activo:** El salón de clases deja de ser un espacio pasivo de dictado y copia. El tiempo presencial se utiliza al 100% como un taller de ingeniería para:
+   * Traducir el pseudocódigo asimilado en casa a código ejecutable en Node.js.
+   * Realizar depuración de errores (*debugging*) en vivo bajo el rol de mentor del docente.
+   * Debatir estrategias lógicas para la resolución de problemas (pensamiento crítico).
+Esta metodología erradica el tiempo perdido en teoría básica durante la clase y ataca directamente el bloqueo del estudiante al momento de programar ("El Síndrome de la Hoja en Blanco").
+
+---
+
 ## 📅 Trimestre 1: Lógica y Estructura de Control (Unidades 1-6)
 
 ### Unidad 1: Algoritmo y Programas

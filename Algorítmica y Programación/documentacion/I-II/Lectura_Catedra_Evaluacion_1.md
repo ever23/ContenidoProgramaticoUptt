@@ -1,120 +1,107 @@
-# Arquitectura de la Programación Modular y el Ecosistema de Funciones en JavaScript: Un Análisis Técnico y Conceptual
+# Manual de Estudio Profundo: Evaluación 1
+## Materia: Algorítmica y Programación (Trayecto I - Trimestre II)
+### Eje Temático: Arquitectura Modular, Funciones y Ámbitos (Scope)
 
-La ingeniería de software contemporánea ha experimentado un cambio de paradigma fundamental, alejándose de las estructuras monolíticas hacia sistemas altamente descompuestos y granulares. Este cambio está impulsado por la necesidad de gestionar la creciente complejidad de las aplicaciones modernas, donde la programación modular se erige como la disciplina central para organizar el pensamiento lógico y la ejecución técnica. En el contexto del lenguaje JavaScript, esta modularidad se manifiesta no solo a través de sistemas de archivos independientes, sino principalmente mediante el uso sofisticado de funciones y procedimientos, los cuales actúan como los bloques de construcción fundamentales de cualquier arquitectura robusta. El presente reporte analiza de manera exhaustiva los conceptos genéricos de la programación modular, la distinción teórica entre funciones y procedimientos, la anatomía técnica de las declaraciones en JavaScript, y las complejas mecánicas de ámbitos, cierres y transferencia de parámetros que definen el comportamiento del lenguaje en entornos profesionales.
+---
 
-## Fundamentos y Evolución de la Programación Modular
-La programación modular es una técnica de diseño de software que enfatiza la separación de la funcionalidad de un programa en módulos independientes e intercambiables, de modo que cada uno contenga todo lo necesario para ejecutar un solo aspecto de la funcionalidad deseada. Este enfoque no es una innovación reciente; sus raíces se remontan a finales de la década de 1960, cuando la industria comenzó a enfrentar la denominada crisis del software, donde los sistemas se volvieron demasiado grandes para ser comprendidos o mantenidos por un solo individuo o equipo sin una estructura divisoria clara.
+## 🏗️ CAPÍTULO I: El Problema del "Código Espagueti" y la Solución Modular
 
-La esencia de la modularidad radica en la descomposición de problemas complejos en subproblemas más pequeños y manejables. Cada módulo se diseña para realizar una tarea específica dentro del sistema global, promoviendo una eficiencia en el desarrollo y permitiendo que diferentes partes del software sean probadas y refinadas de manera aislada. En el desarrollo moderno, la modularidad se ha convertido en una práctica fundamental que facilita no solo la organización del código, sino también la escalabilidad y la robustez de los sistemas empresariales.
+Durante el primer trimestre, escribimos programas de arriba hacia abajo (secuenciales) que resolvían problemas de cálculo inmediatos. Sin embargo, en el mundo real de la ingeniería, los sistemas de software tienen miles o millones de líneas de código. Si escribiéramos todo de corrido, el código se volvería ilegible, frágil e imposible de mantener: a esto se le conoce como **"Código Espagueti"**.
 
-## Principios Cardinales de la Modulización
-Para que un sistema sea verdaderamente modular, debe adherirse a principios específicos que garanticen la independencia y la interoperabilidad de sus componentes. El primer principio es la **abstracción**, donde cada módulo se enfoca en realizar un trabajo específico y oculta los detalles de implementación al resto del programa. Esto se complementa con el **encapsulamiento**, que consiste en agrupar los datos y los procedimientos que operan sobre ellos, manteniendo el estado interno protegido de interferencias externas.
+La **Programación Modular** surge como la cura a este caos. **Técnicamente, se define como un paradigma de diseño de software basado en la descomposición algorítmica de un sistema complejo en subprogramas más pequeños, independientes e intercambiables, denominados "módulos".** 
 
-Dos conceptos técnicos críticos que miden la calidad de la modularización son la cohesión y el acoplamiento. Un módulo de alta calidad debe poseer una **alta cohesión**, lo que significa que los elementos dentro del módulo están estrechamente relacionados y trabajan hacia un propósito único. Simultáneamente, el sistema debe aspirar a un **acoplamiento débil (loose coupling)**, minimizando las dependencias entre módulos para asegurar que los cambios en una parte del sistema no provoquen efectos en cadena o errores impredecibles en otras secciones.
+El objetivo arquitectónico de esta técnica es lograr una **Alta Cohesión** (cada módulo hace una sola cosa muy bien) y un **Bajo Acoplamiento** (los módulos no dependen excesivamente unos de otros), facilitando el mantenimiento, la escalabilidad y la depuración del código.
 
-| Principio | Descripción Técnica | Impacto en el Ciclo de Vida |
-| :--- | :--- | :--- |
-| **Abstracción** | Ocultamiento de la complejidad interna tras una interfaz simple. | Facilita el uso de componentes sin entender su lógica interna. |
-| **Encapsulamiento** | Agrupación de datos y métodos con acceso restringido. | Protege la integridad de los datos y evita mutaciones accidentales. |
-| **Alta Cohesión** | Enfoque de un módulo en una única responsabilidad (SRP). | Mejora la legibilidad y facilita las pruebas unitarias. |
-| **Bajo Acoplamiento** | Reducción de las interconexiones entre módulos independientes. | Permite refactorizar módulos sin afectar el sistema global. |
-| **Separación de Intereses** | División del programa en secciones que abordan preocupaciones distintas. | Mejora la organización y permite el desarrollo paralelo. |
+> **💡 La Analogía del Restaurante (El concepto en la vida real):** 
+> En lugar de que una sola persona tome la orden, cocine, sirva la comida y cobre al cliente (Código Monolítico), la programación modular divide el trabajo: hay un mesero, un chef y un cajero. Cada uno tiene una tarea específica (**Alta Cohesión**), y si la cocina se daña, no impide que el cajero siga cobrando lo que ya se sirvió (**Bajo Acoplamiento**).
 
-*Tabla 1: Principios fundamentales de la arquitectura modular en el desarrollo de software.*
+En lenguajes como JavaScript, esta separación del trabajo se logra principalmente a través de la creación y orquestación de **Funciones**.
 
-## Tipologías de la Programación Modular
-La implementación de la modularidad puede adoptar diversas formas dependiendo del paradigma de programación y los objetivos del sistema. La **programación modular orientada a objetos (OOP)** es quizás la más extendida, donde los módulos se estructuran como clases que encapsulan tanto datos como funciones. Por otro lado, la **programación modular orientada a aspectos (AOP)** busca separar las preocupaciones transversales, como el registro de logs o la seguridad, de la lógica de negocio central, permitiendo que estas funciones se apliquen a múltiples módulos sin duplicar código.
+---
 
-En entornos de interfaz de usuario, la **programación modular dirigida por eventos** es predominante. Aquí, los módulos se estructuran en torno a eventos y controladores de eventos, reaccionando a acciones del usuario o señales del sistema de manera independiente. Finalmente, la **programación modular dirigida por datos** se centra en módulos que manipulan y procesan flujos de información, una técnica común en sistemas de procesamiento de señales o análisis de grandes volúmenes de datos.
+## ⚙️ CAPÍTULO II: Anatomía de una Función
 
-## ¿Qué es una Función?
-En términos generales, una función es un bloque de código reutilizable que realiza una tarea específica. Su objetivo principal es agrupar un conjunto de instrucciones bajo un nombre, de modo que no tengas que escribir el mismo código una y otra vez.
+### 2.1 ¿Qué es una Función?
+En términos prácticos, una función es un **sub-programa** o un "mini-programa" dentro de tu código principal. Es una caja negra diseñada para hacer una tarea específica:
+1.  Le entregas datos crudos (**Entradas**).
+2.  Hace un proceso interno protegido y aislado (**Cálculo**).
+3.  Te devuelve un resultado útil (**Salida** o valor de retorno).
 
-Piensa en una función como una "caja negra":
-1. Le entregas algo (Entrada / Datos).
-2. Ella hace un proceso interno.
-3. Te devuelve un resultado (Salida / Valor de retorno).
+### 2.2 Parámetros vs. Argumentos (La trampa del principiante)
+Es vital en la ingeniería de software hablar con propiedad técnica. Aunque a menudo se usan erróneamente como sinónimos, son dos conceptos muy distintos en el ciclo de vida de una función:
 
-## La Dualidad Conceptual: Funciones frente a Procedimientos
-En la teoría general de la programación, existe una distinción histórica entre funciones y procedimientos, aunque en el contexto de JavaScript ambos términos a menudo se funden bajo el paraguas de las funciones. Sin embargo, para un arquitecto de software, entender la diferencia es crucial para el diseño de interfaces y la gestión de efectos secundarios.
+| Concepto | Definición Técnica | En la vida real | Ejemplo en Código |
+| :--- | :--- | :--- | :--- |
+| **Parámetro** | Es la variable *vacía* que la función **espera recibir** en su definición. | "Tráeme un vaso de *algo*." | `function saludar(nombre)` |
+| **Argumento** | Es el valor o dato *real* que le **inyectas** a la función al invocarla. | El *agua* que viertes en el vaso. | `saludar("Ana")` |
 
-Un **procedimiento** se define tradicionalmente como una rutina almacenada que puede aceptar argumentos pero que no devuelve un valor resultante de manera obligatoria; su propósito principal es ejecutar una serie de acciones o tareas, como insertar datos en una base de datos o imprimir un mensaje en consola. Por el contrario, una **función** se concibe como una entidad que toma parámetros de entrada, realiza un procesamiento (como un cálculo matemático) y devuelve un valor único y específico al llamador.
+### 2.3 La Dualidad: Funciones vs Procedimientos
+*   **Procedimiento:** Ejecuta una serie de acciones pero **no devuelve** un resultado matemático o lógico (Ejemplo: `console.log("Hola, bienvenido")`).
+*   **Función Pura:** Toma datos, los transforma y **obligatoriamente devuelve** un valor nuevo hacia el programa principal usando la palabra clave `return`. 
 
-En JavaScript, esta distinción técnica es nominal, ya que el lenguaje trata todas las declaraciones de este tipo como objetos de la clase `Function`. Sin embargo, el comportamiento interno dicta que si una función no incluye una sentencia `return` explícita, el motor de JavaScript devuelve automáticamente `undefined`, lo que técnicamente la convierte en una función que devuelve un valor nulo, cumpliendo así la definición de procedimiento en otros lenguajes.
+> **⚠️ Advertencia Profesional:** Si en Node.js creas una función para hacer un cálculo y olvidas colocar el `return` al final, la función hará su trabajo pero devolverá `undefined` por defecto hacia el exterior, arruinando y rompiendo tu programa principal.
 
-| Característica | Función (Sentido Estricto) | Procedimiento |
-| :--- | :--- | :--- |
-| **Valor de Retorno** | Obligatorio (matemático o lógico). | Opcional (a menudo devuelve `void` o `undefined`). |
-| **Objetivo** | Transformación de datos y cálculo. | Ejecución de tareas y manipulación de estado. |
-| **Contexto de Uso** | Comúnmente dentro de expresiones matemáticas o lógicas. | Llamado como una instrucción independiente (statement). |
-| **Efectos Secundarios** | Idealmente ninguno (Pura). | Comúnmente tiene efectos secundarios (Impura). |
-| **Ejemplo en JS** | `Math.sqrt(x)` | `console.log("mensaje")` |
+---
 
-*Tabla 2: Comparativa técnica entre funciones y procedimientos en el diseño de algoritmos.*
+## 🛠️ CAPÍTULO III: Declaraciones en JavaScript
 
-La relevancia de esta distinción se manifiesta en la programación funcional, donde se fomenta el uso de **funciones puras** sobre procedimientos. Una función pura es aquella que, para la misma entrada, siempre produce la misma salida y no tiene efectos colaterales en el entorno externo. Esto facilita enormemente la depuración y las pruebas, ya que el comportamiento de la función es totalmente predecible y no depende de variables globales o estados ocultos que puedan cambiar durante la ejecución del programa.
+JavaScript ofrece múltiples formas de crear estos "mini-programas". Las dos estructurales más importantes para este nivel son:
 
-## Anatomía y Diversidad de Declaraciones en JavaScript
-JavaScript ofrece una versatilidad excepcional en la forma en que se definen las funciones. Cada método de declaración tiene implicaciones profundas en el comportamiento del motor de ejecución, la gestión del contexto y el ciclo de vida de las variables.
-
-### 1. Declaración de Función (Function Declaration)
-Es la forma clásica que utiliza la palabra clave `function` seguida de un nombre obligatorio. Su característica principal es el *hoisting*, que permite invocar la función incluso antes de su línea de definición en el código.
+### 1. Declaración Clásica (Function Declaration)
+Es la forma tradicional. Tiene una propiedad técnica llamada *hoisting* (elevación), lo que significa que el motor de JavaScript te permite invocarla (llamarla) incluso líneas antes de donde fue escrita.
 ```javascript
-function saludar(nombre) {
-  return `Hola, ${nombre}`;
+// Invocación (Inyectando los Argumentos 5 y 10)
+const total = calcularArea(5, 10); 
+
+// Definición (Declarando los Parámetros base y altura)
+function calcularArea(base, altura) {
+  return base * altura;
 }
-console.log(saludar("Ana")); // "Hola, Ana"
 ```
 
-### 2. Expresión de Función (Function Expression)
-La función se crea y se asigna a una variable. Pueden ser anónimas (sin nombre propio) o nombradas (útiles para recursión y depuración). A diferencia de las declaraciones, no sufren *hoisting* completo; la variable existe pero la función no está disponible hasta que se procesa la asignación.
+### 2. Funciones Flecha (Arrow Functions - ES6)
+Es el estándar moderno de la industria desde 2015. Ofrece una sintaxis mucho más limpia y analítica. **No tienen hoisting**, por lo que es obligatorio crearlas y guardarlas en memoria antes de poder utilizarlas, lo que fuerza un código más ordenado.
 ```javascript
-// Expresión anónima
-const cuadrado = function(n) {
-  return n * n;
+// Función Flecha tradicional con bloque de llaves
+const multiplicar = (a, b) => {
+    let resultado = a * b;
+    return resultado;
 };
 
-// Expresión nombrada (facilita la auto-referencia)
-const factorial = function fac(n) {
-  return n < 2 ? 1 : n * fac(n - 1);
-};
-```
-
-### 3. Funciones Flecha (Arrow Functions)
-Introducidas en ES6, ofrecen una sintaxis compacta. Son siempre anónimas y no vinculan su propio `this`, sino que lo heredan del contexto léxico circundante.
-```javascript
-// Sintaxis corta (retorno implícito si es una sola expresión)
+// Función Flecha compacta (retorno implícito matemático, ideal para una sola línea)
 const sumar = (a, b) => a + b;
-
-// Con bloque de instrucciones
-const procesar = (x) => {
-  const resultado = x * 2;
-  return resultado;
-};
 ```
 
-### 4. Expresiones de Función Invocadas Inmediatamente (IIFE)
-Son funciones que se ejecutan en el momento exacto de su definición. Se utilizan principalmente para crear ámbitos privados y evitar contaminar el espacio de nombres global.
+---
+
+## 🛡️ CAPÍTULO IV: El Ámbito de las Variables (Scope)
+
+El concepto de ámbito (Scope) dicta **dónde nace, dónde vive y dónde muere una variable**. Entender esto evita el 90% de los errores silenciosos en la programación modular.
+
+### 4.1 La Regla de Las Vegas (Ámbito Local o de Bloque)
+*"Lo que se declara dentro de una función, se queda y muere dentro de la función."*
+Las variables creadas con `let` o `const` dentro de unas llaves `{}` son **invisibles** para el resto del programa. Esto es una ventaja masiva de seguridad: aísla y protege los datos.
+
 ```javascript
-(function() {
-  const mensajePrivado = "Solo visible aquí";
-  console.log("Módulo inicializado");
-})();
+function procesarPago() {
+    let saldoSecreto = 5000; // Variable de Ámbito Local
+    console.log("Procesando pago...");
+}
+
+procesarPago();
+// Intentar acceder desde afuera genera una ruptura de seguridad (Crash)
+console.log(saldoSecreto); // ❌ ERROR FATAL: saldoSecreto is not defined
 ```
 
+### 4.2 El Peligro del Ámbito Global
+Las variables declaradas libremente, fuera de cualquier función, viven en el **Ámbito Global**. Todo el programa puede verlas y, lo que es peor, **modificarlas**.
 
+> **🛑 Alarma de Ingeniería (Bad Practice):** Usar variables globales indiscriminadamente es una práctica repudiada en la industria. Crea "colisiones de nombres", donde una función (ej. `validarUsuario()`) modifica accidentalmente el dato que necesitaba otra función (ej. `procesarCompra()`), causando *bugs* casi imposibles de rastrear. Acostúmbrate a aislar todo dentro de funciones y pasar la información utilizando exclusivamente **parámetros** y **retornos**.
 
-## Mecánicas de Ámbito: Global, Local y de Bloque
-El concepto de ámbito (scope) en JavaScript es quizás el aspecto más crítico para garantizar la modularidad y la seguridad del código. El ámbito define la visibilidad y la vida útil de las variables y funciones dentro de un programa.
+---
 
-- **Ámbito Global:** Las variables declaradas fuera de cualquier función o bloque tienen ámbito global y son accesibles desde cualquier punto. El uso excesivo de estas variables se considera una mala práctica debido al riesgo de colisiones de nombres.
-- **Ámbito de Función (Local):** Cada función crea su propio ámbito. Las variables declaradas dentro (con `var`, `let` o `const`) son invisibles desde el exterior. Este aislamiento permite reutilizar nombres de variables comunes sin interferencias.
-- **Ámbito de Bloque:** Introducido con `let` y `const`, limita la visibilidad de la variable al bloque encerrado por llaves `{}` (como en `if` o `for`). Las variables declaradas con `var` ignoran el ámbito de bloque y se elevan al ámbito de la función contenedora.
+## 📦 CAPÍTULO V: Sistemas de Módulos (CommonJS vs. ES Modules)
 
-## Implementación Práctica y Patrones de Diseño en Node.js
-Node.js ha perfeccionado la aplicación de estos conceptos mediante la implementación de sistemas de módulos robustos y patrones de diseño orientados a la escalabilidad.
-
-### Sistemas de Módulos: CommonJS vs. ES Modules
 Un sistema de módulos es el estándar que dicta cómo el código escrito en un archivo (módulo) puede ser encapsulado, exportado y posteriormente importado por otro archivo. En el ecosistema de Node.js, la arquitectura se divide históricamente en dos grandes estándares:
 
 - **CommonJS (CJS):** Es el sistema de módulos original y tradicional que le dio vida a Node.js. Su característica técnica principal es que su mecanismo de carga es **síncrono**; es decir, el hilo de ejecución se bloquea hasta que el módulo requerido es leído y cargado completamente desde el disco duro a la memoria RAM. Utiliza la función `require()` para importar dependencias y el objeto `module.exports` para exponer la lógica. Dado su diseño síncrono, es altamente eficiente para arquitecturas de servidor (backend), pero inoperante en entornos de navegador web.
@@ -139,12 +126,32 @@ import { sumar } from './util.mjs';
 import { readFile } from 'node:fs/promises'; // Prefijo node: recomendado en 2025
 ```
 
-### Patrones Modulares Clave
+> **⚠️ Configuración Obligatoria (Transición a ESM):**
+> A partir de este trimestre, el estándar de la cátedra será **ES Modules**. Para que Node.js entienda que estás usando ESM en tus archivos, debes asegurarte de que tu archivo `package.json` tenga la propiedad `"type": "module"`.
+
+**Migración de nuestro entorno (`prompt-sync` a ESM):**
+Hasta ahora usábamos `require()` para importar nuestra librería de consola. Al migrar a ESM, la sintaxis arquitectónica cambia. Así es como debes importar `prompt-sync` de ahora en adelante en todos tus laboratorios:
+
+```javascript
+// 1. Importamos la librería por defecto usando sintaxis ESM
+import PromptSync from 'prompt-sync';
+
+// 2. Inicializamos el motor de captura
+const prompt = PromptSync();
+
+// 3. Ya podemos usarlo normalmente
+let edad = prompt("Ingresa tu edad: ");
+console.log(`Edad registrada: ${edad}`);
+```
+
+### 5.1 Patrones Modulares Clave
 - **Singleton:** Garantiza una única instancia compartida (útil para conexiones a bases de datos).
 - **Factory:** Crea objetos dinámicamente según parámetros de entrada sin exponer la lógica de creación.
 - **Revealing Module:** Usa cierres para ocultar variables privadas y exponer solo una interfaz pública controlada.
 
-## Conclusiones Técnicas y Directrices de Implementación
+---
+
+## 🏁 CAPÍTULO VI: Conclusiones Técnicas y Directrices
 La programación modular en JavaScript requiere una integración profunda de conceptos de ámbito, gestión de memoria y diseño de funciones. Para construir sistemas escalables, se recomienda:
 - **Priorización de Funciones Puras:** Minimizar los efectos secundarios para lograr una arquitectura predecible y fácil de testar.
 - **Encapsulamiento mediante Cierres:** Utilizar ámbitos locales para ocultar la complejidad interna y exponer interfaces mínimas.
