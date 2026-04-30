@@ -133,14 +133,18 @@
 
     /* --- EFECTOS DE FONDO ANIMADO (MATRIX) --- */
     #matrix-bg {
-      position: fixed;
+      position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
-      z-index: -2;
-      opacity: 0.25; /* Un poco más sutil para no interferir con la lectura */
+      z-index: 0;
+      opacity: 0.35; 
       pointer-events: none;
       overflow: hidden;
-      background: var(--base-background-color);
+      background: transparent;
     }
+
+    /* Asegurar que el contenido del sidebar esté por encima del matrix */
+    .sidebar { position: relative; }
+    .sidebar > * { position: relative; z-index: 1; }
 
     .bg-glow {
       position: fixed;
@@ -209,7 +213,21 @@
         placeholder: 'Buscar un tema...',
         noData: 'No se encontraron resultados',
         depth: 3
-      }
+      },
+
+      // Plugins personalizados de Docsify
+      plugins: [
+        function(hook, vm) {
+          hook.ready(function() {
+            // Mueve el matrix-bg dentro del sidebar cuando Docsify esté listo
+            const sidebar = document.querySelector('.sidebar');
+            const matrixBg = document.getElementById('matrix-bg');
+            if (sidebar && matrixBg) {
+              sidebar.insertBefore(matrixBg, sidebar.firstChild);
+            }
+          });
+        }
+      ]
     }
   </script>
 
