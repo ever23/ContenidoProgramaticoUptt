@@ -8,14 +8,14 @@
   <meta name="description" content="Manuales de Cátedra Universitarios">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
-  <!-- Tema Visual: Docsify Themeable (Simple) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
+  <!-- Tema Visual: Docsify Themeable (Simple Dark) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css">
   
   <!-- Estilos Personalizados Premium -->
   <style>
     :root {
-      /* Color institucional */
-      --theme-color: #0A3161;
+      /* Color institucional adaptado a Modo Oscuro (Azul Eléctrico Claro) */
+      --theme-color: #4dabf7;
       
       /* Tipografía más limpia y espaciada */
       --base-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -23,18 +23,18 @@
       --base-line-height: 1.6;
       
       /* Título lateral */
-      --sidebar-name-color: #0A3161;
+      --sidebar-name-color: #ffffff;
       --sidebar-name-font-weight: 700;
       
       /* Barra Lateral (Sidebar) */
       --sidebar-width: 20rem;
-      --sidebar-nav-link-color--active: #0A3161;
+      --sidebar-nav-link-color--active: #4dabf7;
       --sidebar-nav-link-font-weight--active: 700;
-      --sidebar-nav-link-border-color--active: #0A3161;
+      --sidebar-nav-link-border-color--active: #4dabf7;
       
-      /* Bloques de Código */
+      /* Bloques de Código adaptados al tema oscuro */
       --code-font-family: "Fira Code", "Consolas", monospace;
-      --code-theme-background: #f8f9fa;
+      --code-theme-background: #1e1e1e;
     }
   </style>
 </head>
@@ -46,6 +46,7 @@
       name: '👨‍💻 Prof: Enyerber Franco',
       repo: 'https://github.com/ever23/ContenidoProgramaticoUptt',
       loadSidebar: true,
+      homepage: 'inicio.md', // <-- Desvincula el README y usa esta página como inicio
       subMaxLevel: 3,
       auto2top: true,
       

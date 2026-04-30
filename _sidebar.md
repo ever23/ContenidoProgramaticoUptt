@@ -1,4 +1,4 @@
-* [🏠 Dashboard de Cátedras](README.md)
+* [🏠 Dashboard de Cátedras](inicio.md)
 
 ---
 
