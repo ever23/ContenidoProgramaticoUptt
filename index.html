@@ -19,10 +19,10 @@
   <!-- Estilos Personalizados Premium -->
   <style>
     :root {
-      /* Colores y Temática General (Estilo Slate/Noche profunda) */
-      --theme-color: #3b82f6; 
-      --base-color: #cbd5e1; 
-      --base-background-color: #0f172a; 
+      /* Colores y Temática General (Inspirado en el CV Enyerber Franco) */
+      --theme-color: #00f2ff; /* Cian Eléctrico */
+      --base-color: #e2e8f0; /* Texto base muy legible */
+      --base-background-color: #12121e; /* Deep Navy/Black del CV */
       
       /* Tipografía Premium */
       --base-font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -30,28 +30,28 @@
       --base-line-height: 1.7;
       
       /* Barra Lateral (Sidebar) */
-      --sidebar-background: #0f172a;
-      --sidebar-border-color: rgba(255, 255, 255, 0.05);
-      --sidebar-name-color: #f8fafc;
-      --sidebar-name-font-weight: 700;
-      --sidebar-nav-link-color--active: #60a5fa;
+      --sidebar-background: #0a0a0c; /* Sidebar sutilmente contrastado del CV */
+      --sidebar-border-color: rgba(0, 242, 255, 0.1); /* Border subtle del CV */
+      --sidebar-name-color: #ffffff;
+      --sidebar-name-font-weight: 800;
+      --sidebar-nav-link-color--active: #39ff14; /* Verde Neón del CV */
       --sidebar-nav-link-font-weight--active: 600;
-      --sidebar-nav-link-border-color--active: #3b82f6;
+      --sidebar-nav-link-border-color--active: #39ff14;
       
       /* Buscador (Search) */
-      --search-background: #1e293b;
-      --search-border-color: transparent;
-      --search-input-color: #f8fafc;
+      --search-background: #12121e;
+      --search-border-color: rgba(0, 242, 255, 0.2);
+      --search-input-color: #ffffff;
       --search-input-placeholder-color: #94a3b8;
       
       /* Bloques de Código */
       --code-font-family: 'JetBrains Mono', "Fira Code", monospace;
-      --code-theme-background: #1e293b; 
+      --code-theme-background: #0a0a0c; /* Más oscuro para resaltar el código */
       --code-font-size: 14px;
       
       /* Citas / Blockquotes (Tips y Notas) */
-      --blockquote-border-color: #3b82f6;
-      --blockquote-background: rgba(59, 130, 246, 0.1);
+      --blockquote-border-color: #39ff14; /* Verde neón para tips */
+      --blockquote-background: rgba(57, 255, 20, 0.05); /* Verde con baja opacidad */
       --blockquote-color: #e2e8f0;
       
       /* Cabeceras */
@@ -64,41 +64,54 @@
 
     /* Scrollbar personalizada y elegante */
     ::-webkit-scrollbar { width: 8px; height: 8px; }
-    ::-webkit-scrollbar-track { background: #0f172a; }
-    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    ::-webkit-scrollbar-track { background: var(--base-background-color); }
+    ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--theme-color); }
 
     /* Efecto gradiente premium para los títulos principales (H1) */
     .markdown-section h1 {
-      background: linear-gradient(to right, #60a5fa, #a78bfa);
+      background: linear-gradient(to right, #00f2ff, #39ff14);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 2rem;
       border-bottom: none; /* Elimina la línea plana por defecto */
     }
 
+    /* Títulos secundarios (H2) */
+    .markdown-section h2 {
+      color: #39ff14;
+      border-bottom: 1px solid rgba(0, 242, 255, 0.1);
+    }
+
     /* Bloques de código con bordes redondeados y sombras sutiles */
     .markdown-section pre {
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(0, 242, 255, 0.1);
       border-radius: 12px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.15);
     }
 
     /* Citas enriquecidas (Blockquotes con diseño de "Tarjeta") */
     .markdown-section blockquote {
       border-radius: 0 10px 10px 0;
       padding: 1.2rem 1.5rem;
-      border-left: 4px solid var(--theme-color);
-      box-shadow: inset 0px 0px 10px rgba(0,0,0,0.05);
+      border-left: 4px solid var(--blockquote-border-color);
+      box-shadow: inset 0px 0px 10px rgba(0,0,0,0.2);
     }
     
     /* Enlaces con transición suave al pasar el mouse */
     .markdown-section a {
-      transition: all 0.2s ease-in-out;
+      color: #00f2ff;
+      transition: all 0.3s ease-in-out;
     }
     .markdown-section a:hover {
-      color: #93c5fd;
+      color: #39ff14;
       text-decoration: none;
+      text-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
+    }
+
+    /* Strong y Bold con color de acento para destacar */
+    .markdown-section strong, .markdown-section b {
+      color: #00f2ff;
     }
   </style>
 </head>
