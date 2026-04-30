@@ -1,76 +1,72 @@
-# Planeación de Infraestructura y Estándares IEEE: El Cimiento de la Red Local
-
-El diseño y la construcción de una Red de Área Local (LAN) no consiste simplemente en "conectar cables a un enrutador". En el ámbito de la ingeniería en telemática y sistemas, la creación de una red es un proceso riguroso de arquitectura lógica y física. Una red mal diseñada generará cuellos de botella, caídas de servicio y será imposible de escalar cuando la organización crezca.
-
-En esta primera unidad del trimestre, dejaremos atrás los conceptos básicos para adentrarnos en la **Planeación Profesional de Redes** y en la estricta obediencia a los **Estándares de la Industria** que garantizan que equipos de diferentes fabricantes (Cisco, TP-Link, Huawei) puedan comunicarse sin fricción.
+# Manual de Estudio Profundo: Evaluación 1
+## Materia: Redes (Trayecto II)
+### Eje Temático: Planeación, Diseño LAN y Estándares IEEE
 
 ---
 
-## 📐 CAPÍTULO I: La Planeación LAN (Diseño de Infraestructura)
+## 🧭 Introducción: Arquitectura antes de la Implementación
+Si te contratan para construir un edificio de 20 pisos, no empiezas a apilar ladrillos al azar. Primero contratas a un arquitecto para que trace los planos y asegure que los cimientos soporten el peso. 
 
-Cuando a un ingeniero se le asigna la tarea de interconectar un edificio gubernamental o un laboratorio universitario, debe seguir una metodología de planeación estructurada:
-
-1.  **Análisis de Requisitos:** ¿Cuántos usuarios habrá? ¿Qué tipo de datos van a transferir (texto, videollamadas, bases de datos pesadas)? ¿Cuál es el presupuesto?
-2.  **Selección de Medios:** Decidir dónde se usará cableado de cobre (UTP/STP), dónde fibra óptica (para los enlaces troncales o *Backbones*) y dónde cobertura inalámbrica (Wi-Fi).
-3.  **Diseño Topológico:** Elegir la estructura física. En la actualidad, la **Topología en Estrella Extendida** (donde los dispositivos se conectan a Switches periféricos, y estos a un Switch central) es el estándar de oro.
-4.  **Escalabilidad y Redundancia:** Planificar pensando en el futuro. Dejar puertos libres en los Switches y asegurar caminos alternativos en caso de que un cable principal se corte.
+En ingeniería de redes, el proceso es idéntico. Antes de comprar un solo metro de cable o configurar una dirección IP, el ingeniero debe realizar un proceso riguroso de **Planeación y Diseño LAN**. Una red mal diseñada hoy, será una red que colapsará mañana cuando la empresa contrate a 50 nuevos empleados.
 
 ---
 
-## 🏛️ CAPÍTULO II: El Imperio de la Interoperabilidad (El IEEE)
+## 🏛️ CAPÍTULO I: El Proceso de Planeación de Red
 
-Imagínate si cada marca de computadoras usara un tipo de cable de red distinto o un lenguaje diferente. El internet no existiría. Para evitar este caos, nació el **IEEE (Instituto de Ingenieros Eléctricos y Electrónicos)**.
+El diseño de una red local (LAN) se divide en fases estructuradas:
 
-El IEEE es la organización mundial que dicta las "leyes" universales de las telecomunicaciones. Ellos definen la familia de estándares **IEEE 802**, que gobiernan exactamente cómo deben transmitirse los datos a nivel físico y de enlace de datos (Capas 1 y 2 del Modelo OSI). Todo fabricante de hardware en el mundo debe obedecer estas leyes.
-
----
-
-## 🔌 CAPÍTULO III: El Estándar 802.3 (Ethernet)
-
-El rey absoluto de las redes cableadas. El estándar **IEEE 802.3** (comúnmente llamado Ethernet) dicta cómo se envían pulsos eléctricos a través de cables de cobre o pulsos de luz a través de fibra óptica.
-
-### Evolución de la Velocidad:
-*   **Ethernet Clásico:** 10 Mbps (Obsoleto).
-*   **Fast Ethernet (802.3u):** 100 Mbps (Aún común en hogares).
-*   **Gigabit Ethernet (802.3ab):** 1,000 Mbps o 1 Gbps (El estándar actual para redes LAN empresariales, requiere cable UTP Categoría 5e o superior).
-*   **10 Gigabit Ethernet (802.3an):** 10,000 Mbps (Usado para interconectar servidores y Switches principales).
-
-**La regla de los 100 metros:** En el diseño Ethernet con cable UTP (cobre), la señal eléctrica comienza a degradarse después de los 100 metros de distancia. Si un dispositivo está más lejos, el ingeniero debe instalar un Switch intermedio o cambiar el medio a Fibra Óptica.
+1. **Recolección de Requisitos:** ¿Para qué se usará la red? Una red para un cibercafé que descarga videojuegos requiere un diseño diferente a la red de un banco que procesa millones de transacciones pequeñas pero hiper-seguras.
+2. **Selección de Topología y Medio:** Decidir si usar Estrella o Malla. Decidir si la conexión vertical entre pisos (Backbone) será de Fibra Óptica (por la velocidad y para evitar interferencia de los ascensores) y la conexión horizontal a las computadoras será de Cobre UTP Cat 6.
+3. **Plano de Direccionamiento Lógico:** Calcular matemáticamente cuántas direcciones IP se necesitarán en el presente y en un futuro a 5 años (Escalabilidad).
+4. **Seguridad Física:** Determinar la ubicación del "Cuarto de Telecomunicaciones" (Site / MDF), asegurando ventilación adecuada, UPS (baterías de respaldo) y control de acceso biométrico.
 
 ---
 
-## 📡 CAPÍTULO IV: El Estándar 802.11 (Wi-Fi)
+## 🧩 CAPÍTULO II: El Modelo de Diseño Jerárquico de 3 Capas (Cisco)
 
-Para la movilidad, el IEEE definió la familia **802.11**, conocida comercialmente como Wi-Fi. Las redes inalámbricas (WLAN) no viajan por cables, sino por ondas de radiofrecuencia (RF) que flotan en el aire, lo cual las hace vulnerables a interferencias (paredes, microondas, otros routers).
+Para redes medianas y grandes, la industria no conecta todos los switches entre sí como una telaraña. Se utiliza el modelo jerárquico de Cisco, que divide la red física en tres capas lógicas:
 
-### Las Dos Grandes Bandas de Frecuencia:
-1.  **Banda de 2.4 GHz:** Mayor alcance (atraviesa mejor las paredes), pero velocidades más bajas y muy congestionada (muchas interferencias).
-2.  **Banda de 5 GHz:** Menor alcance, pero velocidades altísimas y canales más limpios. Ideal para streaming o videollamadas.
-
-### Alfabeto del 802.11:
-*   **802.11n (Wi-Fi 4):** Introdujo MIMO (múltiples antenas) para mejorar señal.
-*   **802.11ac (Wi-Fi 5):** Popularizó la banda de 5 GHz.
-*   **802.11ax (Wi-Fi 6):** Diseñado específicamente para entornos de altísima densidad (estadios, aeropuertos, universidades llenas de alumnos).
+1. **Capa de Acceso (Access Layer):** Son los switches baratos que están en los pasillos o paredes. Su único trabajo es darle conexión directa a las computadoras de los empleados, impresoras y teléfonos IP.
+2. **Capa de Distribución (Distribution Layer):** Son switches más potentes e inteligentes ubicados en el cuarto de servidores de cada piso. Reciben los cables de todos los switches de Acceso de ese piso y aplican políticas de seguridad (Ej: "El departamento de ventas no puede ver las impresoras de recursos humanos").
+3. **Capa Núcleo (Core Layer):** Es el "corazón" de la red. Son equipos extremadamente costosos y ultra-rápidos de fibra óptica. Su única misión es conmutar tráfico a la velocidad de la luz entre los diferentes pisos o edificios sin aplicar reglas pesadas.
 
 ---
 
-## 💻 CAPÍTULO V: Caso de Estudio (Diseño de Laboratorio)
+## 🏗️ CAPÍTULO III: Los Estándares IEEE 802
 
-Si te encargan conectar el nuevo laboratorio de la UPTT con 30 computadoras:
-1.  **Estándar Elegido:** IEEE 802.3ab (Gigabit Ethernet) para garantizar fluidez al compilar código o descargar dependencias (`npm install`).
-2.  **Cableado:** Cable UTP Categoría 6, respetando la regla de no exceder los 100 metros hasta el Cuarto de Telecomunicaciones.
-3.  **Topología:** Estrella. Todas las PC irán canalizadas por la pared hasta un Switch central de 48 puertos en un Rack.
-4.  **Movilidad:** Se instalará un Access Point (Punto de Acceso) bajo el estándar 802.11ac en el techo para proveer conexión a los teléfonos y laptops personales de los profesores, configurado en una red (VLAN) separada por seguridad.
+Si compras una tarjeta Wi-Fi en China y un Router en Alemania, funcionan juntos mágicamente. Esto es gracias al **IEEE (Instituto de Ingenieros Eléctricos y Electrónicos)**, un comité mundial que dictamina las reglas exactas de cómo deben fabricarse las tecnologías.
+
+El comité IEEE tiene un grupo de trabajo específico para Redes Locales y Metropolitanas llamado **IEEE 802**.
+
+### Subcomités Críticos que debes conocer:
+- **IEEE 802.3 (Ethernet):** Es el estándar que define todo sobre el cable de cobre y la fibra en redes LAN. Dicta desde el grosor del hilo hasta cómo deben lidiar con las colisiones.
+- **IEEE 802.11 (Wi-Fi):** Define las comunicaciones LAN inalámbricas (Wireless LAN / WLAN). Ha evolucionado a lo largo de los años para soportar más velocidad y frecuencias:
+  - `802.11g` (Velocidad vieja, 54 Mbps).
+  - `802.11n` (Wi-Fi 4 - Usaba múltiples antenas MIMO).
+  - `802.11ac` (Wi-Fi 5 - Banda de 5GHz, hiper rápido).
+  - `802.11ax` (Wi-Fi 6 - El estándar moderno de ultra alta densidad).
+- **IEEE 802.15 (Bluetooth/PAN):** Estándar para Redes de Área Personal inalámbricas de corto alcance.
 
 ---
 
-## 📘 ANEXO: Diccionario Técnico Formal (Redes II)
+## 💻 Laboratorio Teórico: El Simulador (Packet Tracer)
 
-*Vocabulario de ingeniería para la defensa de diseño de infraestructura:*
+En lugar de gastar miles de dólares comprando equipos reales para practicar, la industria utiliza simuladores de red. El más famoso es **Cisco Packet Tracer**.
 
-- **Topología Física:** El diseño geométrico o mapa físico de cómo están tirados los cables y colocados los equipos de red.
-- **Topología Lógica:** La forma en que los datos (paquetes) realmente viajan a través de la red, independientemente de cómo estén conectados los cables.
-- **IEEE:** Instituto de Ingenieros Eléctricos y Electrónicos, máxima autoridad global en estandarización de tecnologías de red y hardware.
-- **Backbone (Columna Vertebral):** El enlace principal de alta velocidad (usualmente fibra óptica) que conecta las diferentes subredes o pisos de un edificio.
-- **Access Point (AP):** Dispositivo de red que interconecta equipos inalámbricos para formar una red WLAN y sirve como puente hacia la red cableada tradicional.
-- **Atenuación:** Pérdida progresiva de la fuerza de una señal (eléctrica o de radio) a medida que viaja a través del medio físico, dictando los límites de distancia permitida.
+**Flujo de trabajo en el simulador:**
+1. Arrastras un *Switch 2960* al espacio de trabajo.
+2. Arrastras dos *PCs genéricas*.
+3. Usas la herramienta de cableado (Rayo naranja) para seleccionar "Cable Directo de Cobre" (Straight-Through).
+4. Conectas el puerto *FastEthernet0/1* del Switch al puerto *FastEthernet0* de la PC1.
+5. Inmediatamente verás los "leds" de enlace en color ámbar mientras negocian, y luego en verde cuando hay conexión física exitosa (Capa 1 y 2 del modelo OSI operativas).
+
+---
+
+## 📘 ANEXO: Diccionario Técnico Formal
+
+- **Planeación LAN:** Fase arquitectónica deductiva donde se establecen los requerimientos topológicos, físicos y lógicos de una infraestructura de red local para garantizar rendimiento, seguridad y escalabilidad operativa.
+- **Modelo Jerárquico de 3 Capas:** Arquitectura de diseño de red estandarizada que particiona la topología física en Capa de Acceso (conectividad final), Capa de Distribución (agregación y políticas) y Capa Núcleo (conmutación troncal de ultra alta velocidad).
+- **IEEE (Institute of Electrical and Electronics Engineers):** Asociación técnico-profesional mundial responsable de la estandarización y desarrollo de normas tecnológicas en áreas de ingeniería eléctrica y ciencias de la computación.
+- **IEEE 802.3 (Ethernet):** Conjunto normativo de especificaciones técnicas que define la estandarización de las capas Física (PHY) y de Control de Acceso al Medio (MAC) para arquitecturas de red alámbricas LAN.
+- **IEEE 802.11 (Wi-Fi):** Estándar de la industria que especifica el conjunto de protocolos de control de acceso al medio y capa física para la implementación de redes locales inalámbricas (WLAN) sobre bandas de radiofrecuencia (típicamente 2.4GHz y 5GHz).
+- **Packet Tracer:** Herramienta de software propietaria de simulación visual de redes diseñada por Cisco Systems, empleada masivamente en entornos académicos para la emulación topológica, configuración de hardware virtualizado y análisis de tráfico.
