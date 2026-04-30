@@ -8,33 +8,97 @@
   <meta name="description" content="Manuales de Cátedra Universitarios">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
+  <!-- Tipografías Premium de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
   <!-- Tema Visual: Docsify Themeable (Simple Dark) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css">
   
   <!-- Estilos Personalizados Premium -->
   <style>
     :root {
-      /* Color institucional adaptado a Modo Oscuro (Azul Eléctrico Claro) */
-      --theme-color: #4dabf7;
+      /* Colores y Temática General (Estilo Slate/Noche profunda) */
+      --theme-color: #3b82f6; 
+      --base-color: #cbd5e1; 
+      --base-background-color: #0f172a; 
       
-      /* Tipografía más limpia y espaciada */
-      --base-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      --base-font-size: 17px;
-      --base-line-height: 1.6;
-      
-      /* Título lateral */
-      --sidebar-name-color: #ffffff;
-      --sidebar-name-font-weight: 700;
+      /* Tipografía Premium */
+      --base-font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --base-font-size: 16px;
+      --base-line-height: 1.7;
       
       /* Barra Lateral (Sidebar) */
-      --sidebar-width: 20rem;
-      --sidebar-nav-link-color--active: #4dabf7;
-      --sidebar-nav-link-font-weight--active: 700;
-      --sidebar-nav-link-border-color--active: #4dabf7;
+      --sidebar-background: #0f172a;
+      --sidebar-border-color: rgba(255, 255, 255, 0.05);
+      --sidebar-name-color: #f8fafc;
+      --sidebar-name-font-weight: 700;
+      --sidebar-nav-link-color--active: #60a5fa;
+      --sidebar-nav-link-font-weight--active: 600;
+      --sidebar-nav-link-border-color--active: #3b82f6;
       
-      /* Bloques de Código adaptados al tema oscuro */
-      --code-font-family: "Fira Code", "Consolas", monospace;
-      --code-theme-background: #1e1e1e;
+      /* Buscador (Search) */
+      --search-background: #1e293b;
+      --search-border-color: transparent;
+      --search-input-color: #f8fafc;
+      --search-input-placeholder-color: #94a3b8;
+      
+      /* Bloques de Código */
+      --code-font-family: 'JetBrains Mono', "Fira Code", monospace;
+      --code-theme-background: #1e293b; 
+      --code-font-size: 14px;
+      
+      /* Citas / Blockquotes (Tips y Notas) */
+      --blockquote-border-color: #3b82f6;
+      --blockquote-background: rgba(59, 130, 246, 0.1);
+      --blockquote-color: #e2e8f0;
+      
+      /* Cabeceras */
+      --heading-color: #ffffff;
+      --heading-h1-font-weight: 800;
+      --heading-h2-font-weight: 700;
+    }
+
+    /* === Modificaciones CSS Extra Premium === */
+
+    /* Scrollbar personalizada y elegante */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+    /* Efecto gradiente premium para los títulos principales (H1) */
+    .markdown-section h1 {
+      background: linear-gradient(to right, #60a5fa, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 2rem;
+      border-bottom: none; /* Elimina la línea plana por defecto */
+    }
+
+    /* Bloques de código con bordes redondeados y sombras sutiles */
+    .markdown-section pre {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    /* Citas enriquecidas (Blockquotes con diseño de "Tarjeta") */
+    .markdown-section blockquote {
+      border-radius: 0 10px 10px 0;
+      padding: 1.2rem 1.5rem;
+      border-left: 4px solid var(--theme-color);
+      box-shadow: inset 0px 0px 10px rgba(0,0,0,0.05);
+    }
+    
+    /* Enlaces con transición suave al pasar el mouse */
+    .markdown-section a {
+      transition: all 0.2s ease-in-out;
+    }
+    .markdown-section a:hover {
+      color: #93c5fd;
+      text-decoration: none;
     }
   </style>
 </head>
