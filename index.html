@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cátedra UPTT - Algorítmica y Programación</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Manuales de Cátedra Universitarios">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  
+  <!-- Tema Visual de Docsify (Vue Theme) -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+</head>
+<body>
+  <div id="app">Cargando material académico...</div>
+  <script>
+    window.$docsify = {
+      name: '👨‍💻 Cátedra UPTT',
+      repo: 'https://github.com/ever23/ContenidoProgramaticoUptt', // Reemplaza esto con tu URL de GitHub real si es otra
+      loadSidebar: true, // Activa la barra lateral
+      subMaxLevel: 3, // Muestra los títulos y subtítulos de cada página en el menú
+      auto2top: true, // Auto-scroll al inicio al cambiar de página
+      themeColor: '#0A3161', // Color institucional (Azul Marino)
+      
+      // Configuración del buscador
+      search: {
+        placeholder: 'Buscar un tema...',
+        noData: 'No se encontraron resultados',
+        depth: 3
+      }
+    }
+  </script>
+  
+  <!-- Núcleo de Docsify -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  
+  <!-- Plugins extra -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script> <!-- Buscador -->
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-javascript.min.js"></script> <!-- Coloreado de código JS -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script> <!-- Botón de copiar código -->
+</body>
+</html>
