@@ -109,6 +109,73 @@
       text-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
     }
 
+    /* Animación premium para los enlaces del Sidebar (estilo CV) */
+    .sidebar-nav li > a {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      border: 1px solid transparent;
+      border-radius: 8px;
+    }
+
+    .sidebar-nav li > a:hover {
+      color: #00f2ff !important;
+      background: rgba(0, 242, 255, 0.08);
+      border-color: rgba(0, 242, 255, 0.2);
+      transform: translateX(8px); /* Desplazamiento sutil a la derecha */
+    }
+
+    /* Elemento activo en el sidebar */
+    .sidebar-nav li.active > a {
+      color: #39ff14 !important;
+      background: rgba(57, 255, 20, 0.08);
+      border-color: rgba(57, 255, 20, 0.2);
+      transform: translateX(8px);
+    }
+
+    /* --- EFECTOS DE FONDO ANIMADO (MATRIX) --- */
+    #matrix-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -2;
+      opacity: 0.25; /* Un poco más sutil para no interferir con la lectura */
+      pointer-events: none;
+      overflow: hidden;
+      background: var(--base-background-color);
+    }
+
+    .bg-glow {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background:
+        radial-gradient(circle at 80% 20%, rgba(0, 242, 255, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 20% 80%, rgba(57, 255, 20, 0.03) 0%, transparent 40%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .code-line {
+      position: absolute;
+      white-space: nowrap;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: rgba(148, 163, 184, 0.5);
+      user-select: none;
+      opacity: 0;
+      animation: scrollUp 15s linear infinite; /* Un poco más lento para no distraer */
+    }
+
+    .sh-keyword { color: #c678dd; font-weight: 700; }
+    .sh-string { color: #98c379; }
+    .sh-function { color: #61afef; }
+    .sh-comment { color: #5c6370; font-style: italic; }
+    .sh-number { color: #d19a66; }
+
+    @keyframes scrollUp {
+      0% { transform: translateY(110vh); opacity: 0; }
+      5% { opacity: 0.6; }
+      95% { opacity: 0.6; }
+      100% { transform: translateY(-10vh); opacity: 0; }
+    }
+
     /* Strong y Bold con color de acento para destacar */
     .markdown-section strong, .markdown-section b {
       color: #00f2ff;
@@ -117,6 +184,10 @@
 </head>
 
 <body>
+  <!-- Efectos de Fondo -->
+  <div id="matrix-bg"></div>
+  <div class="bg-glow"></div>
+
   <div id="app">Cargando material académico...</div>
   <script>
     window.$docsify = {
@@ -152,6 +223,64 @@
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-javascript.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+
+  <!-- Script para el fondo animado -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const matrixBg = document.getElementById('matrix-bg');
+      if (matrixBg) {
+        const snippets = [
+          "class Nodo { Nodo* sig; int dato; }",
+          "function dfs(nodo, visitados) { ... }",
+          "SELECT id, nombre FROM estudiantes;",
+          "sudo systemctl restart networking",
+          "ping -c 4 192.168.1.1",
+          "const app = express();",
+          "public static void main(String[] args)",
+          "def bubble_sort(arr):",
+          "for(let i = 0; i < n; i++) { ... }",
+          "ip route add 10.0.0.0/8 via 192.168.1.254",
+          "document.getElementById('app').innerHTML",
+          "try { await db.query(sql); } catch(e) {}",
+          "std::cout << 'Hola Mundo' << std::endl;",
+          "if (ip_address == '127.0.0.1') return;"
+        ];
+
+        function highlightCode(code) {
+          return code
+            .replace(/\b(async|await|const|let|var|function|class|public|static|void|if|else|while|for|return|import|from|export|new|select|from|where|update)\b/gi, '<span class="sh-keyword">$1</span>')
+            .replace(/(['"`].*?['"`])/g, '<span class="sh-string">$1</span>')
+            .replace(/\b(\w+)(?=\()/g, '<span class="sh-function">$1</span>')
+            .replace(/(\/\/.*$)/gm, '<span class="sh-comment">$1</span>')
+            .replace(/\b(\d+)\b/g, '<span class="sh-number">$1</span>');
+        }
+
+        const MAX_LINES = 25; 
+
+        function createCodeLine(initial = false) {
+          if (matrixBg.children.length > MAX_LINES) matrixBg.removeChild(matrixBg.firstChild);
+
+          const line = document.createElement('div');
+          const duration = (Math.random() * 10 + 12); // Más lento (12-22 seg)
+          line.className = 'code-line';
+          line.innerHTML = highlightCode(snippets[Math.floor(Math.random() * snippets.length)]);
+          line.style.left = Math.random() * 95 + '%';
+          line.style.animationDuration = duration + 's';
+          
+          if (initial) line.style.animationDelay = '-' + (Math.random() * 15) + 's';
+          
+          matrixBg.appendChild(line);
+
+          const cleanUp = () => { if (line.parentNode) line.remove(); };
+          line.addEventListener('animationend', cleanUp);
+          setTimeout(cleanUp, duration * 1000 + 100); 
+        }
+
+        for (let i = 0; i < 15; i++) createCodeLine(true);
+        setInterval(createCodeLine, 800); 
+      }
+    });
+  </script>
 </body>
 
 </html>
