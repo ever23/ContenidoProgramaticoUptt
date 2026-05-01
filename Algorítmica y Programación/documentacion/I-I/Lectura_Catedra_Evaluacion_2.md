@@ -84,20 +84,58 @@ Su poder computacional se fundamenta en dos pilares tecnológicos críticos:
 
 ---
 
-## ⚙️ CAPÍTULO V: Instalación y Prueba del Entorno (El "Hola Mundo")
+## ⚙️ CAPÍTULO V: Configuración del Laboratorio de Ingeniería
 
-Para llevar la teoría a la práctica y empezar a programar, es imperativo configurar y validar la estación de trabajo:
+Antes de procesar lógica matemática, debemos transformar nuestra computadora en una estación de trabajo de ingeniería. Esto requiere dos herramientas fundamentales: el **Motor (Node.js)** y la **Cabina de Mando (VS Code)**.
 
-**1. Instalación de Node.js y npm**
-*   **Windows:** Descargar el instalador LTS (Long Term Support) desde `nodejs.org`. Durante el asistente, es obligatorio marcar la opción "Add to PATH".
-*   **Linux (Ubuntu):** Ejecutar en terminal `sudo apt update && sudo apt install nodejs npm`.
-*   *Verificación:* Escribir en terminal `node -v` y `npm -v` para confirmar que el sistema los reconoce.
+### 5.1 Instalación de Node.js y npm (El Motor de Ejecución)
 
-**2. Instalación de VS Code**
-*   Descargar desde `code.visualstudio.com`. Al instalar, marcar "Agregar a PATH" para poder abrir proyectos directamente desde la consola tecleando `code .`
+Node.js es el intérprete que permitirá que nuestro código JavaScript cobre vida fuera del navegador. **npm** (Node Package Manager) se instalará automáticamente con Node.
 
-**3. Prueba de Fuego: Tu Primer Script por Consola**
-Una vez instaladas las herramientas, abre tu terminal (CMD, PowerShell o Bash) y ejecuta el siguiente comando:
+#### 🪟 En Windows
+1.  **Descarga:** Ve a [nodejs.org](https://nodejs.org/es/) y selecciona la versión **LTS** (Long Term Support). Es la versión más estable para ingeniería.
+2.  **Instalador:** Ejecuta el archivo `.msi` descargado.
+3.  **Configuración Crítica:** Durante la instalación, asegúrate de que la casilla **"Add to PATH"** esté marcada. Esto permite que el comando `node` funcione en cualquier terminal.
+4.  **Chocolatey (Opcional):** El instalador preguntará si deseas instalar herramientas para módulos nativos. Puedes aceptar (requerirá unos 3GB de espacio extra).
+
+#### 🐧 En Linux (Ubuntu/Debian)
+Existen dos métodos recomendados:
+*   **Método Rápido (Repositorios oficiales):**
+    ```bash
+    sudo apt update
+    sudo apt install nodejs npm
+    ```
+*   **Método Profesional (nvm - Node Version Manager):** Permite cambiar entre versiones de Node fácilmente. [Guía de instalación de NVM](https://github.com/nvm-sh/nvm#installing-and-updating).
+
+#### ✅ Verificación del Motor
+Abre una terminal (PowerShell en Windows o Bash en Linux) y escribe:
+```bash
+node -v   # Debería mostrar algo como v20.x.x
+npm -v    # Debería mostrar algo como 10.x.x
+```
+
+---
+
+### 5.2 Instalación de Visual Studio Code (El Editor de Código)
+
+VS Code es el estándar de la industria para escribir código gracias a su ligereza y potencia.
+
+1.  **Descarga:** [code.visualstudio.com](https://code.visualstudio.com/download)
+    *   **Windows:** Descargar "User Installer" (x64).
+    *   **Linux:** Descargar el archivo `.deb` (Ubuntu/Debian) o `.rpm` (Fedora/RedHat).
+2.  **Instalación:**
+    *   **Windows:** Durante la instalación, marca las casillas **"Agregar la acción 'Abrir con Code' al menú contextual de archivos/carpetas"** y **"Agregar a PATH"**.
+    *   **Linux:** Instala el paquete usando `sudo dpkg -i archivo.deb` o mediante la tienda de software.
+3.  **Extensiones Recomendadas:** Una vez abierto VS Code, presiona `Ctrl+Shift+X` e instala:
+    *   **ESLint:** Para detectar errores de sintaxis en tiempo real.
+    *   **Prettier:** Para que tu código se auto-formatee y sea legible.
+    *   **Spanish Language Pack:** Si prefieres la interfaz en español.
+
+---
+
+### 5.3 Prueba de Fuego: Tu Primer Script por Consola
+
+Para validar que todo el ecosistema está integrado, realizaremos la prueba del "Hola Mundo" desde la terminal. Abre tu terminal (CMD, PowerShell o Bash) y ejecuta:
 ```bash
 node -e "console.log('¡Entorno de Ingeniería Listo!');"
 ```
@@ -105,11 +143,57 @@ Si la consola responde con el mensaje, habrás ejecutado exitosamente tu primer 
 
 ---
 
-## 🚀 CAPÍTULO VI: De la Lógica al Código (Práctica de Traducción)
+## 📱 CAPÍTULO VI: Configuración de Laboratorio Móvil (Opcional)
+
+Para aquellos estudiantes que no poseen una computadora o desean practicar en cualquier lugar, Android permite emular un entorno Linux profesional mediante **Termux**.
+
+### 6.1 Instalación de Termux
+1.  **Descarga:** Aunque existe en la Play Store, la versión recomendada por la comunidad (más actualizada) se encuentra en **F-Droid**.
+    *   [Link de descarga (F-Droid)](https://f-droid.org/es/packages/com.termux/)
+    ```bash
+    pkg update && pkg upgrade
+    ```
+3.  **Acceso al Almacenamiento:** Para que Termux pueda leer y escribir archivos en la memoria interna de tu teléfono, ejecuta:
+    ```bash
+    termux-setup-storage
+    ```
+    *(Deberás aceptar el permiso de archivos que aparecerá en pantalla).*
+
+### 6.2 Instalación del Motor (Node.js) en el Móvil
+Una vez actualizado, instala Node.js con un solo comando:
+```bash
+pkg install nodejs
+```
+*Verificación:* Al igual que en PC, escribe `node -v` para confirmar.
+
+### 6.3 Edición de Código en el Móvil
+
+Existen dos formas recomendadas de escribir código en Android:
+
+#### Opción A: Editor de Terminal (Rápido)
+1.  **Instalar Nano:** `pkg install nano`
+2.  **Crear archivo:** `nano hola.js`
+3.  **Escribir:** Escribe `console.log("Hola desde mi Android");`.
+4.  **Guardar:** Presiona `Ctrl + O` (Enter) y luego `Ctrl + X` para salir.
+
+#### Opción B: Editor Gráfico (Recomendado para principiantes)
+Si prefieres una interfaz táctil parecida a VS Code, puedes usar **QuickEdit**:
+1.  **Descarga:** [QuickEdit Text Editor (Play Store)](https://play.google.com/store/apps/details?id=com.rhmsoft.code)
+2.  **Uso:** Crea tus archivos `.js` en una carpeta de tu teléfono (ej. `/Documentos/Programacion`).
+3.  **Vínculo con Termux:** Gracias al comando `termux-setup-storage`, podrás acceder a tus archivos desde la terminal navegando a `~/storage/downloads` o la ruta donde guardaste el archivo para ejecutarlo con Node.
+
+### 6.4 Ejecución
+```bash
+node hola.js
+```
+
+---
+
+## 🚀 CAPÍTULO VII: De la Lógica al Código (Práctica de Traducción)
 
 Toda la teoría de entornos y scripts tiene un único objetivo final: traducir nuestra lógica abstracta a un idioma que la máquina pueda ejecutar. Para demostrar esto, tomaremos el algoritmo de la **"Calculadora de Masas para Arepas"** (visto en la Evaluación 1) y lo convertiremos en nuestro primer programa real.
 
-### 6.1 El Pseudocódigo Original (Repaso)
+### 7.1 El Pseudocódigo Original (Repaso)
 Recordemos nuestra lógica base diseñada en papel:
 ```text
 Algoritmo CalcularMasaArepas
@@ -125,7 +209,7 @@ Algoritmo CalcularMasaArepas
 Fin
 ```
 
-### 6.2 Integrando Entrada de Datos Reales (`prompt-sync`)
+### 7.2 Integrando Entrada de Datos Reales (`prompt-sync`)
 En el entorno web (navegador) existe una instrucción nativa para pedir datos al usuario, pero Node.js (al operar en la terminal) maneja las entradas de teclado de forma *asíncrona* (un concepto avanzado que verás más adelante). 
 
 Para replicar el comportamiento directo y secuencial de nuestra instrucción `Leer()` del pseudocódigo, usaremos una librería externa. Abre la terminal integrada de VS Code y ejecuta:
@@ -134,7 +218,7 @@ npm install prompt-sync
 ```
 **¿Por qué hacemos esto?** Estamos utilizando **npm** (el gestor de paquetes del Capítulo 4) para descargar código creado por la comunidad que nos facilita la lectura de teclado, permitiéndonos mantener nuestro código simple y estructurado de arriba hacia abajo.
 
-### 6.3 Guía Rápida de Traducción de Algoritmos
+### 7.3 Guía Rápida de Traducción de Algoritmos
 Antes de traducir la calculadora completa, es vital entender las equivalencias exactas entre lo que escribíamos en papel y cómo se escribe en la computadora. Fíjate en el siguiente ejemplo donde importamos la librería bajo el nombre de la constante `leer`:
 
 ![Guía de Traducción de Algoritmos](file:///C:/Users/HP%20430%20G6/.gemini/antigravity/brain/d3e2905f-6023-4794-87df-6de7fbc95dcb/media__1777476313425.png)
@@ -144,7 +228,7 @@ Como puedes ver en la imagen de referencia:
 *   El comando `Leer` pasa a ser `leer()` (si es texto) o `parseInt(leer())` si necesitamos asegurarnos de que sea un número para hacer operaciones matemáticas.
 *   El comando `Escribir` pasa a ser `console.log()`.
 
-### 6.4 La Traducción de la Calculadora de Masas (Node.js)
+### 7.4 La Traducción de la Calculadora de Masas (Node.js)
 Aplicando la guía anterior en tu editor, crea un archivo llamado `calculadora.js` e implementa la lógica completa:
 
 ```javascript
@@ -166,7 +250,7 @@ console.log("-> Harina: " + tazasHarina + " tazas.");
 console.log("-> Agua: " + tazasAgua + " tazas.");
 ```
 
-### 6.4 Ejecución del Script
+### 7.5 Ejecución del Script
 Para que la computadora procese esta "receta", debes abrir la terminal integrada de tu editor y pasarle el archivo al intérprete:
 ```bash
 node calculadora.js

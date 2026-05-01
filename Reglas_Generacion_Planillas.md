@@ -22,4 +22,18 @@ Este documento establece los criterios y reglas pedagógicas para la generación
 
 ## 5. Automatización (MCP)
 - Utilizar la herramienta `fill_uptt_planilla` del servidor `uptt-planner`.
-- Parámetros requeridos: `templatePath`, `outputPath` y el array de `weeks` con objetos que incluyan `fecha`, `numero`, `contenidos`, `objetivos` y opcionalmente `evaluacion`.
+- **Parámetros requeridos:** `templatePath`, `outputPath`, `weeks`.
+- **Parámetro opcional pero recomendado:** `metadata` (Objeto con los datos del encabezado).
+- **Campos del Objeto Metadata:**
+  - `profesor`: Nombre completo.
+  - `ci`: Cédula de Identidad (ej. 23781625).
+  - `carrera`: Nombre de la carrera (ej. PNF Informática).
+  - `trayecto`: Número romano (ej. II).
+  - `trimestre`: Número romano (ej. III).
+  - `unidad`: Nombre de la materia (ej. Programación II).
+  - `aula`: Ubicación física de la clase.
+  - `dedicacion`, `pnf`, `desde`, `hasta`, `codigo`.
+
+## 6. Verificación de Integridad
+- **Antes de Generar:** Confirmar con el usuario el día de la semana que le corresponde dar clase.
+- **Post-Generación:** Notificar la ubicación del archivo generado para que el usuario pueda validarlo antes de la impresión.
