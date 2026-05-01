@@ -260,59 +260,99 @@
         --base-font-size: 15px;
       }
 
+      /* Eliminar espacios muertos en la cabecera del manual */
       .markdown-section {
         padding: 0.5rem 1rem !important;
-        /* Menos espacio arriba */
       }
 
       .markdown-section h1 {
         font-size: 1.6rem;
-        margin-top: 0.5rem;
-        /* Pegado arriba */
+        margin-top: 0 !important; /* Totalmente arriba */
+        padding-top: 0 !important;
       }
 
-      /* Matrix casi invisible */
-      #matrix-bg {
-        opacity: 0.08;
-      }
-
-      /* Sidebar Overlay Total */
+      /* Sidebar como Overlay Fijo e Impenetrable */
       .sidebar {
-        width: 100vw !important;
-        height: 100vh !important;
-        left: -100vw !important;
-        /* Totalmente fuera */
-        transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        z-index: 1000 !important;
-        background-color: var(--sidebar-background) !important;
-      }
-
-      /* Docsify usa body.close para ESCONDER el sidebar en desktop, 
-         pero en mobile el comportamiento depende de cómo esté configurado. 
-         Forzamos el overlay cuando NO tenga la clase close (abierto). */
-      body:not(.close) .sidebar {
-        left: 0 !important;
-      }
-
-      /* El contenido no debe moverse cuando el sidebar se abre en móvil */
-      body:not(.close) .content {
-        transform: none !important;
-      }
-
-      .sidebar-toggle {
-        background: rgba(18, 18, 30, 0.9) !important;
-        backdrop-filter: blur(8px);
-        border-radius: 0 0 12px 0;
+        position: fixed !important;
         top: 0 !important;
         left: 0 !important;
-        padding: 12px !important;
-        z-index: 1001 !important;
-        /* Por encima del sidebar */
+        width: 100vw !important;
+        height: 100vh !important;
+        transform: translateX(-100vw) !important; /* Escondido */
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        z-index: 10000 !important;
+        background-color: var(--sidebar-background) !important;
+        border: none !important;
       }
 
-      /* Botón de cerrar dentro del sidebar si fuera necesario */
+      /* Clase que Docsify aplica al abrir el menú en móvil */
+      body.close .sidebar {
+        transform: translateX(0) !important;
+      }
+
+      /* Evitar que el contenido se mueva o se "lance" al otro lado */
+      .content, body, main {
+        transform: none !important;
+        transition: none !important;
+      }
+
+      /* Botón de Menú (Toggle) Estilo Floating Premium */
+      .sidebar-toggle {
+        position: fixed !important;
+        background: rgba(10, 10, 12, 0.85) !important;
+        backdrop-filter: blur(12px) saturate(180%);
+        -webkit-backdrop-filter: blur(12px) saturate(180%);
+        border: 1px solid rgba(0, 242, 255, 0.25) !important;
+        top: 15px !important;
+        left: 15px !important;
+        width: 48px !important;
+        height: 48px !important;
+        padding: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        z-index: 10001 !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        border-radius: 12px !important;
+      }
+
+      /* Efecto al presionar o pasar el mouse */
+      .sidebar-toggle:active {
+        transform: scale(0.9);
+      }
+
+      /* El icono de las 3 barras (hamburguesa) */
       .sidebar-toggle span {
+        width: 22px !important;
+        height: 2px !important;
         background-color: var(--theme-color) !important;
+        box-shadow: 0 0 10px var(--theme-color);
+        margin: 4px 0 !important;
+        display: block;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+      }
+
+      /* POSICIÓN DE "CERRAR": Lo movemos a la derecha cuando el menú está abierto */
+      body.close .sidebar-toggle {
+        left: auto !important;
+        right: 20px !important;
+        top: 20px !important;
+        background: rgba(20, 20, 25, 0.95) !important;
+        border-color: rgba(255, 255, 255, 0.1) !important;
+        border-radius: 50% !important; /* Botón circular para cerrar */
+      }
+
+      /* Animación del icono para que parezca una X (opcional si Docsify no lo hace) */
+      body.close .sidebar-toggle span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+      body.close .sidebar-toggle span:nth-child(2) { opacity: 0; }
+      body.close .sidebar-toggle span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+      /* Quitar espacio del buscador en el sidebar */
+      .sidebar .search {
+        margin-top: 80px !important;
+        padding: 15px !important;
       }
 
       .markdown-section pre {
@@ -322,15 +362,14 @@
     }
 
     @media screen and (max-width: 480px) {
-
-      /* Eliminamos el espacio superior masivo */
-      main {
-        margin-top: 0 !important;
-      }
-
       .content {
-        padding-top: 60px !important;
-        /* Solo lo justo para el botón */
+        padding-top: 50px !important;
+      }
+      
+      /* Ajuste de imágenes para que no desborden */
+      .markdown-section img {
+        max-width: 100%;
+        height: auto;
       }
     }
   </style>
