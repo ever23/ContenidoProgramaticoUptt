@@ -49,6 +49,14 @@ Express nos permite definir estas rutas fácilmente usando los "Verbos HTTP":
 Un middleware es una función que se ejecuta *en el medio* de una petición. Antes de que tu ruta principal procese la petición, el middleware puede revisarla.
 Por ejemplo, un middleware de autenticación: verifica si el usuario está logueado. Si no lo está, bloquea la petición antes de que llegue a la ruta de "Ver Perfil".
 
+### 3.3 Servir Archivos Estáticos (Static Files)
+En la arquitectura clásica web, el Backend es el responsable de entregarle al navegador web los archivos base del Frontend (HTML, CSS, imágenes y scripts del DOM). A esta acción se le llama "Servir contenido estático".
+Express simplifica enormemente esto usando un middleware nativo llamado `express.static()`. Al indicarle a Express una carpeta física (por ejemplo, `public/`), automáticamente expone todos los archivos de esa carpeta para que el navegador los descargue sin necesidad de programar una ruta manualmente para cada imagen o archivo HTML.
+
+### 3.4 Renderizado de HTML en el Servidor (SSR)
+Además de enviar HTML estático puro, Express tiene la capacidad de **Construir HTML Dinámicamente** en el servidor antes de enviarlo al cliente. A este patrón arquitectónico se le conoce como *Server-Side Rendering (SSR)*.
+En lugar de enviar un HTML vacío y hacer que el navegador tenga que pedir los datos después con JavaScript, el Backend (Node.js) procesa los datos, los "inyecta" directamente dentro de una plantilla HTML y le envía al navegador la página web ya ensamblada y lista para ser mostrada al usuario. Esto se logra acoplando Express con "Motores de Plantillas" (Template Engines) como **EJS**, **Pug** o enviando HTML puro ensamblado mediante el método `res.sendFile()`.
+
 ---
 
 ## 💻 Laboratorio: Tu Primer Servidor Web en 10 Líneas
@@ -67,18 +75,49 @@ const app = express();
 // Esto le dice al servidor: "Si alguien pide un archivo HTML o CSS, búscalo en la carpeta 'public'"
 app.use(express.static('public'));
 
-// 4. Crear una Ruta Dinámica (Método GET)
+// 4. Crear una Ruta Básica (Método GET)
 app.get('/saludo', (req, res) => {
-    // req (Request): Trae la información de quién me pide esto.
-    // res (Response): Mi herramienta para responder.
+    // req (Request): Trae la información de quién pide esto.
+    // res (Response): Herramienta para responder.
     res.send("¡Hola desde el Backend! Tu servidor está vivo.");
 });
 
-// 5. Encender el servidor y ponerlo a escuchar en un puerto de red
-const PUERTO = 3000;
-app.listen(PUERTO, () => {
-    console.log(`Servidor de la UPTT corriendo en http://localhost:${PUERTO}`);
+// 5. Ejemplo de SSR Profesional usando un Motor de Plantillas (EJS)
+// Pre-configuración necesaria: app.set('view engine', 'ejs');
+app.get('/perfil', (req, res) => {
+    // Simulamos un dato que nació en el servidor (ej. de una Base de Datos)
+    const nombreUsuario = "Estudiante de Ingeniería";
+    const horaServidor = new Date().toLocaleTimeString();
+
+    // res.render busca automáticamente el archivo 'perfil.ejs' en la carpeta '/views'
+    // Inyecta el objeto de variables en la plantilla, lo compila a HTML y lo envía al navegador
+    res.render('perfil', { 
+        nombre: nombreUsuario, 
+        hora: horaServidor 
+    });
+    // 6. Encender el servidor y ponerlo a escuchar en un puerto de red
+    const PUERTO = 3000;
+    app.listen(PUERTO, () => {
+        console.log(`Servidor de la UPTT corriendo en http://localhost:${PUERTO}`);
+    });
 });
+```
+
+*(Para que el código anterior funcione, debes crear un archivo llamado `perfil.ejs` dentro de una carpeta llamada `views` en la raíz de tu proyecto, con este contenido:)*
+
+```html
+<!-- Archivo: views/perfil.ejs -->
+<!DOCTYPE html>
+<html lang="es">
+<head><title>Perfil SSR</title></head>
+<body>
+    <h1>¡Hola Mundo!</h1>
+    <h2>Bienvenido, <strong><%= nombre %></strong></h2>
+    <p>Este HTML fue renderizado en el servidor. La hora es: <%= hora %></p>
+</body>
+</html>
+
+
 ```
 
 ---

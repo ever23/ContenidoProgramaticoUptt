@@ -26,19 +26,14 @@ Tiene tres estados:
 
 ---
 
-## 🧩 CAPÍTULO II: Fetch API y JSON
+## 🧩 CAPÍTULO II: Peticiones con Fetch API
 
-Para realizar estas peticiones asíncronas desde el navegador (Frontend) hacia nuestro servidor Node.js (Backend), utilizamos una herramienta nativa moderna llamada **Fetch API**.
+Para realizar estas peticiones asíncronas desde el navegador (Frontend) hacia nuestro servidor Node.js (Backend), utilizamos una herramienta nativa moderna llamada **Fetch API**. 
 
-### 2.1 ¿Qué es JSON?
-Cuando el Frontend y el Backend se comunican, no se envían objetos complejos de JavaScript directamente, porque podrían estar escritos en lenguajes distintos. Se envían texto puro.
+Como recordarás de la materia de Algorítmica, los sistemas web no se envían objetos de memoria crudos entre sí; utilizan el estándar **JSON** como texto plano universal para la transferencia. Fetch API facilita enormemente tanto la petición como la extracción de estas respuestas JSON.
 
-**JSON (JavaScript Object Notation)** es el formato estándar de intercambio de datos en la web. Es básicamente un objeto JS convertido en una cadena de texto (String) gigante y formateada.
-- De JS a Texto: `JSON.stringify()`
-- De Texto a JS: `JSON.parse()`
-
-### 2.2 Sintaxis Moderna: async / await
-Aunque las Promesas se pueden manejar con la sintaxis clásica `.then()`, la ingeniería moderna prefiere `async/await` por su legibilidad, ya que permite escribir código asíncrono como si fuera síncrono.
+### 2.1 Sintaxis Moderna: async / await
+Aunque las Promesas se pueden manejar con la sintaxis clásica `.then()`, la ingeniería moderna prefiere `async/await` por su legibilidad, ya que permite escribir código asíncrono manteniendo una estructura visual síncrona.
 
 ---
 

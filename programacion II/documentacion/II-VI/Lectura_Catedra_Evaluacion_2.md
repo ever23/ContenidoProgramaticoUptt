@@ -1,118 +1,116 @@
 # Manual de Estudio Profundo: Evaluación 2
 ## Materia: Programación II (Trayecto II)
-### Eje Temático: Integración Backend-BD y CRUD Asíncrono
+### Eje Temático: Mapeo Objeto-Relacional (ORM) y Active Record
 
 ---
 
-## 🧭 Introducción: Conectando los Dos Cerebros
-En este punto, tenemos dos sistemas aislados en nuestra computadora (o servidor):
-1. **Node.js (Express):** Procesador de peticiones web rápidas, inteligente pero sin memoria propia a largo plazo.
-2. **Servidor SQL (MySQL/PostgreSQL):** Un bóveda de alta seguridad, excelente para memoria a largo plazo pero no sabe cómo hablar con navegadores web o procesar clics de usuario.
-
-El objetivo de un ingeniero Backend es construir un **Puente** entre Node.js y la Base de Datos. Cuando Node.js reciba un `POST` desde el Frontend, traducirá esa petición a un comando SQL, lo enviará a la Base de Datos, esperará la confirmación, y luego le responderá al Frontend: "Todo salió perfecto".
+## 🧭 Introducción: Elevando el Nivel de Abstracción
+En la lectura anterior, aprendimos a conectarnos a la base de datos y realizar operaciones CRUD escribiendo comandos SQL en texto puro (`"INSERT INTO..."`). 
+Aunque esto funciona, hace que el código sea extenso y difícil de mantener. La ingeniería de software moderna soluciona este problema mediante el uso de herramientas llamadas **ORM**, las cuales transforman las tablas de SQL en objetos de JavaScript.
 
 ---
 
-## 🏛️ CAPÍTULO I: Drivers y ORMs (El Traductor)
+## 🏛️ CAPÍTULO I: Abstracción de Datos y el Patrón Active Record
 
-Node.js, de forma nativa, no sabe hablar el idioma de base de datos MySQL o Postgres. Necesita un paquete de software intermediario.
+Un **ORM (Object-Relational Mapping)** es una capa de software que se coloca "encima" del driver (`mysql2`). Su trabajo es ocultar el texto SQL y permitirte interactuar con la base de datos usando programación orientada a objetos.
 
-### 1.1 El Driver Nativo (El Traductor Crudo)
-Es una librería que descargamos mediante `npm` (por ejemplo, `mysql2` o `pg`). Este driver abre un túnel de red directo hacia el puerto de la base de datos (usualmente el 3306 o 5432). 
-- **Ventaja:** Tú escribes tus comandos SQL puros en texto y el driver los pasa directamente. Es extremadamente rápido.
-- **Desventaja:** Si te equivocas en la ortografía del SQL, te enterarás en tiempo de ejecución.
+### 1.1 ORMs en la Industria Moderna
+El uso de ORMs es un estándar absoluto en el desarrollo de software a nivel mundial. Como ingeniero, si dominas la lógica subyacente de un ORM, aprender a utilizar cualquier otro en tu futuro profesional será sumamente sencillo. Algunos de los líderes del mercado en la actualidad son:
+- **Ecosistema Node.js (JS/TS):** Prisma, Sequelize y TypeORM.
+- **Ecosistema Python:** Django ORM y SQLAlchemy.
+- **Ecosistema PHP:** Eloquent (Laravel) y Doctrine (Symfony).
+- **Ecosistema Java:** Hibernate.
+- **Ecosistema C# (.NET):** Entity Framework.
 
-### 1.2 El ORM (Mapeo Objeto-Relacional)
-Un ORM (como Sequelize o Prisma) es un nivel de abstracción mayor. En lugar de escribir sentencias SQL en texto, usas los métodos de Clases y Objetos (POO) en JavaScript que aprendimos en el Trimestre 1.
-- **Ejemplo:** En vez de escribir `"SELECT * FROM usuarios"`, el ORM te permite hacer `Usuarios.findAll()`. El ORM luego genera el SQL automáticamente y lo manda.
-- Para efectos formativos y de dominio de la arquitectura, esta cátedra exige primero el uso del Driver Nativo.
-
----
-
-## 🧩 CAPÍTULO II: El Cuello de Botella Asíncrono
-
-Comunicar dos programas distintos (Node y el SGBD) toma tiempo. La base de datos puede estar en otro país. Por tanto, **absolutamente todas las consultas a la Base de Datos son Asíncronas**. 
-
-Si Node.js hace un `SELECT` e intenta imprimir el resultado inmediatamente en la siguiente línea, obtendrá "Indefinido", porque el disco duro de la base de datos aún no ha terminado de girar.
-Debemos aplicar la filosofía de las **Promesas** (`async / await`) que dominamos en el Frontend, pero esta vez desde el Backend hacia la Base de Datos.
+### 1.2 El Patrón Active Record
+Casi todos los ORMs mencionados se basan fuertemente en el patrón *Active Record* (Registro Activo), el cual establece dos principios fundamentales:
+1. **El Objeto Tabla:** Representa la tabla completa y sirve para hacer inserciones masivas y búsquedas sin escribir comandos `SELECT`.
+2. **El Objeto Fila:** Cada registro que buscas en la base de datos te es devuelto como un objeto inteligente. Si cambias un dato en el objeto (ej. el nombre) y lo mandas a guardar, el objeto automáticamente genera y ejecuta el `UPDATE` en la base de datos por ti.
 
 ---
 
-## 🏗️ CAPÍTULO III: Prevención de Inyección SQL (Seguridad Crítica)
+## 🧩 CAPÍTULO II: El ORM de la Cátedra (`mysql-tab`)
 
-> [!CAUTION]
-> **El pecado más mortal de un Backend:** Concatenar texto ciegamente.
+Para facilitar tu aprendizaje y enseñarte a construir arquitecturas limpias, utilizaremos el ORM desarrollado en esta cátedra: **`mysql-tab`** (que hace uso de `tabla-model` por debajo).
 
-Supongamos que el usuario envía su nombre a través de un formulario web y llega a Node.js en la variable `req.body.nombre`.
-Si tú escribes tu consulta SQL así:
-`let sql = "SELECT * FROM usuarios WHERE nombre = '" + req.body.nombre + "'";`
-
-¿Qué pasa si un atacante malicioso escribe en el formulario de la página web exactamente este texto?:
-`Pedro'; DROP TABLE usuarios; --`
-
-El texto SQL concatenado resultante sería:
-`SELECT * FROM usuarios WHERE nombre = 'Pedro'; DROP TABLE usuarios; --'`
-Node enviará este texto a la Base de Datos. La BD ejecutará el SELECT y luego **BORRARÁ LA TABLA ENTERA DEL SISTEMA**.
-
-### La Solución: Consultas Preparadas (Prepared Statements)
-Nunca debes inyectar variables directamente en el string SQL. Debes usar marcadores de posición (`?` o `$1`) y pasar las variables en un arreglo separado. El Driver (mysql2) desinfectará y escapará caracteres peligrosos automáticamente.
+Este ORM tiene funcionalidades automáticas diseñadas para ahorrarte horas de trabajo:
+1. **Auto-Creación de Bases de Datos:** Si olvidas crear la base de datos en tu motor, el ORM atrapará el error de red y creará la base de datos vacía automáticamente.
+2. **Creación Automática con Modelos:** No necesitas ir a PHPMyAdmin a crear la tabla columna por columna. Puedes definir la estructura en tu archivo de JavaScript y el ORM construirá la tabla física de forma invisible.
+3. **Seguridad Automática:** No tienes que preocuparte por programar Consultas Preparadas; el ORM sanitiza todas las variables automáticamente para evitar la Inyección SQL.
 
 ---
 
-## 💻 Laboratorio: Implementación de la Ruta C (Create)
+## 💻 Laboratorio: Modelado y Active Record con `mysql-tab`
 
-Aquí integramos Express con un driver SQL, aplicando Asincronía y Consultas Preparadas.
+Reescribiremos el CRUD de la lectura pasada usando nuestra herramienta ORM para que veas la diferencia entre SQL manual y Active Record.
+
+**Paso 1: Instalación**
+```bash
+npm install mysql-tab tabla-model
+```
+
+**Paso 2: Implementación (`index.js`)**
 
 ```javascript
-// Servidor Node.js
 const express = require('express');
-// Importamos el driver moderno basado en Promesas
-const mysql = require('mysql2/promise'); 
+const dbTabla = require('mysql-tab');
+const Model = require('tabla-model'); // Herramienta para modelar la BD desde JS
+
 const app = express();
 app.use(express.json());
 
-// 1. Crear la conexión global a la Base de Datos (Pool)
-const poolBD = mysql.createPool({
+// 1. Configuramos la conexión (El ORM creará la BD si no existe)
+const poolBD = new dbTabla({
     host: 'localhost',
     user: 'root',
-    password: 'passwordSeguro',
+    password: '',
     database: 'universidad_db'
 });
 
-// 2. Ruta POST para guardar en BD (Endpoint C de CRUD)
-app.post('/api/registrar-alumno', async (req, res) => {
-    try {
-        const { nombre, cedula, edad } = req.body; // Extraemos lo que envía el Frontend
+// 2. Definición del Modelo (Creará la tabla automáticamente si no existe)
+const ModeloEstudiante = new Model("Estudiantes", [
+    { name: "id", type: "int", primary: true, autoincrement: true },
+    { name: "nombre", type: "varchar(100)" },
+    { name: "cedula", type: "varchar(20)" }
+]);
+poolBD.addModel(ModeloEstudiante);
 
-        // 3. CONSULTA PREPARADA DE ALTA SEGURIDAD (Note los signos de interrogación '?')
-        const sql = "INSERT INTO Estudiantes (nombre, cedula, edad) VALUES (?, ?, ?)";
-        
-        // 4. Ejecución Asíncrona. El Pool inyecta de forma segura el arreglo [nombre, cedula, edad] en los '?'
-        console.log("Iniciando transacción con la BD...");
-        const [resultado] = await poolBD.execute(sql, [nombre, cedula, edad]);
+// Extraemos el controlador de la tabla
+const tablaEstudiantes = poolBD.tabla("Estudiantes");
 
-        // 5. Respuesta al cliente
-        res.status(201).json({
-            mensaje: "Alumno registrado exitosamente en MySQL.",
-            idGenerado: resultado.insertId
-        });
-
-    } catch (error) {
-        console.error("Error fatal SQL:", error);
-        res.status(500).json({ error: "Fallo en la persistencia de datos." });
-    }
+// 🟢 C (Create): Inserción Directa con Objeto
+app.post('/api/estudiantes', async (req, res) => {
+    // Adiós al INSERT INTO. El ORM lo hace por nosotros.
+    await tablaEstudiantes.insert(req.body); 
+    res.json({ mensaje: "Estudiante guardado" });
 });
 
-app.listen(3000, () => console.log('API conectada al motor relacional'));
+// 🔵 R (Read): Búsqueda Limpia
+app.get('/api/estudiantes', async (req, res) => {
+    const lista = await tablaEstudiantes.select(); 
+    res.json(lista);
+});
+
+// 🟠 U (Update): Modificando la base de datos con Active Record
+app.put('/api/estudiantes/:id', async (req, res) => {
+    // 1. Buscamos la fila específica. Devuelve un objeto inteligente (dbRow)
+    let estudiante = await tablaEstudiantes.selectById(req.params.id);
+    
+    // 2. Modificamos el objeto en la memoria RAM
+    estudiante.nombre = req.body.nombre;
+    
+    // 3. El objeto se sincroniza a sí mismo con la Base de Datos
+    await estudiante.update(); 
+    
+    res.json({ mensaje: "Estudiante actualizado mediante Active Record" });
+});
+
+app.listen(3000, () => console.log('API ORM conectada y escuchando'));
 ```
 
 ---
 
 ## 📘 ANEXO: Diccionario Técnico Formal
-
-- **API RESTful (Representational State Transfer):** Estilo arquitectónico para sistemas hipermedia distribuidos que define un conjunto de restricciones (sin estado, cacheable, interfaz uniforme) para la creación de servicios web operados a través de verbos estándar HTTP (GET, POST, PUT, DELETE).
-- **CRUD:** Acrónimo fundacional de las cuatro funciones operativas elementales de almacenamiento persistente: Crear (Create), Leer (Read), Actualizar (Update) y Eliminar (Delete).
-- **Driver de BD:** Módulo de software especializado que implementa la capa física de transporte y los protocolos de socket requeridos para establecer un enlace de bajo nivel entre un entorno de ejecución y un motor de base de datos específico.
-- **ORM (Object-Relational Mapping):** Técnica de ingeniería de software que facilita la conversión automática de datos incompatibles entre sistemas de tipos orientados a objetos (Node/JS) y bases de datos relacionales, creando una base de datos "virtual" en código.
-- **SQL Injection (Inyección SQL):** Vulnerabilidad crítica de seguridad informática que ocurre cuando un atacante interfiere maliciosamente con las consultas estructuradas que la aplicación realiza a su base de datos, explotando la concatenación insegura de inputs del cliente.
-- **Prepared Statement (Sentencia Preparada):** Funcionalidad de seguridad y optimización de motores SGBD que pre-compila el esquema de la consulta separando tajantemente la lógica estática del SQL de los parámetros variables de entrada, neutralizando la Inyección SQL.
+- **ORM (Object-Relational Mapping):** Técnica de ingeniería que convierte datos incompatibles entre sistemas de tipos orientados a objetos (JavaScript) y bases de datos relacionales.
+- **Active Record:** Patrón de diseño en el cual los objetos de dominio encapsulan tanto la lógica de datos como el comportamiento de persistencia, mapeando instancias directamente a filas de una tabla.
+- **`mysql-tab` y `tabla-model`:** Ecosistema ORM propietario empleado en la cátedra para encapsular drivers nativos y facilitar el modelado, inferencia y operaciones asíncronas mediante objetos declarativos.

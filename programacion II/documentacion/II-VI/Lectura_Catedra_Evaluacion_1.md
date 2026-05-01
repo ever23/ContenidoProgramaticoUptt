@@ -1,104 +1,167 @@
 # Manual de Estudio Profundo: Evaluación 1
 ## Materia: Programación II (Trayecto II)
-### Eje Temático: Gestión de Bases de Datos Relacionales (SQL Estándar)
+### Eje Temático: Conectividad Nativa, Arquitectura de Datos y CRUD con MySQL2
 
 ---
 
-## 🧭 Introducción: De la Prehistoria a la Ingeniería de Datos
-En el trimestre pasado guardamos nuestra información en archivos de texto (`.json`) usando el módulo `fs`. Aunque eso sirve para tareas minúsculas, es una práctica obsoleta para sistemas reales. 
+## 🧭 Introducción: El Puente hacia la Persistencia
+En tu trayectoria académica, hasta ahora has construido aplicaciones web donde la memoria es volátil; si el servidor Node.js se reinicia, todos los datos se pierden. Por otro lado, en la materia de Bases de Datos estás aprendiendo a estructurar información persistente usando el Modelo Relacional y SQL.
 
-¿Qué pasa si dos usuarios intentan guardar su perfil exactamente en el mismo milisegundo? El archivo JSON se corromperá. ¿Qué pasa si tienes 10 millones de usuarios y quieres buscar a "María"? Node.js tendría que cargar un archivo de 2 Gigabytes a la RAM entera solo para hacer un `if` de búsqueda. El servidor explotaría.
+El objetivo fundamental de un desarrollador Backend es construir un **Puente Arquitectónico** infalible entre estos dos mundos: la agilidad de Node.js y la persistencia de un motor como MySQL o MariaDB. 
 
-La solución definitiva de la ingeniería de software son los **Sistemas Gestores de Bases de Datos (SGBD)**.
-
----
-
-## 🏛️ CAPÍTULO I: El Modelo Relacional
-
-Creado por E.F. Codd en 1970, es el modelo dominante en la banca, la industria y el comercio mundial.
-Una Base de Datos Relacional organiza los datos no como listas planas, sino como un conjunto de **Tablas** (relaciones matemáticas) bidimensionales.
-
-### 1.1 Elementos de la Tabla
-- **La Tabla (Entidad):** Representa un objeto del mundo real. Ej: `Tabla_Estudiantes`.
-- **Las Columnas (Atributos):** Definen el esquema estricto. Ej: `ID`, `Nombre`, `Edad`.
-- **Las Filas (Registros/Tuplas):** Cada entrada individual. Si hay 100 estudiantes, la tabla tiene 100 filas.
-
-### 1.2 La Regla de Oro: Integridad y Claves
-El modelo relacional exige orden estricto:
-- **Clave Primaria (Primary Key - PK):** Es una columna cuyo valor debe ser matemáticamente ÚNICO e IRREPETIBLE en toda la tabla. Garantiza que no haya duplicados de entidades completas. El mejor ejemplo es la "Cédula de Identidad" o un "ID numérico autoincremental".
-- **Clave Foránea (Foreign Key - FK):** Es el pilar que le da la palabra "Relacional" al sistema. Es una columna en una tabla que "apunta" a la Clave Primaria de otra tabla, estableciendo un vínculo irrompible.
-
-> [!TIP]
-> **Ejemplo de Relación:** Si el Estudiante "Juan" inscribe la Materia "Matemáticas". No copiamos el nombre "Matemáticas" mil veces. La tabla `Inscripciones` solo guardará `ID_Estudiante=1` y `ID_Materia=14`. La Base de datos relaciona los números a altísima velocidad.
+En esta lectura abandonaremos las simulaciones y aprenderemos a establecer esta conexión a muy bajo nivel, escribiendo sentencias SQL puras desde JavaScript, controlando el flujo de datos y comprendiendo los peligros de seguridad inherentes a las bases de datos.
 
 ---
 
-## 🧩 CAPÍTULO II: El Estándar SQL (Structured Query Language)
+## 🏛️ CAPÍTULO I: Drivers y Arquitectura de Conexión
 
-Para hablar con estos motores de bases de datos (sean MySQL, PostgreSQL o SQL Server) no usamos JavaScript. Usamos **SQL**, el lenguaje declarativo estándar mundial. Se llama "Declarativo" porque no le das los pasos lógicos al motor; solo le dices "Qué quieres", y el motor decide "Cómo buscarlo" internamente.
+Node.js, por su propia naturaleza de diseño, no sabe cómo comunicarse con MySQL. Necesita un programa intermediario capaz de traducir los objetos de JavaScript a paquetes de red binarios que el puerto 3306 de MySQL pueda entender. A este traductor se le conoce como **Driver**.
 
-El lenguaje SQL se divide en varios sub-lenguajes:
+En la industria moderna, el estándar absoluto es el paquete `mysql2`. A diferencia del antiguo paquete `mysql` (ya obsoleto), `mysql2` está reescrito para soportar **Promesas (`async/await`)**. Esto es vital: si usamos un driver antiguo que bloquee el *Event Loop* mientras espera que la base de datos responda, todo nuestro servidor se congelará para los demás usuarios.
 
-### 2.1 DDL (Data Definition Language)
-Se usa para crear la "Arquitectura" o el esqueleto.
-```sql
--- Creamos la tabla y definimos sus reglas estrictas (Tipos de datos)
-CREATE TABLE Estudiantes (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(100) NOT NULL,
-    edad INT,
-    fecha_registro DATE
-);
+### 1.1 El Anti-Patrón: Conexiones Simples (`createConnection`)
+Una conexión simple abre un túnel directo (un socket) entre Node.js y MySQL. 
+```javascript
+// ❌ Mala práctica en servidores web
+const conexion = await mysql.createConnection({...}); 
+```
+**¿Por qué es peligroso?**
+Imagina que tu API se vuelve popular y 500 usuarios intentan iniciar sesión al mismo tiempo. Si usas una conexión simple, los 500 usuarios intentarán pasar por el mismo túnel simultáneamente. El túnel se saturará, MySQL rechazará las peticiones por exceso de tráfico concurrente y tu servidor colapsará mostrando el temido error `ETIMEDOUT` o `ECONNREFUSED`.
+
+### 1.2 La Solución Profesional: El Pool de Conexiones (`createPool`)
+La arquitectura élite dicta el uso de un **Pool de Conexiones**. 
+Un Pool actúa como un "estacionamiento" de túneles de red. Cuando el servidor inicia, Node.js abre silenciosamente, por ejemplo, 10 conexiones simultáneas hacia MySQL y las deja "estacionadas" a la espera.
+
+Cuando un usuario hace una petición HTTP, Node.js le presta un túnel vacío. El usuario ejecuta su SQL, y cuando termina, el túnel no se destruye, sino que regresa al Pool para ser prestado inmediatamente al siguiente usuario. Esto permite atender a miles de usuarios reciclando un número pequeño de conexiones físicas, optimizando dramáticamente la memoria RAM.
+
+---
+
+## 🧩 CAPÍTULO II: Seguridad Crítica (Inyección SQL)
+
+Al integrar Node.js con SQL, surge la vulnerabilidad de seguridad más famosa y destructiva del mundo del Backend: **La Inyección SQL**.
+
+> [!CAUTION]
+> **El pecado mortal del Backend:** Concatenar texto ciegamente. 
+> Nunca debes construir una cadena SQL uniendo variables enviadas por el usuario.
+
+Supongamos que haces un sistema de Login y escribes tu SQL así:
+```javascript
+// FORMA INSEGURA (Prohibida)
+const sql = "SELECT * FROM usuarios WHERE email = '" + req.body.email + "'";
+```
+¿Qué pasa si un atacante malicioso escribe en el campo de email el siguiente texto exacto?
+`' OR 1=1; --`
+
+Tu código concatenará eso directamente y el SQL resultante que Node enviará a MySQL será:
+`SELECT * FROM usuarios WHERE email = '' OR 1=1; --'`
+
+Como la condición matemática `1=1` siempre es verdadera, MySQL ignorará la contraseña y le dará al atacante acceso total al sistema como si fuera administrador. Peor aún, podría inyectar un comando `DROP TABLE usuarios` y borrar tu empresa entera.
+
+### 2.1 La Solución: Consultas Preparadas (Prepared Statements)
+Para anular este ataque, el driver `mysql2` nos obliga a usar **Consultas Preparadas**. 
+En lugar de inyectar variables en el string, colocamos signos de interrogación `?` (marcadores de posición) y le pasamos los datos en un arreglo por separado. 
+
+```javascript
+// FORMA SEGURA (Consulta Preparada)
+const sql = "SELECT * FROM usuarios WHERE email = ?";
+// El driver desinfecta automáticamente la variable antes de tocar la BD
+const [filas] = await pool.execute(sql, [req.body.email]); 
+```
+Con esto, si el usuario envía código malicioso, MySQL lo tratará como texto simple y no lo ejecutará.
+
+---
+
+## 💻 Laboratorio: Tu Primer CRUD Nativo con MySQL2
+
+Vamos a llevar la teoría a la práctica construyendo una API RESTful con las 4 operaciones básicas de persistencia (Create, Read, Update, Delete) usando SQL puro y arquitectura asíncrona.
+
+**Paso 1: Instalación de Dependencias**
+```bash
+npm install express mysql2
 ```
 
-### 2.2 DML (Data Manipulation Language)
-El núcleo del trabajo diario. Modifica o lee la información real (CRUD).
-- **C**reate: `INSERT INTO Estudiantes (nombre, edad) VALUES ('Ana', 22);`
-- **R**ead: `SELECT nombre, edad FROM Estudiantes WHERE edad >= 18;`
-- **U**pdate: `UPDATE Estudiantes SET edad = 23 WHERE id = 1;`
-- **D**elete: `DELETE FROM Estudiantes WHERE id = 1;`
+**Paso 2: Construcción de la API (`index.js`)**
+Presta especial atención a la desestructuración de arreglos `const [filas] = await ...`. El método `pool.execute` devuelve un arreglo con mucha metadata. Al usar los corchetes `[]`, extraemos únicamente los datos reales de la tabla. También aplicaremos bloques `try/catch` para manejar caídas de red.
 
----
+```javascript
+const express = require('express');
+const mysql = require('mysql2/promise'); // Exigimos la versión de Promesas
+const app = express();
 
-## 🏗️ CAPÍTULO III: El Riesgo de las Anomalías (Normalización)
+// Middleware obligatorio para procesar JSON en el req.body
+app.use(express.json());
 
-Si diseñas mal las tablas, tu sistema colapsará. Imagina una tabla donde guardas: `Nombre | Teléfono1 | Teléfono2 | Teléfono3`. ¿Y si alguien tiene 4 teléfonos? Tendrías que rediseñar la tabla entera. 
+// 1. Configuramos el Pool de Conexiones
+const pool = mysql.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'universidad_db',
+    waitForConnections: true,
+    connectionLimit: 10, // Máximo de túneles simultáneos en el Pool
+    queueLimit: 0
+});
 
-La **Normalización** es un conjunto de reglas algorítmicas (Primera Forma Normal, Segunda, Tercera) que aplicas al diseño para garantizar que:
-1. No haya datos redundantes (repetidos innecesariamente).
-2. Cada celda de la tabla contenga un solo valor atómico (no guardar "tlf1, tlf2" en un solo texto).
-3. Las dependencias sean lógicas (el nombre depende del ID del estudiante, no del profesor).
+// 🟢 C (Create): Insertar con SQL
+app.post('/api/estudiantes', async (req, res) => {
+    try {
+        const { nombre, cedula } = req.body;
+        // Consulta Preparada de alta seguridad
+        const sql = "INSERT INTO Estudiantes (nombre, cedula) VALUES (?, ?)";
+        const [resultado] = await pool.execute(sql, [nombre, cedula]);
+        
+        // 201 = Created (Creado con éxito)
+        res.status(201).json({ mensaje: "Estudiante guardado", id: resultado.insertId });
+    } catch (error) {
+        res.status(500).json({ error: "Fallo en la base de datos" });
+    }
+});
 
----
+// 🔵 R (Read): Consultar con SQL
+app.get('/api/estudiantes', async (req, res) => {
+    try {
+        const sql = "SELECT * FROM Estudiantes";
+        // Desestructuramos el resultado para obtener solo las filas
+        const [filas] = await pool.execute(sql);
+        res.status(200).json(filas);
+    } catch (error) {
+        res.status(500).json({ error: "Error al leer datos" });
+    }
+});
 
-## 💻 Laboratorio: Consultas Avanzadas (El Poder de JOIN)
+// 🟠 U (Update): Actualizar con SQL
+app.put('/api/estudiantes/:id', async (req, res) => {
+    try {
+        const { nombre } = req.body;
+        const sql = "UPDATE Estudiantes SET nombre = ? WHERE id = ?";
+        await pool.execute(sql, [nombre, req.params.id]);
+        res.status(200).json({ mensaje: "Estudiante actualizado correctamente" });
+    } catch (error) {
+        res.status(500).json({ error: "No se pudo actualizar" });
+    }
+});
 
-El verdadero poder relacional se ve cuando necesitamos datos que están divididos en diferentes tablas. Para unirlos en una sola vista, usamos la instrucción `JOIN`.
+// 🔴 D (Delete): Eliminar con SQL
+app.delete('/api/estudiantes/:id', async (req, res) => {
+    try {
+        const sql = "DELETE FROM Estudiantes WHERE id = ?";
+        await pool.execute(sql, [req.params.id]);
+        res.status(200).json({ mensaje: "Estudiante eliminado del sistema" });
+    } catch (error) {
+        res.status(500).json({ error: "Error al eliminar" });
+    }
+});
 
-Supongamos que tenemos `Estudiantes` y `Materias`. Y una tabla puente `Inscripciones`.
-Queremos saber: *"¿Cuáles son los nombres de los estudiantes y el nombre de la materia en la que están inscritos?"*
-
-```sql
-SELECT 
-    Estudiantes.nombre, 
-    Materias.nombre_materia 
-FROM 
-    Inscripciones
-/* Unimos la tabla Estudiantes usando el puente de los IDs */
-INNER JOIN Estudiantes ON Inscripciones.id_estudiante = Estudiantes.id
-/* Unimos la tabla Materias usando el puente de los IDs */
-INNER JOIN Materias ON Inscripciones.id_materia = Materias.id;
-
-/* El resultado será una vista plana instantánea con los nombres reales */
+app.listen(3000, () => console.log('API conectada a MySQL en puerto 3000'));
 ```
+
+### El Siguiente Nivel
+¡Felicidades! Tienes una API conectada de forma segura. Sin embargo, escribir SQL en texto rígido dentro de JavaScript puede volverse tedioso cuando los proyectos escalan. En la Lectura 2, veremos cómo la Ingeniería de Software soluciona esto usando herramientas más abstractas.
 
 ---
 
 ## 📘 ANEXO: Diccionario Técnico Formal
-
-- **SGBD (Sistema Gestor de Base de Datos):** Software de infraestructura altamente optimizado y especializado que actúa como una interfaz transaccional entre el almacenamiento físico de datos, las aplicaciones de negocio y los usuarios.
-- **SQL (Structured Query Language):** Lenguaje de programación de dominio específico diseñado conceptualmente bajo el paradigma declarativo para la administración y consulta de sistemas de bases de datos relacionales.
-- **Clave Primaria (PK):** Restricción de integridad en una tabla relacional conformada por una o más columnas cuyos valores unívocos identifican de manera inequívoca a cada tupla o registro individual.
-- **Clave Foránea (FK):** Restricción referencial impuesta sobre una columna de una tabla que requiere que los valores contenidos coincidan mandatoriamente con los valores existentes en una Clave Primaria de otra (o la misma) tabla, garantizando la consistencia del ecosistema.
-- **Normalización:** Proceso analítico y sistemático de diseño lógico de bases de datos que aplica un conjunto riguroso de reglas (Formas Normales) orientado a la erradicación de anomalías transaccionales y redundancias estructurales.
-- **JOIN:** Operador relacional fundamental del estándar SQL que permite la fusión horizontal temporal de dos o más conjuntos de datos (tablas), fundamentado en una condición algorítmica de coincidencia entre sus respectivos dominios.
+- **Driver de BD:** Módulo de software especializado que implementa la capa física de transporte requerida para establecer un enlace de bajo nivel entre un entorno de ejecución (Node.js) y un motor de base de datos específico (MySQL/MariaDB).
+- **Pool de Conexiones:** Patrón de diseño de software enfocado en la concurrencia, el cual mantiene en memoria caché un conjunto de conexiones de base de datos activas y listas para ser reutilizadas dinámicamente.
+- **Inyección SQL:** Vulnerabilidad crítica de seguridad informática que ocurre cuando un atacante interfiere maliciosamente con las consultas estructuradas de la base de datos para alterar su comportamiento lógico.
+- **Prepared Statement:** Funcionalidad de optimización y seguridad que pre-compila el esquema de la consulta en el motor de base de datos, separando tajantemente la lógica estática del SQL de los parámetros variables de entrada.

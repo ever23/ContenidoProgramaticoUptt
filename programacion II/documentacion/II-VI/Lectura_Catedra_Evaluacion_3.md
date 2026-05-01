@@ -65,12 +65,17 @@ Veamos el algoritmo general para la ruta de Autenticación.
 app.post('/api/login', async (req, res) => {
     const { email, passwordPlano } = req.body;
 
-    // 1. Verificar existencia en BD
-    const [usuarios] = await poolBD.execute("SELECT * FROM Usuarios WHERE email = ?", [email]);
+    // 1. Verificar existencia en BD usando el ORM mysql-tab
+    const tablaUsuarios = poolBD.tabla("Usuarios");
+    
+    // Pasamos "*", null (para no usar joins), y nuestro filtro WHERE como objeto
+    const usuarios = await tablaUsuarios.select(`email="${email}"`);
+    
     if (usuarios.length === 0) {
         return res.status(401).json({ error: "Credenciales inválidas" }); // No existe
     }
 
+    // Extraemos la fila (Objeto dbRow)
     const usuarioDB = usuarios[0];
 
     // 2. Comparación Criptográfica Segura
