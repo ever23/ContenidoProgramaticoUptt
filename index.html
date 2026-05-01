@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Cátedra UPTT - Algorítmica y Programación</title>
+  <title>Prof. Enyerber Franco</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Manuales de Cátedra Universitarios">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
@@ -11,49 +11,60 @@
   <!-- Tipografías Premium de Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
 
   <!-- Tema Visual: Docsify Themeable (Simple Dark) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css">
-  
+
   <!-- Estilos Personalizados Premium -->
   <style>
     :root {
       /* Colores y Temática General (Inspirado en el CV Enyerber Franco) */
-      --theme-color: #00f2ff; /* Cian Eléctrico */
-      --base-color: #e2e8f0; /* Texto base muy legible */
-      --base-background-color: #12121e; /* Deep Navy/Black del CV */
-      
+      --theme-color: #00f2ff;
+      /* Cian Eléctrico */
+      --base-color: #e2e8f0;
+      /* Texto base muy legible */
+      --base-background-color: #12121e;
+      /* Deep Navy/Black del CV */
+
       /* Tipografía Premium */
       --base-font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       --base-font-size: 16px;
       --base-line-height: 1.7;
-      
+
       /* Barra Lateral (Sidebar) */
-      --sidebar-background: #0a0a0c; /* Sidebar sutilmente contrastado del CV */
-      --sidebar-border-color: rgba(0, 242, 255, 0.1); /* Border subtle del CV */
+      --sidebar-background: #0a0a0c;
+      /* Sidebar sutilmente contrastado del CV */
+      --sidebar-border-color: rgba(0, 242, 255, 0.1);
+      /* Border subtle del CV */
       --sidebar-name-color: #ffffff;
       --sidebar-name-font-weight: 800;
-      --sidebar-nav-link-color--active: #39ff14; /* Verde Neón del CV */
+      --sidebar-nav-link-color--active: #39ff14;
+      /* Verde Neón del CV */
       --sidebar-nav-link-font-weight--active: 600;
       --sidebar-nav-link-border-color--active: #39ff14;
-      
+
       /* Buscador (Search) */
       --search-background: #12121e;
       --search-border-color: rgba(0, 242, 255, 0.2);
       --search-input-color: #ffffff;
       --search-input-placeholder-color: #94a3b8;
-      
+
       /* Bloques de Código */
       --code-font-family: 'JetBrains Mono', "Fira Code", monospace;
-      --code-theme-background: #0a0a0c; /* Más oscuro para resaltar el código */
+      --code-theme-background: #0a0a0c;
+      /* Más oscuro para resaltar el código */
       --code-font-size: 14px;
-      
+
       /* Citas / Blockquotes (Tips y Notas) */
-      --blockquote-border-color: #39ff14; /* Verde neón para tips */
-      --blockquote-background: rgba(57, 255, 20, 0.05); /* Verde con baja opacidad */
+      --blockquote-border-color: #39ff14;
+      /* Verde neón para tips */
+      --blockquote-background: rgba(57, 255, 20, 0.05);
+      /* Verde con baja opacidad */
       --blockquote-color: #e2e8f0;
-      
+
       /* Cabeceras */
       --heading-color: #ffffff;
       --heading-h1-font-weight: 800;
@@ -63,10 +74,23 @@
     /* === Modificaciones CSS Extra Premium === */
 
     /* Scrollbar personalizada y elegante */
-    ::-webkit-scrollbar { width: 8px; height: 8px; }
-    ::-webkit-scrollbar-track { background: var(--base-background-color); }
-    ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--theme-color); }
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--base-background-color);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #475569;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--theme-color);
+    }
 
     /* Efecto gradiente premium para los títulos principales (H1) */
     .markdown-section h1 {
@@ -74,7 +98,8 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 2rem;
-      border-bottom: none; /* Elimina la línea plana por defecto */
+      border-bottom: none;
+      /* Elimina la línea plana por defecto */
     }
 
     /* Títulos secundarios (H2) */
@@ -95,14 +120,15 @@
       border-radius: 0 10px 10px 0;
       padding: 1.2rem 1.5rem;
       border-left: 4px solid var(--blockquote-border-color);
-      box-shadow: inset 0px 0px 10px rgba(0,0,0,0.2);
+      box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.2);
     }
-    
+
     /* Enlaces con transición suave al pasar el mouse */
     .markdown-section a {
       color: #00f2ff;
       transition: all 0.3s ease-in-out;
     }
+
     .markdown-section a:hover {
       color: #39ff14;
       text-decoration: none;
@@ -110,21 +136,22 @@
     }
 
     /* Animación premium para los enlaces del Sidebar (estilo CV) */
-    .sidebar-nav li > a {
+    .sidebar-nav li>a {
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
       border: 1px solid transparent;
       border-radius: 8px;
     }
 
-    .sidebar-nav li > a:hover {
+    .sidebar-nav li>a:hover {
       color: #00f2ff !important;
       background: rgba(0, 242, 255, 0.08);
       border-color: rgba(0, 242, 255, 0.2);
-      transform: translateX(8px); /* Desplazamiento sutil a la derecha */
+      transform: translateX(8px);
+      /* Desplazamiento sutil a la derecha */
     }
 
     /* Elemento activo en el sidebar */
-    .sidebar-nav li.active > a {
+    .sidebar-nav li.active>a {
       color: #39ff14 !important;
       background: rgba(57, 255, 20, 0.08);
       border-color: rgba(57, 255, 20, 0.2);
@@ -134,21 +161,33 @@
     /* --- EFECTOS DE FONDO ANIMADO (MATRIX) --- */
     #matrix-bg {
       position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       z-index: 0;
-      opacity: 0.35; 
+      opacity: 0.35;
       pointer-events: none;
       overflow: hidden;
       background: transparent;
     }
 
     /* Asegurar que el contenido del sidebar esté por encima del matrix */
-    .sidebar { position: relative; }
-    .sidebar > * { position: relative; z-index: 1; }
-    
+    .sidebar {
+      position: relative;
+    }
+
+    .sidebar>* {
+      position: relative;
+      z-index: 1;
+    }
+
     .bg-glow {
       position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background:
         radial-gradient(circle at 80% 20%, rgba(0, 242, 255, 0.05) 0%, transparent 40%),
         radial-gradient(circle at 20% 80%, rgba(57, 255, 20, 0.03) 0%, transparent 40%);
@@ -167,67 +206,111 @@
       animation: scrollUp 15s linear infinite;
     }
 
-    .sh-keyword { color: #c678dd; font-weight: 700; }
-    .sh-string { color: #98c379; }
-    .sh-function { color: #61afef; }
-    .sh-comment { color: #5c6370; font-style: italic; }
-    .sh-number { color: #d19a66; }
+    .sh-keyword {
+      color: #c678dd;
+      font-weight: 700;
+    }
+
+    .sh-string {
+      color: #98c379;
+    }
+
+    .sh-function {
+      color: #61afef;
+    }
+
+    .sh-comment {
+      color: #5c6370;
+      font-style: italic;
+    }
+
+    .sh-number {
+      color: #d19a66;
+    }
 
     @keyframes scrollUp {
-      0% { transform: translateY(110vh); opacity: 0; }
-      5% { opacity: 0.6; }
-      95% { opacity: 0.6; }
-      100% { transform: translateY(-10vh); opacity: 0; }
+      0% {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+
+      5% {
+        opacity: 0.6;
+      }
+
+      95% {
+        opacity: 0.6;
+      }
+
+      100% {
+        transform: translateY(-10vh);
+        opacity: 0;
+      }
     }
 
     /* Strong y Bold con color de acento para destacar */
-    .markdown-section strong, .markdown-section b {
+    .markdown-section strong,
+    .markdown-section b {
       color: #00f2ff;
     }
 
     /* --- OPTIMIZACIONES PARA MÓVILES (RESPONSIVE) --- */
     @media screen and (max-width: 768px) {
       :root {
-        --base-font-size: 15px; /* Texto un poco más pequeño en móviles */
+        --base-font-size: 15px;
       }
-      
+
       .markdown-section {
-        padding: 1.5rem 1rem !important; /* Más espacio lateral en móviles */
+        padding: 1rem !important;
       }
 
       .markdown-section h1 {
-        font-size: 1.8rem; /* Título menos intrusivo */
+        font-size: 1.7rem;
       }
 
-      .markdown-section h2 {
-        font-size: 1.4rem;
-      }
-
-      /* Ocultamos o simplificamos el efecto matrix en móviles para ahorrar batería/CPU */
+      /* Matrix casi invisible en móviles para no distraer */
       #matrix-bg {
-        opacity: 0.15;
+        opacity: 0.1;
       }
 
+      /* Sidebar a pantalla completa en móviles */
       .sidebar {
-        width: 260px; /* Sidebar un poco más estrecho */
+        width: 100% !important;
+        left: -100% !important;
+        /* Escondido por defecto */
+        transition: left 0.3s ease-in-out !important;
       }
 
-      /* Ajuste de bloques de código en pantallas pequeñas */
+      /* Cuando el body tiene la clase para mostrar el sidebar */
+      body.close .sidebar {
+        left: 0 !important;
+      }
+
+      /* Botón de toggle siempre visible y con buen contraste */
+      .sidebar-toggle {
+        background: rgba(18, 18, 30, 0.8) !important;
+        backdrop-filter: blur(4px);
+        border-radius: 0 8px 8px 0;
+        padding: 10px !important;
+        width: 44px !important;
+        height: 44px !important;
+      }
+
+      /* Ajuste de bloques de código */
       .markdown-section pre {
-        margin: 1rem -0.5rem;
-        border-radius: 8px;
-        font-size: 13px;
+        margin: 1rem -0.2rem;
+        font-size: 12px;
       }
     }
 
     @media screen and (max-width: 480px) {
       .markdown-section h1 {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
       }
-      
-      /* En pantallas muy pequeñas, forzamos que el contenido use todo el ancho */
-      body.close .content {
-        padding: 0 15px;
+
+      /* Eliminamos espacios muertos en el contenido principal */
+      .content {
+        padding-top: 50px !important;
       }
     }
   </style>
@@ -247,11 +330,11 @@
       homepage: 'inicio.md', // <-- Desvincula el README y usa esta página como inicio
       subMaxLevel: 3,
       auto2top: true,
-      
+
       // Opciones exclusivas de Themeable
       themeable: {
-          readyTransition : true, // Transición suave al cargar
-          responsiveTables: true  // Tablas que se adaptan a móviles
+        readyTransition: true, // Transición suave al cargar
+        responsiveTables: true  // Tablas que se adaptan a móviles
       },
 
       // Configuración del buscador
@@ -263,8 +346,8 @@
 
       // Plugins personalizados de Docsify
       plugins: [
-        function(hook, vm) {
-          hook.ready(function() {
+        function (hook, vm) {
+          hook.ready(function () {
             // Mueve el matrix-bg dentro del sidebar cuando Docsify esté listo
             const sidebar = document.querySelector('.sidebar');
             const matrixBg = document.getElementById('matrix-bg');
@@ -279,7 +362,7 @@
 
   <!-- Núcleo de Docsify -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-  
+
   <!-- Plugin Themeable (Debe ir inmediatamente después del núcleo) -->
   <script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/js/docsify-themeable.min.js"></script>
 
@@ -319,7 +402,7 @@
             .replace(/\b(\d+)\b/g, '<span class="sh-number">$1</span>');
         }
 
-        const MAX_LINES = 25; 
+        const MAX_LINES = 25;
 
         function createCodeLine(initial = false) {
           if (matrixBg.children.length > MAX_LINES) matrixBg.removeChild(matrixBg.firstChild);
@@ -330,18 +413,18 @@
           line.innerHTML = highlightCode(snippets[Math.floor(Math.random() * snippets.length)]);
           line.style.left = Math.random() * 95 + '%';
           line.style.animationDuration = duration + 's';
-          
+
           if (initial) line.style.animationDelay = '-' + (Math.random() * 15) + 's';
-          
+
           matrixBg.appendChild(line);
 
           const cleanUp = () => { if (line.parentNode) line.remove(); };
           line.addEventListener('animationend', cleanUp);
-          setTimeout(cleanUp, duration * 1000 + 100); 
+          setTimeout(cleanUp, duration * 1000 + 100);
         }
 
         for (let i = 0; i < 15; i++) createCodeLine(true);
-        setInterval(createCodeLine, 800); 
+        setInterval(createCodeLine, 800);
       }
     });
   </script>
