@@ -174,10 +174,9 @@
       width: 272px; /* Ajustado al ancho real del sidebar */
       height: 100vh;
       z-index: 5;
-      opacity: 0.35;
       pointer-events: none;
       overflow: hidden;
-      background: var(--sidebar-background);
+      background: var(--sidebar-background); /* Fondo sólido para tapar el contenido */
       transition: transform 0.25s ease-out;
       border-right: 1px solid rgba(0, 242, 255, 0.1); /* Línea divisoria sutil */
     }
@@ -307,6 +306,7 @@
         width: 100vw !important;
         z-index: 999 !important; /* Justo detrás del sidebar móvil */
         transform: translateX(-100vw);
+        opacity: 1 !important; /* Asegurar que sea opaco en móvil */
       }
 
       body.close #matrix-bg {
