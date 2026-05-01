@@ -148,12 +148,17 @@ Si la consola responde con el mensaje, habrás ejecutado exitosamente tu primer 
 Para aquellos estudiantes que no poseen una computadora o desean practicar en cualquier lugar, Android permite emular un entorno Linux profesional mediante **Termux**.
 
 ### 6.1 Instalación de Termux
-1.  **Descarga:** Aunque existe en la Play Store, la versión recomendada por la comunidad (más actualizada) se encuentra en **F-Droid**.
-    *   [Link de descarga (F-Droid)](https://f-droid.org/es/packages/com.termux/)
+Existen dos fuentes principales para obtener Termux:
+1.  **F-Droid (Recomendado):** Contiene la versión más actualizada y con soporte completo para paquetes modernos.
+    *   [Descargar desde F-Droid](https://f-droid.org/es/packages/com.termux/)
+2.  **Google Play Store:** Aunque es más fácil de instalar, no recibe actualizaciones frecuentes de paquetes debido a restricciones de Google.
+    *   [Descargar desde Play Store](https://play.google.com/store/apps/details?id=com.termux)
+
+3.  **Configuración Inicial:** Abre la app y ejecuta los siguientes comandos para actualizar los repositorios de software:
     ```bash
     pkg update && pkg upgrade
     ```
-3.  **Acceso al Almacenamiento:** Para que Termux pueda leer y escribir archivos en la memoria interna de tu teléfono, ejecuta:
+4.  **Acceso al Almacenamiento:** Para que Termux pueda leer y escribir archivos en la memoria interna de tu teléfono, ejecuta:
     ```bash
     termux-setup-storage
     ```
@@ -221,9 +226,6 @@ npm install prompt-sync
 ### 7.3 Guía Rápida de Traducción de Algoritmos
 Antes de traducir la calculadora completa, es vital entender las equivalencias exactas entre lo que escribíamos en papel y cómo se escribe en la computadora. Fíjate en el siguiente ejemplo donde importamos la librería bajo el nombre de la constante `leer`:
 
-![Guía de Traducción de Algoritmos](file:///C:/Users/HP%20430%20G6/.gemini/antigravity/brain/d3e2905f-6023-4794-87df-6de7fbc95dcb/media__1777476313425.png)
-
-Como puedes ver en la imagen de referencia:
 *   Declarar una `Variable` pasa a ser `let`.
 *   El comando `Leer` pasa a ser `leer()` (si es texto) o `parseInt(leer())` si necesitamos asegurarnos de que sea un número para hacer operaciones matemáticas.
 *   El comando `Escribir` pasa a ser `console.log()`.
