@@ -67,10 +67,33 @@ A continuación, los enlaces directos a los manuales de estudio profundos (Manua
   - [Evaluación 4: Estructuras de Registros (Objetos) y Persistencia (Archivos)](./Algorítmica%20y%20Programación/documentacion/I-II/Lectura_Catedra_Evaluacion_4.md)
 
 ### Trayecto II
-- **Programación II (Trimestre 5)**
-  - [Evaluación 1: Arquitectura Cliente-Servidor, Capas y Express.js](./programacion%20II/documentacion/II-V/Lectura_Catedra_Evaluacion_1.md)
-- **Redes de Computadoras (Trimestre 5)**
-  - [Evaluación 1: Planeación LAN, Topologías y Estándares IEEE](./Redes/documentacion/II-V/Lectura_Catedra_Evaluacion_1.md)
+- **Programación II**
+  - **Trimestre 4 (II-IV)**
+    - [Evaluación 1: Fundamentos de POO](./programacion%20II/documentacion/II-IV/Lectura_Catedra_Evaluacion_1.md)
+    - [Evaluación 2: Herencia y Polimorfismo](./programacion%20II/documentacion/II-IV/Lectura_Catedra_Evaluacion_2.md)
+    - [Evaluación 3: Semántica HTML y CSS](./programacion%20II/documentacion/II-IV/Lectura_Catedra_Evaluacion_3.md)
+    - [Evaluación 4: DOM y JS Funcional](./programacion%20II/documentacion/II-IV/Lectura_Catedra_Evaluacion_4.md)
+  - **Trimestre 5 (II-V)**
+    - [Evaluación 1: Cliente-Servidor, Express y SSR](./programacion%20II/documentacion/II-V/Lectura_Catedra_Evaluacion_1.md)
+    - [Evaluación 2: Asincronía y Fetch API](./programacion%20II/documentacion/II-V/Lectura_Catedra_Evaluacion_2.md)
+    - [Evaluación 3: Rutas POST y Seguridad](./programacion%20II/documentacion/II-V/Lectura_Catedra_Evaluacion_3.md)
+    - [Evaluación 4: Persistencia Básica (FS)](./programacion%20II/documentacion/II-V/Lectura_Catedra_Evaluacion_4.md)
+  - **Trimestre 6 (II-VI)**
+    - [Evaluación 1: Conectividad Nativa (MySQL2)](./programacion%20II/documentacion/II-VI/Lectura_Catedra_Evaluacion_1.md)
+    - [Evaluación 2: ORM y Active Record](./programacion%20II/documentacion/II-VI/Lectura_Catedra_Evaluacion_2.md)
+    - [Evaluación 3: Autenticación y JWT](./programacion%20II/documentacion/II-VI/Lectura_Catedra_Evaluacion_3.md)
+    - [Evaluación 4: Despliegue VPS y Docker](./programacion%20II/documentacion/II-VI/Lectura_Catedra_Evaluacion_4.md)
+- **Redes de Computadoras**
+  - **Trimestre 4 (II-IV)**
+    - [Evaluación 1: Medios Físicos de Red](./Redes/documentacion/II-IV/Lectura_Catedra_Evaluacion_1.md)
+    - [Evaluación 2: Hardware y Topologías](./Redes/documentacion/II-IV/Lectura_Catedra_Evaluacion_2.md)
+    - [Evaluación 3: Protocolos OSI y TCP/IP](./Redes/documentacion/II-IV/Lectura_Catedra_Evaluacion_3.md)
+    - [Evaluación 4: Tecnologías LAN](./Redes/documentacion/II-IV/Lectura_Catedra_Evaluacion_4.md)
+  - **Trimestre 5 (II-V)**
+    - [Evaluación 1: Planeación LAN y IEEE](./Redes/documentacion/II-V/Lectura_Catedra_Evaluacion_1.md)
+    - [Evaluación 2: Direccionamiento e IPs](./Redes/documentacion/II-V/Lectura_Catedra_Evaluacion_2.md)
+    - [Evaluación 3: Servicios de Red y SysAdmin](./Redes/documentacion/II-V/Lectura_Catedra_Evaluacion_3.md)
+    - [Evaluación 4: Firewalls y Seguridad](./Redes/documentacion/II-V/Lectura_Catedra_Evaluacion_4.md)
 
 ---
 
@@ -92,6 +115,6 @@ A continuación, los enlaces a los documentos rectores que definen los objetivos
 - [Planificación Trimestre 6 (II-VI)](./programacion%20II/Planificacion_Trimestre_II-VI.md)
 
 ### Trayecto II: Redes de Computadoras
-- [Contenido Programático](./Redes/Contenido_Programatico.md)
+- [Contenido Programático Base](./Redes/Contenido_Programatico.md)
 - [Planificación Trimestre 4 (II-IV)](./Redes/Planificacion_Trimestre_II-IV.md)
 - [Planificación Trimestre 5 (II-V)](./Redes/Planificacion_Trimestre_II-V.md)

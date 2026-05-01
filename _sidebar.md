@@ -3,6 +3,8 @@
 ---
 
 * **📘 Algorítmica y Programación**
+  * [📄 Propuesta Curricular 2026](Algorítmica%20y%20Programación/Propuesta_Contenido_Programatico_2026.md)
+
   * **Trimestre I**
     * [1. Fundamentos y Algorítmica](Algorítmica%20y%20Programación/documentacion/I-I/Lectura_Catedra_Evaluacion_1.md)
     * [2. Estructuras Condicionales](Algorítmica%20y%20Programación/documentacion/I-I/Lectura_Catedra_Evaluacion_2.md)
@@ -22,6 +24,8 @@
 ---
 
 * **📙 Programación II**
+  * [📄 Propuesta Curricular 2026](programacion%20II/Propuesta_Contenido_Programatico_2026.md)
+  
   * **Trimestre IV**
     * [1. Fundamentos de POO](programacion%20II/documentacion/II-IV/Lectura_Catedra_Evaluacion_1.md)
     * [2. Herencia y Polimorfismo](programacion%20II/documentacion/II-IV/Lectura_Catedra_Evaluacion_2.md)
@@ -41,6 +45,7 @@
 ---
 
 * **📗 Redes de Computadoras**
+  * [📋 Contenido Programático](Redes/Contenido_Programatico.md)
   * **Trimestre IV**
     * [1. Medios Físicos de Red](Redes/documentacion/II-IV/Lectura_Catedra_Evaluacion_1.md)
     * [2. Hardware y Topologías](Redes/documentacion/II-IV/Lectura_Catedra_Evaluacion_2.md)

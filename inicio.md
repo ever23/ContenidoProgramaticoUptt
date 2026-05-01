@@ -9,6 +9,11 @@ Bienvenido al portal oficial de contenidos programáticos y manuales de estudio.
 *   **[Programación II](programacion%20II/documentacion/II-V/Lectura_Catedra_Evaluacion_1.md)** (Trayecto II)
 *   **[Redes](Redes/documentacion/II-V/Lectura_Catedra_Evaluacion_1.md)** (Trayecto II)
 
+### 📋 Documentación y Planificación
+*   **Algorítmica:** [Contenido Programático](Algorítmica%20y%20Programación/Propuesta_Contenido_Programatico_2026.md)
+*   **Programación II:** [Contenido Programático](programacion%20II/Propuesta_Contenido_Programatico_2026.md)
+*   **Redes:** [Contenido Programático](Redes/Contenido_Programatico.md) 
+
 ---
 
 > **💡 Tips para estudiantes:**
