@@ -145,7 +145,7 @@
     /* Asegurar que el contenido del sidebar esté por encima del matrix */
     .sidebar { position: relative; }
     .sidebar > * { position: relative; z-index: 1; }
-
+    
     .bg-glow {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -164,7 +164,7 @@
       color: rgba(148, 163, 184, 0.5);
       user-select: none;
       opacity: 0;
-      animation: scrollUp 15s linear infinite; /* Un poco más lento para no distraer */
+      animation: scrollUp 15s linear infinite;
     }
 
     .sh-keyword { color: #c678dd; font-weight: 700; }
@@ -183,6 +183,52 @@
     /* Strong y Bold con color de acento para destacar */
     .markdown-section strong, .markdown-section b {
       color: #00f2ff;
+    }
+
+    /* --- OPTIMIZACIONES PARA MÓVILES (RESPONSIVE) --- */
+    @media screen and (max-width: 768px) {
+      :root {
+        --base-font-size: 15px; /* Texto un poco más pequeño en móviles */
+      }
+      
+      .markdown-section {
+        padding: 1.5rem 1rem !important; /* Más espacio lateral en móviles */
+      }
+
+      .markdown-section h1 {
+        font-size: 1.8rem; /* Título menos intrusivo */
+      }
+
+      .markdown-section h2 {
+        font-size: 1.4rem;
+      }
+
+      /* Ocultamos o simplificamos el efecto matrix en móviles para ahorrar batería/CPU */
+      #matrix-bg {
+        opacity: 0.15;
+      }
+
+      .sidebar {
+        width: 260px; /* Sidebar un poco más estrecho */
+      }
+
+      /* Ajuste de bloques de código en pantallas pequeñas */
+      .markdown-section pre {
+        margin: 1rem -0.5rem;
+        border-radius: 8px;
+        font-size: 13px;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .markdown-section h1 {
+        font-size: 1.6rem;
+      }
+      
+      /* En pantallas muy pequeñas, forzamos que el contenido use todo el ancho */
+      body.close .content {
+        padding: 0 15px;
+      }
     }
   </style>
 </head>
