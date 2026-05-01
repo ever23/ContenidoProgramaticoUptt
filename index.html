@@ -84,12 +84,20 @@
     }
 
     ::-webkit-scrollbar-thumb {
-      background: #475569;
-      border-radius: 4px;
+      background: rgba(71, 85, 105, 0.5); /* Más sutil */
+      border-radius: 10px;
+      border: 2px solid transparent;
+      background-clip: content-box;
     }
 
     ::-webkit-scrollbar-thumb:hover {
       background: var(--theme-color);
+      background-clip: content-box;
+    }
+
+    /* Scrollbar específica para el sidebar para que no se pierda */
+    .sidebar::-webkit-scrollbar-track {
+      background: rgba(10, 10, 12, 0.4);
     }
 
     /* Efecto gradiente premium para los títulos principales (H1) */
@@ -160,21 +168,29 @@
 
     /* --- EFECTOS DE FONDO ANIMADO (MATRIX) --- */
     #matrix-bg {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
+      width: 272px; /* Ajustado al ancho real del sidebar */
+      height: 100vh;
+      z-index: 5;
       opacity: 0.35;
       pointer-events: none;
       overflow: hidden;
-      background: transparent;
+      background: var(--sidebar-background);
+      transition: transform 0.25s ease-out;
+      border-right: 1px solid rgba(0, 242, 255, 0.1); /* Línea divisoria sutil */
+    }
+
+    /* Ocultar/Mover cuando el sidebar se cierra */
+    body.close #matrix-bg {
+      transform: translateX(-272px);
     }
 
     /* Asegurar que el contenido del sidebar esté por encima del matrix */
     .sidebar {
       position: relative;
+      background: transparent !important; /* Permitir ver el fondo Matrix que está debajo */
     }
 
     .sidebar>* {
@@ -283,9 +299,21 @@
         /* Escondido */
         transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
         z-index: 1000 !important; /* Bajamos el sidebar para que el botón gane */
-        background-color: var(--sidebar-background) !important;
+        background-color: transparent !important; /* Transparente para ver el Matrix */
         border: none !important;
       }
+
+      #matrix-bg {
+        width: 100vw !important;
+        z-index: 999 !important; /* Justo detrás del sidebar móvil */
+        transform: translateX(-100vw);
+      }
+
+      body.close #matrix-bg {
+        transform: translateX(0) !important;
+      }
+
+
 
       /* Clase que Docsify aplica al abrir el menú en móvil */
       body.close .sidebar {
@@ -437,14 +465,7 @@
       // Plugins personalizados de Docsify
       plugins: [
         function (hook, vm) {
-          hook.ready(function () {
-            // Mueve el matrix-bg dentro del sidebar cuando Docsify esté listo
-            const sidebar = document.querySelector('.sidebar');
-            const matrixBg = document.getElementById('matrix-bg');
-            if (sidebar && matrixBg) {
-              sidebar.insertBefore(matrixBg, sidebar.firstChild);
-            }
-          });
+          // Ya no necesitamos mover el fondo manualmente
         }
       ]
     }

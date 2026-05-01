@@ -3,14 +3,8 @@
 ---
 
 * **📘 Algorítmica y Programación**
-  * [📄 Contenido Programático](Algorítmica%20y%20Programación/Contenido_Programatico.md)
-  * [📄 Propuesta Curricular 2026](Algorítmica%20y%20Programación/Propuesta_Contenido_Programatico_2026.md)
-  
-  * **📅 Planificación Académica**
-    * [Trimestre I-I](Algorítmica%20y%20Programación/Planificacion_Trimestre_I-I.md)
-    * [Trimestre I-II](Algorítmica%20y%20Programación/Planificacion_Trimestre_I-II.md)
-    * [Trimestre I-III](Algorítmica%20y%20Programación/Planificacion_Trimestre_I-III.md)
-
+  * [📄 Contenido Programático](Algorítmica%20y%20Programación/Propuesta_Contenido_Programatico_2026.md)
+ 
   * **📖 Lecturas de Cátedra**
     * **Trimestre I**
       * [1. Fundamentos y Metodología 4 Fases](Algorítmica%20y%20Programación/documentacion/I-I/Lectura_Catedra_Evaluacion_1.md)
