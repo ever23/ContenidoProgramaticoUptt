@@ -1,15 +1,23 @@
-# UPTT Planner - Automatización con MCP y Antigravity
+# 🎓 Ecosistema Digital de Cátedra - UPTT
 
-Este proyecto utiliza el **Model Context Protocol (MCP)** para automatizar la creación de cronogramas académicos de la UPTT directamente desde Antigravity (Gemini).
+Este repositorio es el núcleo tecnológico y académico para las unidades curriculares de la **Universidad Politécnica Territorial de Trujillo (UPTT)**. Combina documentación pedagógica avanzada con herramientas de automatización inteligente.
 
-## 🚀 ¿Qué es el MCP?
-El MCP (Model Context Protocol) es un estándar que permite a Antigravity "salir" de su ventana de chat y utilizar herramientas externas. En este caso, permite que la IA pueda leer y escribir archivos de Excel de forma precisa, manteniendo el formato institucional.
+## 🌐 Documentación en Vivo (GitHub Pages)
+Accede a la versión navegable, estilizada y optimizada para dispositivos móviles de todo el material de cátedra aquí:
+👉 **[https://ever23.github.io/ContenidoProgramaticoUptt/](https://ever23.github.io/ContenidoProgramaticoUptt/)**
 
-## 🛠️ Componentes del Sistema
-- **Servidor MCP (`mcp-uptt-work/server.js`):** El motor en Node.js que procesa los archivos Excel usando `exceljs`.
-- **Plantilla Base (`Cronograma de Activides.xlsx`):** El formato oficial de la UPTT.
-- **Planificaciones (`.md`):** Documentos donde se definen los objetivos y temas por trimestre.
-- **Reglas (`Reglas_Generacion_Planillas.md`):** El manual pedagógico que guía a la IA.
+---
+
+## 📂 Áreas del Proyecto
+
+### 1. 📚 Material de Cátedra Modernizado
+Documentación técnica profunda para estudiantes, estructurada en lecturas de evaluación que cubren:
+- **Algorítmica y Programación:** Fundamentos de lógica, pseudocódigo y Node.js (CLI).
+- **Programación II:** Arquitectura de capas, POO, bases de datos (MariaDB/Docker) y seguridad.
+- **Redes de Computadoras:** Infraestructura, protocolos y administración de sistemas.
+
+### 2. 🤖 UPTT Planner (Automatización MCP)
+Un sistema basado en el **Model Context Protocol (MCP)** que permite a la IA (Antigravity/Gemini) automatizar la creación de cronogramas académicos directamente en formato Excel institucional, respetando asuetos y pedagogía de cátedra.
 
 ## 📖 Cómo usarlo en Antigravity
 
