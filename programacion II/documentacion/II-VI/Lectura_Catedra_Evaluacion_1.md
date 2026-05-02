@@ -36,7 +36,54 @@ Cuando un usuario hace una petición HTTP, Node.js le presta un túnel vacío. E
 
 ---
 
-## 🧩 CAPÍTULO II: Seguridad Crítica (Inyección SQL)
+## 🐳 CAPÍTULO II: Infraestructura Moderna (Docker & MariaDB)
+
+Antes de programar, necesitamos un motor de base de datos activo. Instalar MySQL o MariaDB directamente en Windows suele causar conflictos de puertos y servicios (especialmente si usas XAMPP). La solución profesional es **Docker**.
+
+### 2.1 ¿Por qué Docker?
+Docker nos permite crear un "contenedor" (una computadora virtual mínima) que solo contiene MariaDB. Es portátil, no ensucia tu sistema operativo y garantiza que todos los desarrolladores del equipo usen la misma versión exacta.
+
+### 2.2 Orquestación con Docker Compose
+Para levantar nuestra base de datos, crearemos un archivo llamado `docker-compose.yml` en la raíz de nuestro proyecto. Este archivo es el "plano arquitectónico" de nuestra infraestructura.
+
+```yaml
+version: '3.8'
+services:
+  db:
+    image: mariadb:latest
+    container_name: mariadb-uptt
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: root        # Contraseña del superusuario
+      MARIADB_DATABASE: universidad_db   # Crea la base de datos automáticamente
+    ports:
+      - "3306:3306"                      # Mapea el puerto del contenedor al tuyo
+    volumes:
+      - ./mysql_data:/var/lib/mysql      # Persistencia: los datos no se borran al apagar
+```
+
+### 2.3 Comandos Esenciales
+Para iniciar tu base de datos, abre una terminal en la carpeta del proyecto y ejecuta:
+```bash
+# Levanta el contenedor en segundo plano
+docker-compose up -d
+
+# Verifica que esté corriendo
+docker ps
+```
+
+### 2.4 Acceso a la Consola SQL (Terminal)
+Si necesitas entrar directamente a la base de datos para hacer consultas rápidas desde la terminal, usa este comando:
+
+```bash
+# Acceso interactivo a MariaDB dentro del contenedor
+docker exec -it mariadb-uptt mariadb -u root -proot universidad_db
+```
+Una vez dentro, puedes ejecutar comandos como `SELECT * FROM Estudiantes;` directamente. Para salir, escribe `exit`.
+
+---
+
+## 🧩 CAPÍTULO III: Seguridad Crítica (Inyección SQL)
 
 Al integrar Node.js con SQL, surge la vulnerabilidad de seguridad más famosa y destructiva del mundo del Backend: **La Inyección SQL**.
 
@@ -73,7 +120,18 @@ Con esto, si el usuario envía código malicioso, MySQL lo tratará como texto s
 
 ## 💻 Laboratorio: Tu Primer CRUD Nativo con MySQL2
 
-Vamos a llevar la teoría a la práctica construyendo una API RESTful con las 4 operaciones básicas de persistencia (Create, Read, Update, Delete) usando SQL puro y arquitectura asíncrona.
+Vamos a llevar la teoría a la práctica construyendo una API RESTful. Asegúrate de tener tu contenedor de Docker corriendo antes de empezar.
+
+**Paso 0: Preparar la Base de Datos**
+Si estás usando el Docker Compose anterior, conéctate con tu gestor (HeidiSQL, DBeaver o VS Code MySQL) y ejecuta este SQL inicial:
+
+```sql
+CREATE TABLE IF NOT EXISTS Estudiantes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    cedula VARCHAR(20) NOT NULL UNIQUE
+);
+```
 
 **Paso 1: Instalación de Dependencias**
 ```bash
@@ -93,12 +151,12 @@ app.use(express.json());
 
 // 1. Configuramos el Pool de Conexiones
 const pool = mysql.createPool({
-    host: 'localhost',
+    host: 'localhost',      // Si usas Docker, es localhost
     user: 'root',
-    password: '',
+    password: 'root',       // La contraseña que definimos en el docker-compose
     database: 'universidad_db',
     waitForConnections: true,
-    connectionLimit: 10, // Máximo de túneles simultáneos en el Pool
+    connectionLimit: 10,
     queueLimit: 0
 });
 
@@ -165,3 +223,5 @@ app.listen(3000, () => console.log('API conectada a MySQL en puerto 3000'));
 - **Pool de Conexiones:** Patrón de diseño de software enfocado en la concurrencia, el cual mantiene en memoria caché un conjunto de conexiones de base de datos activas y listas para ser reutilizadas dinámicamente.
 - **Inyección SQL:** Vulnerabilidad crítica de seguridad informática que ocurre cuando un atacante interfiere maliciosamente con las consultas estructuradas de la base de datos para alterar su comportamiento lógico.
 - **Prepared Statement:** Funcionalidad de optimización y seguridad que pre-compila el esquema de la consulta en el motor de base de datos, separando tajantemente la lógica estática del SQL de los parámetros variables de entrada.
+- **Docker:** Plataforma de virtualización a nivel de sistema operativo que permite empaquetar software en "contenedores" aislados, garantizando que una aplicación funcione de la misma manera en cualquier entorno de hardware.
+- **Docker Compose:** Herramienta de orquestación utilizada para definir y ejecutar aplicaciones multi-contenedor mediante un archivo de configuración YAML, facilitando la gestión de servicios vinculados como APIs y bases de datos.

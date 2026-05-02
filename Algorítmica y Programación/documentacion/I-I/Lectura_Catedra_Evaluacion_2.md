@@ -90,7 +90,7 @@ Antes de procesar lógica matemática, debemos transformar nuestra computadora e
 
 ### 5.1 Instalación de Node.js y npm (El Motor de Ejecución)
 
-Node.js es el intérprete que permitirá que nuestro código JavaScript cobre vida fuera del navegador. **npm** (Node Package Manager) se instalará automáticamente con Node.
+Node.js es el motor que permitirá que nuestro código JavaScript se ejecute directamente en la computadora. **npm** (Node Package Manager) se instalará automáticamente con Node.
 
 #### 🪟 En Windows
 1.  **Descarga:** Ve a [nodejs.org](https://nodejs.org/es/) y selecciona la versión **LTS** (Long Term Support). Es la versión más estable para ingeniería.
@@ -133,13 +133,11 @@ VS Code es el estándar de la industria para escribir código gracias a su liger
 
 ---
 
-### 5.3 Prueba de Fuego: Tu Primer Script por Consola
-
 Para validar que todo el ecosistema está integrado, realizaremos la prueba del "Hola Mundo" desde la terminal. Abre tu terminal (CMD, PowerShell o Bash) y ejecuta:
 ```bash
 node -e "console.log('¡Entorno de Ingeniería Listo!');"
 ```
-Si la consola responde con el mensaje, habrás ejecutado exitosamente tu primer código JavaScript a través del motor V8 directamente en el sistema operativo, sin usar un navegador.
+Si la consola responde con el mensaje, habrás ejecutado exitosamente tu primer código JavaScript a través del motor V8 directamente en el sistema operativo.
 
 ---
 
@@ -215,13 +213,13 @@ Fin
 ```
 
 ### 7.2 Integrando Entrada de Datos Reales (`prompt-sync`)
-En el entorno web (navegador) existe una instrucción nativa para pedir datos al usuario, pero Node.js (al operar en la terminal) maneja las entradas de teclado de forma *asíncrona* (un concepto avanzado que verás más adelante). 
+Para que nuestra computadora pueda recibir datos del teclado de forma secuencial (como nuestra instrucción `Leer()` del pseudocódigo), usaremos una herramienta técnica adicional. Abre la terminal integrada de VS Code y ejecuta:
 
-Para replicar el comportamiento directo y secuencial de nuestra instrucción `Leer()` del pseudocódigo, usaremos una librería externa. Abre la terminal integrada de VS Code y ejecuta:
 ```bash
 npm install prompt-sync
 ```
-**¿Por qué hacemos esto?** Estamos utilizando **npm** (el gestor de paquetes del Capítulo 4) para descargar código creado por la comunidad que nos facilita la lectura de teclado, permitiéndonos mantener nuestro código simple y estructurado de arriba hacia abajo.
+
+**¿Por qué hacemos esto?** Estamos utilizando **npm** (el gestor de paquetes del Capítulo 4) para descargar una funcionalidad que facilita la captura de datos por teclado, permitiéndonos mantener nuestro código simple, ordenado y estructurado de arriba hacia abajo.
 
 ### 7.3 Guía Rápida de Traducción de Algoritmos
 Antes de traducir la calculadora completa, es vital entender las equivalencias exactas entre lo que escribíamos en papel y cómo se escribe en la computadora. Fíjate en el siguiente ejemplo donde importamos la librería bajo el nombre de la constante `leer`:

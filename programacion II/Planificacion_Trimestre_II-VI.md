@@ -6,7 +6,7 @@ Este trimestre se enfoca en el dominio de las Bases de Datos y la culminación d
 
 ## 📅 Trimestre 3: Bases de Datos, Seguridad y Proyecto Final (Unidades 9 a 12)
 **Periodo:** 21/09/2026 al 28/11/2026
-
+ 
 ### 📝 Evaluación 1: Gestión de Bases de Datos para la Web (Unidad 10)
 **Objetivo:** Preparar y administrar la infraestructura de datos para la aplicación.
 - Configuración de servidores de BD (PostgreSQL/MySQL) para acceso remoto.

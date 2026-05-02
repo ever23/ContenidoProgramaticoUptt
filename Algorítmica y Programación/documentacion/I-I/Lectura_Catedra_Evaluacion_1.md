@@ -7,7 +7,7 @@
 ## 🧭 Introducción: La Programación como el Arte de la Abstracción
 La **Programación** es, en su esencia más pura, el arte de darle instrucciones a una computadora para que realice tareas específicas. Sin embargo, para un estudiante de ingeniería, esta definición debe ir un paso más allá: programar es el proceso de **modelar la realidad**. Es tomar un problema del mundo real, abstraer sus componentes fundamentales y diseñar una solución sistemática que una máquina pueda ejecutar a velocidades sobrehumanas.
 
-Para entenderlo de forma sencilla, solemos usar la analogía de escribir una **receta de cocina** o un manual de instrucciones: tú (el programador) defines los pasos exactos y secuenciales que el procesador (el cocinero) debe seguir para obtener un resultado. Ya sea mostrar una foto en Instagram, calcular el clima de mañana o simular la física de un videojuego, todo se reduce a instrucciones lógicas.
+Para entenderlo de forma sencilla, solemos usar la analogía de escribir una **receta de cocina** o un manual de instrucciones: tú (el programador) defines los pasos exactos y secuenciales que el procesador (el cocinero) debe seguir para obtener un resultado. Ya sea procesar una nómina bancaria, calcular el clima de mañana o simular la física de un movimiento, todo se reduce a instrucciones lógicas.
 
 Este proceso requiere una transición cognitiva fundamental en el estudiante: debes dejar de pensar como un usuario pasivo de la tecnología para empezar a razonar como un **arquitecto de soluciones**.
 
@@ -66,7 +66,7 @@ Para resolver cualquier problema computacional de manera estructurada y evitar e
 Antes de procesar información, necesitamos dónde guardarla. En esta fase identificamos y "reservamos" los espacios necesarios en la memoria RAM (las variables). Es como preparar los recipientes (boles, sartenes) antes de empezar a cocinar. Si tu programa calculará la edad de alguien, necesitas declarar un espacio para el "año de nacimiento" y otro para el "año actual".
 
 ### 2. FASE DE ENTRADA (Adquisición de Insumos)
-La computadora no es adivina; necesita que el mundo exterior le provea los datos. En esta fase, capturamos la información necesaria a través del teclado. Para que tu transición al lenguaje JavaScript sea natural y sin choques lógicos, utilizaremos una sintaxis de asignación funcional en nuestro pseudocódigo: `variable = Leer()`. Esto preparará tu cerebro para cuando uses instrucciones reales como `variable = prompt()`.
+La computadora no es adivina; necesita que el mundo exterior le provea los datos. En esta fase, capturamos la información necesaria a través del teclado. Para que tu transición a los lenguajes de programación sea natural y sin choques lógicos, utilizaremos una sintaxis de asignación funcional en nuestro pseudocódigo: `variable = Leer()`. Esto preparará tu cerebro para entender cómo los programas reciben información del usuario antes de procesarla.
 
 ### 3. FASE DE CÁLCULO (Transformación)
 Es el núcleo del algoritmo. Aquí interviene la Unidad Aritmético Lógica (ALU) del procesador. Los datos capturados en la entrada se someten a operaciones matemáticas (sumas, multiplicaciones) o lógicas (comparaciones) para transformarlos en nueva información. Es el acto de cocinar los ingredientes.

@@ -73,6 +73,7 @@ La revisión del modelo tradicional de Programación II revela factores de obsol
 - Protección de rutas y prevención de ataques (Inyecciones SQL/XSS).
 
 ### Unidad 13: Herramientas de Servidor y Producción
+- Virtualización con **Docker**: Creación de imágenes y contenedores para entornos reproducibles.
 - Configuración de entornos reales (VPS) mediante SSH.
 - Gestión de procesos con PM2 y despliegue continuo.
 
@@ -93,7 +94,7 @@ El entorno de aprendizaje simula una estación de trabajo de ingeniería de soft
 - **Ecosistema Backend:** Express.js, NPM (Gestión de dependencias).
 - **Gestión de Datos:** PostgreSQL / MySQL, Clientes de DB (DBeaver/TablePlus).
 - **Pruebas de API:** Postman o Insomnia para la verificación de servicios web.
-- **Infraestructura:** Servidores VPS (Virtual Private Servers), SSH y PM2 para puesta en producción.
+- **Infraestructura:** Docker & Docker Compose (Contenerización), Servidores VPS, SSH y PM2 para puesta en producción.
 - **Material Educativo:** Repositorios de GitHub con plantillas base y documentación en Markdown.
 
 ## 📊 Sistema de Evaluación
