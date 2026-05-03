@@ -1,0 +1,93 @@
+:root {
+    --primary: #4f46e5;
+    --bg: #f8fafc;
+    --border: #e2e8f0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    margin: 0;
+    padding: 2rem;
+}
+
+.app-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 2rem;
+}
+
+input {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.file-input {
+    margin: 1rem 0;
+    padding: 1rem;
+    border: 2px dashed var(--border);
+    border-radius: 8px;
+    background: #fff;
+}
+
+button {
+    width: 100%;
+    padding: 1rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.estudiantes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.estudiante-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px solid var(--border);
+}
+
+.estudiante-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    background: #cbd5e1;
+}
+
+.estudiante-card .info {
+    padding: 1rem;
+}
+
+.estudiante-card h3 { margin: 0; font-size: 1.1rem; }
+.estudiante-card p { color: #64748b; margin: 0.5rem 0 1rem; }
+
+.actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.btn-edit { background: #eab308; font-size: 0.8rem; padding: 0.5rem; }
+.btn-delete { background: #ef4444; font-size: 0.8rem; padding: 0.5rem; }

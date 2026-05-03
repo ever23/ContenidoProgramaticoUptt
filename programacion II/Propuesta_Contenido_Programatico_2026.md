@@ -2,22 +2,22 @@
 **Línea de Investigación:** Ingeniería de Software Educativa y Arquitecturas Web Soberanas
 **Enfoque:** Profesionalización del Desarrollo mediante el Modelo de Capas y Persistencia Real
 
-## 🎓 Justificación Pedagógica e Investigativa
-En la etapa de transición hacia el Trayecto II, la presente propuesta plantea un cambio de paradigma: pasar del código como herramienta aislada al código como **arquitectura de ingeniería**. Alineada con el **Documento Rector del PNFI**, esta actualización busca consolidar la formación técnica mediante la construcción de soluciones integrales que respondan a la realidad productiva del país.
+## Justificación Pedagógica e Investigativa
+En el marco de la transformación curricular del Trayecto II, esta propuesta plantea una transición estratégica del aprendizaje instrumental hacia la Ingeniería de Software como arquitectura integral. Alineada con el Documento Rector del Programa Nacional de Formación en Informática (PNFI), esta actualización busca la convergencia de competencias técnicas mediante la unificación del ecosistema de desarrollo.
 
-La introducción de la **Arquitectura de 3 Capas** y el desarrollo **Full-Stack** no solo dota al estudiante de competencias laborales de alto nivel, sino que fomenta una **cultura de ingeniería** basada en el orden, la modularidad y la escalabilidad. Al centrar la enseñanza en un stack tecnológico unificado y soberano (Node.js/SQL/Linux), garantizamos que el estudiante pueda liderar proyectos socio-tecnológicos complejos, transformando meros conceptos en prototipos totalmente funcionales con impacto social directo.
+El núcleo de la propuesta reside en la reducción de la carga cognitiva mediante la continuidad sintáctica (JavaScript/Node.js). Al eliminar la fragmentación tecnológica característica de modelos anteriores, el estudiante puede dedicar su potencial analítico a la comprensión de conceptos de alta complejidad como la Programación Orientada a Objetos, la arquitectura de tres capas y la seguridad lógica. Este enfoque garantiza la formación de un profesional capaz de liderar proyectos socio-tecnológicos con soluciones escalables, seguras y alineadas con los estándares internacionales de la industria del software.
 
-## 📉 Diagnóstico de Obsolescencia y Desafío Pedagógico
+## Diagnóstico de Obsolescencia y Desafío Pedagógico
 La revisión del modelo tradicional de Programación II revela factores de obsolescencia que limitan el perfil profesional del egresado:
 
-- **Efecto de la "Caja de Cristal":** El enfoque anterior limitaba al estudiante al entorno local de su computadora (localhost). Nuestra propuesta rompe esta barrera, introduciendo el **Despliegue en VPS y Gestión de Procesos (PM2)**, forzando un encuentro real con el entorno de producción y la administración de sistemas.
-- **Vulnerabilidad de los Sistemas Monolíticos:** El contenido anterior (basado en scripts lineales) es inadecuado para la web moderna. Esta propuesta introduce el **Patrón de Capas y Middlewares** como respuesta pedagógica a la necesidad de seguridad, mantenimiento y trabajo colaborativo en equipo.
-- **Invisibilidad de la Seguridad:** En el diseño curricular previo, la seguridad era un tema anecdótico. En la Propuesta 2026, la **Seguridad Lógica (Autenticación, Sesiones y Saneamiento de Datos)** es un eje transversal, preparando al egresado para proteger la integridad de la información institucional.
-- **Fricción Cognitiva Tecnológica:** El cambio abrupto a lenguajes como PHP o Java en este nivel generaba una interrupción en el flujo de aprendizaje. Al mantener la **continuidad con JavaScript**, el estudiante puede enfocar toda su potencia cognitiva en los conceptos complejos de la **Orientación a Objetos y Bases de Datos**.
+- Efecto de la "Caja de Cristal": El enfoque anterior limitaba al estudiante al entorno local de su computadora (localhost). Nuestra propuesta rompe esta barrera, introduciendo el Despliegue en VPS y Gestión de Procesos (PM2), forzando un encuentro real con el entorno de producción y la administración de sistemas.
+- Vulnerabilidad de los Sistemas Monolíticos: El contenido anterior (basado en scripts lineales) es inadecuado para la web moderna. Esta propuesta introduce el Patrón de Capas y Middlewares como respuesta pedagógica a la necesidad de seguridad, mantenimiento y trabajo colaborativo en equipo.
+- Invisibilidad de la Seguridad: En el diseño curricular previo, la seguridad era un tema anecdótico. En la Propuesta 2026, la Seguridad Lógica (Autenticación, Sesiones y Saneamiento de Datos) es un eje transversal, preparando al egresado para proteger la integridad de la información institucional.
+- Fricción Cognitiva Tecnológica: El cambio abrupto a lenguajes como PHP o Java en este nivel generaba una interrupción en el flujo de aprendizaje. Al mantener la continuidad con JavaScript, el estudiante puede enfocar toda su potencia cognitiva en los conceptos complejos de la Orientación a Objetos y Bases de Datos.
 
 ---
 
-## 📅 Trimestre II-IV: Paradigma de Objetos e interfaces (Unidades 1-6)
+## Trimestre II-IV: Paradigma de Objetos e interfaces (Unidades 1-6)
 **Meta:** Migrar de la lógica procedural a la arquitectura de objetos y diseño visual.
 
 ### Unidad 1: Paradigma de Programación Orientada a Objetos
@@ -41,7 +41,7 @@ La revisión del modelo tradicional de Programación II revela factores de obsol
 
 ---
 
-## 📅 Trimestre II-V: Arquitectura Web y Lógica de Script (Unidades 7-10)
+## Trimestre II-V: Arquitectura Web y Lógica de Script (Unidades 7-10)
 **Meta:** Construir el puente entre el cliente y el servidor.
 
 ### Unidad 7: Arquitectura de Sistemas Web
@@ -61,7 +61,7 @@ La revisión del modelo tradicional de Programación II revela factores de obsol
 
 ---
 
-## 📅 Trimestre II-VI: Persistencia, Seguridad y Despliegue (Unidades 11-14)
+## Trimestre II-VI: Persistencia, Seguridad y Despliegue (Unidades 11-14)
 **Meta:** Profesionalización, base de datos y puesta en producción.
 
 ### Unidad 11: Gestión de Bases de Datos Relacionales (SQL)
@@ -73,7 +73,7 @@ La revisión del modelo tradicional de Programación II revela factores de obsol
 - Protección de rutas y prevención de ataques (Inyecciones SQL/XSS).
 
 ### Unidad 13: Herramientas de Servidor y Producción
-- Virtualización con **Docker**: Creación de imágenes y contenedores para entornos reproducibles.
+- Virtualización con Docker: Creación de imágenes y contenedores para entornos reproducibles.
 - Configuración de entornos reales (VPS) mediante SSH.
 - Gestión de procesos con PM2 y despliegue continuo.
 
@@ -81,26 +81,26 @@ La revisión del modelo tradicional de Programación II revela factores de obsol
 - Integración total del sistema: Frontend + Backend + BD en la nube.
 ---
 
-## 🏛️ Estrategias Pedagógicas
+## Estrategias Pedagógicas
 Para garantizar el éxito en el desarrollo de software profesional, se aplicarán las siguientes estrategias:
-- **Metodología "Learning by Doing" (Aprender Haciendo):** Desarrollo de micro-proyectos semanales que escalan hasta convertirse en el proyecto final.
-- **Sesiones de Live Coding:** El docente desarrolla módulos de software en tiempo real, permitiendo al alumno observar el proceso de *debugging* y resolución de problemas.
-- **Revisión de Pares (Code Review):** Uso de Git para que los alumnos revisen el código de sus compañeros, fomentando la lectura de código ajeno y las mejores prácticas.
-- **Arquitectura de 3 Capas:** Aplicación obligatoria de la separación de responsabilidades en todos los laboratorios desde el segundo trimestre.
+- Metodología "Learning by Doing" (Aprender Haciendo): Desarrollo de micro-proyectos semanales que escalan hasta convertirse en el proyecto final.
+- Sesiones de Live Coding: El docente desarrolla módulos de software en tiempo real, permitiendo al alumno observar el proceso de debugging y resolución de problemas.
+- Revisión de Pares (Code Review): Uso de Git para que los alumnos revisen el código de sus compañeros, fomentando la lectura de código ajeno y las mejores prácticas.
+- Arquitectura de 3 Capas: Aplicación obligatoria de la separación de responsabilidades en todos los laboratorios desde el segundo trimestre.
 
-## 🛠️ Recursos y Herramientas Tecnológicas
+## Recursos e Herramientas Tecnológicas
 El entorno de aprendizaje simula una estación de trabajo de ingeniería de software real:
-- **Software Base:** Visual Studio Code (Extensiones Pro), Node.js (LTS), Git.
-- **Ecosistema Backend:** Express.js, NPM (Gestión de dependencias).
-- **Gestión de Datos:** PostgreSQL / MySQL, Clientes de DB (DBeaver/TablePlus).
-- **Pruebas de API:** Postman o Insomnia para la verificación de servicios web.
-- **Infraestructura:** Docker & Docker Compose (Contenerización), Servidores VPS, SSH y PM2 para puesta en producción.
-- **Material Educativo:** Repositorios de GitHub con plantillas base y documentación en Markdown.
+- Software Base: Visual Studio Code (Extensiones Pro), Node.js (LTS), Git.
+- Ecosistema Backend: Express.js, NPM (Gestión de dependencias).
+- Gestión de Datos: PostgreSQL / MySQL, Clientes de DB (DBeaver/TablePlus).
+- Pruebas de API: Postman o Insomnia para la verificación de servicios web.
+- Infraestructura: Docker & Docker Compose (Contenerización), Servidores VPS, SSH y PM2 para puesta en producción.
+- Material Educativo: Repositorios de GitHub con plantillas base y documentación en Markdown.
 
-## 📊 Sistema de Evaluación
+## Sistema de Evaluación
 La evaluación es continua y orientada a resultados funcionales:
-- **Evaluación Formativa:** Retroalimentación constante sobre la calidad del código, aplicación de *Clean Code* y patrones de diseño.
-- **Evaluación Sumativa (4 Cortes por Trimestre):**
-    - **Laboratorios Técnicos (50%):** Implementación de funcionalidades específicas (ej: un CRUD, un Login).
-    - **Exámenes de Lógica/Arquitectura (25%):** Validación de conceptos teóricos y diseño de esquemas de datos.
-    - **Proyecto Final (25%):** Prototipo Totalmente Funcional de un sistema integral Full-Stack, desplegado en un servidor real (VPS) y validado mediante casos de uso reales.
+- Evaluación Formativa: Retroalimentación constante sobre la calidad del código, aplicación de Clean Code y patrones de diseño.
+- Evaluación Sumativa (4 Cortes por Trimestre):
+    - Laboratorios Técnicos (50%): Implementación de funcionalidades específicas (ej: un CRUD, un Login).
+    - Exámenes de Lógica/Arquitectura (25%): Validación de conceptos teóricos y diseño de esquemas de datos.
+    - Proyecto Final (25%): Prototipo Totalmente Funcional de un sistema integral Full-Stack, desplegado en un servidor real (VPS) y validado mediante casos de uso reales.

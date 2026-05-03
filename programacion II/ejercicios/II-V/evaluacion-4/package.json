@@ -1,7 +1,7 @@
 {
-  "name": "evaluacion-1-uptt",
+  "name": "evaluacion-4-uptt",
   "version": "1.0.0",
-  "description": "Arquitectura Cliente-Servidor con EJS",
+  "description": "Persistencia fs y Subida de Archivos",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -9,6 +9,6 @@
   },
   "dependencies": {
     "express": "^4.18.2",
-    "ejs": "^3.1.9"
+    "multer": "^1.4.5-lts.1"
   }
 }

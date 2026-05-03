@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Proyectos UPTT - Eval 3</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="card-form">
+        <header>
+            <img src="https://uptt.edu.ve/img/logo.png" alt="UPTT Logo" class="logo">
+            <h1>Registro de Proyectos PST</h1>
+            <p>Unidad de Innovación Tecnológica</p>
+        </header>
+
+        <form id="formProyecto">
+            <div class="input-group">
+                <label>Título del Proyecto</label>
+                <input type="text" name="titulo" placeholder="Ej: Sistema de Gestión de Notas..." required>
+                <small>Mínimo 10 caracteres (Capa 1: HTML)</small>
+            </div>
+
+            <div class="input-group">
+                <label>Autor Principal</label>
+                <input type="text" name="autor" placeholder="Nombre y Apellido" required>
+            </div>
+
+            <div class="input-group">
+                <label>Trayecto</label>
+                <select name="trayecto">
+                    <option value="I">Trayecto I</option>
+                    <option value="II">Trayecto II</option>
+                    <option value="III">Trayecto III</option>
+                    <option value="IV">Trayecto IV</option>
+                </select>
+            </div>
+
+            <button type="submit" id="btnEnviar">Registrar Proyecto</button>
+        </form>
+
+        <div id="feedback" class="hidden"></div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

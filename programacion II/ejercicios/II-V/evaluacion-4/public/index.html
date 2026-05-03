@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Identidad UPTT - Proyecto Final</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-grid">
+        <!-- Columna Formulario -->
+        <section class="form-section">
+            <div class="card">
+                <h2>Registrar Estudiante</h2>
+                <form id="formRegistro">
+                    <input type="text" name="nombre" placeholder="Nombre completo" required>
+                    <input type="text" name="cedula" placeholder="Cédula de Identidad" required>
+                    
+                    <div class="file-input">
+                        <label>Foto de Carnet:</label>
+                        <input type="file" name="foto" accept="image/*" required>
+                    </div>
+
+                    <button type="submit" id="btnGuardar">Guardar en Disco Duro</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Columna Lista (Persistente) -->
+        <section class="list-section">
+            <h2>Estudiantes Registrados (Persistentes)</h2>
+            <div id="listaEstudiantes" class="estudiantes-grid">
+                <!-- Se cargan del JSON aquí -->
+            </div>
+        </section>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

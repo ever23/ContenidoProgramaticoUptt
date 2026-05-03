@@ -8,11 +8,7 @@ const app = express();
 // Esto le dice al servidor: "Si alguien pide un archivo HTML o CSS, búscalo en la carpeta 'public'"
 app.use(express.static('public'));
 // 4. Crear una Ruta Básica (Método GET)
-app.get('/', (req, res) => {
-    // req (Request): Trae la información de quién pide esto.
-    // res (Response): Herramienta para responder.
-    res.send("¡Hola Mundo.");
-});
+
 // 4. Crear una Ruta Básica (Método GET)  
 app.get('/saludo', (req, res) => {
     // req (Request): Trae la información de quién pide esto.

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Notas UPTT - Eval 2</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Sistema de Consulta Asíncrona</h1>
+            <p>Programación II - Evaluación 2 (Fetch API)</p>
+        </header>
+
+        <main>
+            <div class="controls">
+                <button id="btnConsultar">Consultar Notas al Servidor</button>
+            </div>
+
+            <div id="loader" class="hidden">Cargando datos...</div>
+
+            <div id="contenedorNotas" class="grid-notas">
+                <!-- Las notas se cargarán aquí dinámicamente -->
+            </div>
+        </main>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>
