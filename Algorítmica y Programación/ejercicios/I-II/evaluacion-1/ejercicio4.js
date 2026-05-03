@@ -1,4 +1,6 @@
-const prompt = require('prompt-sync')();
+import PromptSync from 'prompt-sync';
+const prompt = PromptSync();
+
 
 /**
  * Compara el intento con el número secreto y devuelve una pista

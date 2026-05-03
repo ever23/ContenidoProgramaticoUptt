@@ -1,4 +1,6 @@
-const prompt = require('prompt-sync')();
+import PromptSync from 'prompt-sync';
+const prompt = PromptSync();
+
 
 /**
  * Calcula el precio neto aplicando un porcentaje de descuento

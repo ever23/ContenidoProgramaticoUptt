@@ -1,4 +1,6 @@
-const prompt = require('prompt-sync')();
+import PromptSync from 'prompt-sync';
+const prompt = PromptSync();
+
 
 /**
  * Recorre números e imprime pares, retornando el total encontrado

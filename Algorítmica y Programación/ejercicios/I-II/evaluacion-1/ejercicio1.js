@@ -1,4 +1,6 @@
-const prompt = require('prompt-sync')();
+import PromptSync from 'prompt-sync';
+const prompt = PromptSync();
+
 
 /**
  * Función que calcula el costo final aplicando descuentos por edad
