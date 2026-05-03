@@ -1,38 +1,40 @@
-# Planificación Académica: Programación II (Trimestre 2)
+# Planificación Académica: Programación II (Trimestre II-V)
 
-Este trimestre se enfoca en la Fase 2 del contenido programático (Unidades 6 y 8), centrando el aprendizaje en el lado del cliente (Frontend) y la arquitectura.
+Este trimestre se enfoca en la Fase 2 del contenido programático (Unidades 7 a 10), centrando el aprendizaje en el lado del cliente (Frontend) y la arquitectura.
 
 ---
 
-## 📅 Trimestre 2: Arquitectura y Programación Web (Unidades 6 y 8)
+## 📅 Trimestre II-V: Arquitectura Web y Lógica de Script (Unidades 7 a 10)
 **Periodo:** 04/05/2026 al 17/07/2026
 
-### 📝 Evaluación 1: Arquitectura Cliente-Servidor con Express.js (Unidad 6 y 9)
-**Objetivo:** Implementar la arquitectura de 3 capas mediante un servidor profesional.
-- Configuración de un servidor con **Express.js** (Unidad 9).
-- **Servicio de archivos estáticos:** Servir HTML, CSS e imágenes desde el servidor.
-- Manejo de rutas y middlewares para entender el flujo Cliente-Servidor (Unidad 6).
-- Separación de responsabilidades: Presentación, Negocio y Datos.
+### 📝 Evaluación 1: Arquitectura de 3 Capas y Express.js (Unidad 7 y 10)
+**Objetivo:** Implementar la arquitectura fundamental de un sistema web profesional.
+- **Modelo Cliente-Servidor:** Arquitectura de 3 capas (Presentación, Negocio, Datos). (Unidad 7)
+- **Servidores con Express.js:** Configuración, rutas y middlewares. (Unidad 10)
+- **Servicio de archivos estáticos:** Integración de la arquitectura Frontend/Backend.
 - **Actividad:** **Evaluación en Laboratorio.** (25%)
 
-### 📝 Evaluación 2: Programación de Script - Lógica Web (Unidad 8)
-**Objetivo:** Implementar el ciclo de vida de los datos: Petición, obtención y acción.
-- **Fetch API:** Realizar peticiones asíncronas a un servidor (el creado en la Eval 1).
-- **Manejo de Respuestas:** Procesar datos en formato JSON.
-- **Acciones Dinámicas:** Actualizar la interfaz de usuario basándose en los datos recibidos.
+### 📝 Evaluación 2: Comunicación Asíncrona y Fetch API (Unidad 9)
+**Objetivo:** Dominar el flujo de datos entre el navegador y el servidor.
+- **Ciclo Petición-Respuesta (HTTP):** Procesamiento de datos en formato JSON.
+- **Fetch API:** Consumo de servicios y comunicación asíncrona.
+- **Manejo de Promesas:** `async/await` para la obtención de datos externos.
 - **Actividad:** **Evaluación en Laboratorio.** (25%)
 
-### 📝 Evaluación 3: Gestión de Datos y Formularios (Unidad 8)
-**Objetivo:** Manejar colecciones de datos y capturar información del usuario.
-- Vectores (tablas) en el Frontend.
-- Creación y validación de Formularios interactivos.
+### 📝 Evaluación 3: Manipulación del DOM e Interactividad (Unidad 8)
+**Objetivo:** Crear interfaces dinámicas que respondan a las acciones del usuario.
+- **Programación de Script:** Gestión de eventos y lógica en el navegador.
+- **Manipulación del DOM:** Actualización dinámica de elementos HTML.
+- **Validación de Formularios:** Captura y saneamiento de datos del lado del cliente.
 - **Actividad:** **Evaluación en Laboratorio.** (25%)
 
-### 📝 Evaluación 4: Almacenamiento y Gestión de Archivos (Unidad 8)
-**Objetivo:** Aprender las bases de la persistencia de información.
-- Almacenamiento de información con BD (Conceptos iniciales).
-- Gestión de archivos en el cliente.
-- **Actividad:** **Evaluación en Laboratorio.** (25%)
+### 📝 Evaluación 4: Integración y Lógica de Aplicación (Unidades 8, 9 y 10)
+**Objetivo:** Consolidar el puente entre el cliente y el servidor mediante un prototipo funcional.
+- **Integración Full-Stack:** Conectar la interfaz con el servidor Express.
+- **Gestión de Colecciones:** Procesamiento de arreglos de objetos en el Frontend.
+- **Persistencia Inicial:** Simulación de persistencia de datos.
+- **Actividad:** **Evaluación en Laboratorio (Proyecto Integrador).** (25%)
+
 
 ---
 

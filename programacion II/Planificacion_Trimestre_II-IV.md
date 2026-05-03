@@ -1,10 +1,10 @@
-# Planificación Académica: Programación II (Trimestre 1)
+# Planificación Académica: Programación II (Trimestre II-IV)
 
 Este trimestre se enfoca en el estudio profundo de la Programación Orientada a Objetos y el inicio del desarrollo de interfaces web.
 
 ---
 
-## 📅 Trimestre 1: Lógica de Objetos e Interfaz (Unidades 1 a 5, 7 y 8)
+## 📅 Trimestre II-IV: Lógica de Objetos e Interfaz (Unidades 1 a 6)
 **Periodo:** 26/01/2026 al 25/04/2026
 
 ### 📝 Evaluación 1: Paradigma de POO, Clases y Objetos (Unidad 1 y 2)

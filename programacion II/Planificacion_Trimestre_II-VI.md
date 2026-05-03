@@ -1,39 +1,40 @@
-# Planificación Académica: Programación II (Trimestre 3)
+# Planificación Académica: Programación II (Trimestre II-VI)
 
 Este trimestre se enfoca en el dominio de las Bases de Datos y la culminación de un Proyecto Web Integral desplegado en un entorno real.
 
 ---
 
-## 📅 Trimestre 3: Bases de Datos, Seguridad y Proyecto Final (Unidades 9 a 12)
+## 📅 Trimestre II-VI: Persistencia, Seguridad y Despliegue (Unidades 11 a 14)
 **Periodo:** 21/09/2026 al 28/11/2026
  
-### 📝 Evaluación 1: Gestión de Bases de Datos para la Web (Unidad 10)
-**Objetivo:** Preparar y administrar la infraestructura de datos para la aplicación.
-- Configuración de servidores de BD (PostgreSQL/MySQL) para acceso remoto.
-- Gestión de esquemas y seguridad de usuarios en el motor de BD.
-- Migración de datos y exportación de backups profesionales.
-- **Actividad:** **Laboratorio / Administración de sistemas.** (25%)
+### 📝 Evaluación 1: Gestión de Bases de Datos Relacionales (Unidad 11)
+**Objetivo:** Administrar la infraestructura de datos profesional para aplicaciones web.
+- **Administración de Motores:** Configuración de PostgreSQL/MySQL y gestión de usuarios.
+- **Esquemas y SQL:** Diseño de tablas, relaciones y sentencias SQL optimizadas.
+- **Mantenimiento:** Estrategias de backup y restauración de datos.
+- **Actividad:** **Laboratorio / Administración de Sistemas.** (25%)
 
-### 📝 Evaluación 2: Integración Backend-BD y CRUD Asíncrono (Unidad 10)
-**Objetivo:** Dominar el flujo de datos entre el servidor Node.js y la Base de Datos.
-- Conectividad mediante Drivers (Paquetes NPM).
-- Implementación de CRUD completo usando sentencias SQL optimizadas.
-- Manejo de asincronía y tipado de resultados en JavaScript.
+### 📝 Evaluación 2: Integración Backend y CRUD SQL (Unidad 11)
+**Objetivo:** Conectar la lógica de Node.js con motores de persistencia profesionales.
+- **Conectividad:** Uso de drivers nativos para la comunicación Servidor-Base de Datos.
+- **Operaciones CRUD:** Implementación de persistencia real para las entidades del sistema.
+- **Seguridad en Datos:** Saneamiento de entradas para prevenir Inyecciones SQL.
 - **Actividad:** **Evaluación en Laboratorio (Desarrollo de API).** (25%)
 
-### 📝 Evaluación 3: Proyecto Final - Fase I: Autenticación y Sesiones (Unidad 12)
-**Objetivo:** Implementar el control de acceso y la lógica de seguridad de usuarios.
-- **Seguridad:** Manejo de Cookies y Sesiones en el servidor.
-- **Autenticación:** Sistema de Login, Registro y protección de rutas.
-- **Integración:** Unión de la lógica de negocio con la base de datos de usuarios.
-- **Actividad:** **Avance de Proyecto en Laboratorio.** (25%)
+### 📝 Evaluación 3: Autenticación, Sesiones y Seguridad (Unidad 12)
+**Objetivo:** Implementar la capa de seguridad lógica y control de acceso.
+- **Gestión de Sesiones:** Uso de Cookies y sesiones en el servidor para identificar usuarios.
+- **Autenticación:** Desarrollo del flujo de Login/Registro con encriptación de datos.
+- **Protección de Rutas:** Implementación de Middlewares de seguridad (ACL).
+- **Actividad:** **Avance de Proyecto Final.** (25%)
 
-### 📝 Evaluación 4: Proyecto Final - Fase II: Despliegue VPS y Defensa (Unidades 9 y 11)
-**Objetivo:** Poner el sistema en producción y realizar la defensa final del trayecto.
-- **Despliegue VPS:** Configuración del servidor remoto, SSH y gestores de procesos (PM2).
-- **Publicación:** Puesta en marcha del sistema integral (Frontend + Backend + BD) en la nube.
-- **Defensa:** Presentación y verificación del funcionamiento del sistema en vivo.
-- **Actividad:** **Defensa Final del Proyecto en Laboratorio.** (25%)
+### 📝 Evaluación 4: Despliegue Real y Defensa Final (Unidades 13 y 14)
+**Objetivo:** Puesta en producción y validación integral del sistema.
+- **Contenerización (Docker):** Creación de entornos reproducibles para el sistema.
+- **Despliegue VPS:** Configuración de servidores remotos, SSH y gestión con PM2.
+- **Defensa Final:** Presentación del prototipo funcional desplegado en un entorno real.
+- **Actividad:** **Defensa Final de Carrera.** (25%)
+
 
 ---
 
