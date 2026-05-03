@@ -62,8 +62,9 @@ En lugar de enviar un HTML vacío y hacer que el navegador tenga que pedir los d
 ## 💻 Laboratorio: Tu Primer Servidor Web en 10 Líneas
 
 Veamos cómo crear un servidor profesional básico.
-*Nota: Debes haber instalado Node.js y ejecutado `npm init -y` y `npm install express` en tu terminal.*
+*Nota: Debes haber instalado Node.js y ejecutado `npm init -y`, `npm install express` y `npm install ejs` en tu terminal.*
 
+> 
 ```javascript
 // 1. Importar el framework Express
 const express = require('express');
@@ -83,7 +84,8 @@ app.get('/saludo', (req, res) => {
 });
 
 // 5. Ejemplo de SSR Profesional usando un Motor de Plantillas (EJS)
-// Pre-configuración necesaria: app.set('view engine', 'ejs');
+// Pre-configuración necesaria: activar el motor de plantillas
+app.set('view engine', 'ejs'); // ← OBLIGATORIO: sin esto, res.render() fallará
 app.get('/perfil', (req, res) => {
     // Simulamos un dato que nació en el servidor (ej. de una Base de Datos)
     const nombreUsuario = "Estudiante de Ingeniería";
@@ -95,12 +97,13 @@ app.get('/perfil', (req, res) => {
         nombre: nombreUsuario, 
         hora: horaServidor 
     });
+});
     // 6. Encender el servidor y ponerlo a escuchar en un puerto de red
     const PUERTO = 3000;
     app.listen(PUERTO, () => {
         console.log(`Servidor de la UPTT corriendo en http://localhost:${PUERTO}`);
     });
-});
+
 ```
 
 *(Para que el código anterior funcione, debes crear un archivo llamado `perfil.ejs` dentro de una carpeta llamada `views` en la raíz de tu proyecto, con este contenido:)*
@@ -122,6 +125,84 @@ app.get('/perfil', (req, res) => {
 
 ---
 
+## 🖼️ CAPÍTULO IV: Motores de Plantillas (Template Engines)
+
+Un **Motor de Plantillas** es una librería que permite combinar una plantilla HTML con datos dinámicos provenientes del servidor para generar una página HTML final. Express es compatible con cualquier motor que siga el estándar de Node.js.
+
+### 4.1 Configuración en Express
+
+Todos los motores se activan con dos líneas clave antes de definir las rutas:
+
+```javascript
+// Indicar qué motor usar
+app.set('view engine', 'ejs');
+
+// Opcional: cambiar la carpeta de plantillas (por defecto es ./views)
+app.set('views', './vistas');
+```
+
+> ⚠️ **Error común:** Si omites `app.set('view engine', 'ejs')`, Express lanzará el error `No default engine was specified` al llamar a `res.render()`.
+
+---
+
+### 4.2 EJS — Embedded JavaScript Templates
+
+Es la opción más popular para quienes vienen de HTML. La sintaxis es HTML puro con etiquetas especiales incrustadas.
+
+**Instalación:** `npm install ejs`
+
+**Etiquetas principales:**
+
+| Etiqueta | Función |
+|---|---|
+| `<%= valor %>` | Imprime el valor (escapa HTML por seguridad) |
+| `<%- valor %>` | Imprime HTML sin escapar (⚠️ peligroso con datos del usuario) |
+| `<% codigo %>` | Ejecuta JavaScript sin imprimir nada |
+| `<%# comentario %>` | Comentario (no aparece en el HTML final) |
+
+**Ejemplo `views/perfil.ejs`:**
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head><title>Perfil de <%= nombre %></title></head>
+<body>
+    <h1>Bienvenido, <%= nombre %></h1>
+    <p>Hora del servidor: <%= hora %></p>
+
+    <% if (esAdmin) { %>
+        <p>Tienes acceso de administrador.</p>
+    <% } %>
+
+    <ul>
+        <% materias.forEach(materia => { %>
+            <li><%= materia %></li>
+        <% }) %>
+    </ul>
+</body>
+</html>
+```
+
+**Ruta en `server.js`:**
+```javascript
+app.set('view engine', 'ejs');
+
+app.get('/perfil', (req, res) => {
+    res.render('perfil', {
+        nombre: 'Estudiante de Ingeniería',
+        hora: new Date().toLocaleTimeString(),
+        esAdmin: false,
+        materias: ['Programación II', 'Cálculo', 'Base de Datos']
+    });
+});
+```
+💡 **Observación — Modo Vigilancia (`--watch`):** En lugar de detener y reiniciar el servidor manualmente cada vez que modificas el código, puedes iniciarlo con el flag `--watch`:
+> ```
+> node --watch server.js
+> ```
+> Node.js detectará automáticamente cualquier cambio guardado en los archivos y reiniciará el servidor por ti. Este flag está disponible de forma nativa desde **Node.js v18** sin necesidad de instalar herramientas adicionales como `nodemon`.
+
+---
+
 ## 📘 ANEXO: Diccionario Técnico Formal
 
 - **Arquitectura Cliente-Servidor:** Modelo de diseño de software distribuido que separa las cargas de trabajo entre proveedores de recursos (servidores) y demandantes (clientes) sobre una red computacional.
@@ -130,3 +211,6 @@ app.get('/perfil', (req, res) => {
 - **HTTP (Hypertext Transfer Protocol):** Protocolo de comunicación de la capa de aplicación sin estado, estándar fundamental para la transferencia de hipertexto en la World Wide Web.
 - **Enrutamiento (Routing):** Proceso de definición de los puntos finales de una aplicación (URIs) y cómo responden a las peticiones de los clientes mediante los distintos métodos HTTP.
 - **Middleware:** Capa de software subyacente que intercepta peticiones HTTP para ejecutar lógicas intermedias (parseo, autorización, logging) antes de transferir el control al manejador de ruta final.
+- **Motor de Plantillas (Template Engine):** Librería que combina una plantilla HTML con datos dinámicos del servidor para producir un documento HTML final, habilitando el patrón SSR.
+- **EJS (Embedded JavaScript Templates):** Motor de plantillas que extiende HTML estándar con etiquetas especiales `<%= %>` para incrustar expresiones JavaScript evaluadas en el servidor.
+- **SSR (Server-Side Rendering):** Patrón arquitectónico en el que el servidor genera el HTML completo antes de enviarlo al cliente, en contraposición al CSR donde el HTML se construye en el navegador.

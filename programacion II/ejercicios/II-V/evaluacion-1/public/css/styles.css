@@ -1,0 +1,135 @@
+/* ============================================
+   Estilos principales — public/css/styles.css
+   ============================================ */
+
+/* --- Reset y base --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Encabezado --- */
+header {
+    background-color: #1a3a5c;
+    color: white;
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    opacity: 0.8;
+    font-size: 0.95rem;
+}
+
+/* --- Contenido principal --- */
+main {
+    flex: 1;
+    max-width: 800px;
+    width: 100%;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* --- Tarjetas --- */
+.card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.card h2 {
+    color: #1a3a5c;
+    margin-bottom: 0.75rem;
+    font-size: 1.15rem;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+}
+
+.card p {
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+
+.card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.card ul li {
+    padding: 0.4rem 0;
+    border-bottom: 1px solid #f0f4f8;
+}
+
+.card ul li a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.card ul li a:hover {
+    text-decoration: underline;
+}
+
+/* --- Hora dinámica --- */
+.hora {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #1a3a5c;
+    text-align: center;
+    margin: 1rem 0;
+    letter-spacing: 2px;
+}
+
+/* --- Botón --- */
+button {
+    display: block;
+    margin: 0 auto;
+    padding: 0.6rem 1.5rem;
+    background-color: #1a3a5c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #2563eb;
+}
+
+/* --- Código inline --- */
+code {
+    background: #e2e8f0;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-family: 'Courier New', monospace;
+}
+
+/* --- Pie de página --- */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #1a3a5c;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+}
