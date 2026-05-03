@@ -16,7 +16,7 @@ Tras un proceso de observación y evaluación de resultados académicos, se iden
 
 ---
 
-## Trimestre 1: Fundamentos y Estructuras (Unidades 1-5)
+## Trimestre I-I: Fundamentos y Estructuras (Unidades 1-5)
 
 ### Unidad 1: Algoritmo y Programas
 - Concepto de Algoritmos y Programas.
@@ -43,7 +43,7 @@ Tras un proceso de observación y evaluación de resultados académicos, se iden
 
 ---
 
-## Trimestre 2: Modularidad y Estructuras de Datos (Unidades 6-10)
+## Trimestre I-II: Modularidad y Estructuras de Datos (Unidades 6-10)
 
 ### Unidad 6: Programación Modular
 - Funciones y procedimientos: Definición y Declaración.
@@ -68,7 +68,7 @@ Tras un proceso de observación y evaluación de resultados académicos, se iden
 
 ---
 
-## Trimestre 3: Gestión de Memoria y Estructuras Dinámicas (Unidades 11-14)
+## Trimestre I-III: Gestión de Memoria y Estructuras Dinámicas (Unidades 11-14)
 
 ### Unidad 11: Punteros
 - Definición, operadores y gestión de referencias en memoria.
