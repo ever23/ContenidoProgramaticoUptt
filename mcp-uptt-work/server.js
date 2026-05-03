@@ -19,7 +19,7 @@ const server = new Server(
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
   if (request.params.name === "fill_uptt_planilla") {
     const { templatePath, outputPath, weeks, metadata } = request.params.arguments;
-    
+
     const workbook = new ExcelJS.Workbook();
     await workbook.xlsx.readFile(templatePath);
     const worksheet = workbook.getWorksheet(1);
@@ -36,8 +36,11 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       if (metadata.desde || metadata.hasta) {
         worksheet.getCell('D9').value = `Desde: ${metadata.desde || '_________'}   Hasta: ${metadata.hasta || '________'}`;
       }
-      if (metadata.unidad) worksheet.getCell('G10').value = metadata.unidad;
-      if (metadata.codigo) worksheet.getCell('G11').value = metadata.codigo;
+
+      if (metadata.unidad) {
+        worksheet.getCell('H10').value = metadata.unidad;
+      }
+      if (metadata.codigo) worksheet.getCell('H11').value = metadata.codigo;
       if (metadata.aula) worksheet.getCell('J11').value = metadata.aula;
       if (metadata.semestre) worksheet.getCell('C9').value = metadata.semestre;
     }
@@ -46,26 +49,26 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
     for (const week of weeks) {
       const row = worksheet.getRow(currentRow);
-      
+
       row.getCell('A').value = `Semana ${week.numero}`;
       row.getCell('B').value = week.fecha;
       row.getCell('C').value = week.objetivos;
       row.getCell('D').value = week.contenidos;
       row.getCell('E').value = week.horas || 4;
-      
+
       if (week.evaluacion) {
         row.getCell('F').value = week.fecha;
         row.getCell('H').value = week.evaluacion.actividad;
         row.getCell('I').value = week.objetivos;
         row.getCell('J').value = week.evaluacion.peso;
       }
-      
+
       row.commit();
       currentRow++;
     }
 
     await workbook.xlsx.writeFile(outputPath);
-    
+
     return {
       content: [{ type: "text", text: `Planilla generada con éxito en: ${outputPath}` }],
     };
@@ -123,7 +126,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
   }
 
   if (request.params.name === "edit_uptt_planilla") {
-    const { excelPath, outputPath, metadata, weeks } = request.params.arguments;
+    const { excelPath, outputPath, metadata, weeks, customCells } = request.params.arguments;
     const workbook = new ExcelJS.Workbook();
     await workbook.xlsx.readFile(excelPath);
     const worksheet = workbook.getWorksheet(1);
@@ -137,11 +140,11 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       if (metadata.trayecto !== undefined) worksheet.getCell('F9').value = `Trayecto:  ${metadata.trayecto}`;
       if (metadata.trimestre !== undefined) worksheet.getCell('G9').value = `Trimestre: ${metadata.trimestre}`;
       if (metadata.desde !== undefined || metadata.hasta !== undefined) {
-        const current = worksheet.getCell('D9').value || '';
-        // Intentamos preservar lo que no estamos cambiando si es posible, o simplemente sobreescribimos el bloque
         worksheet.getCell('D9').value = `Desde: ${metadata.desde || '_________'}   Hasta: ${metadata.hasta || '________'}`;
       }
-      if (metadata.unidad !== undefined) worksheet.getCell('G10').value = metadata.unidad;
+      if (metadata.unidad !== undefined) {
+        worksheet.getCell('H10').value = metadata.unidad;
+      }
       if (metadata.codigo !== undefined) worksheet.getCell('G11').value = metadata.codigo;
       if (metadata.aula !== undefined) worksheet.getCell('J11').value = metadata.aula;
       if (metadata.semestre !== undefined) worksheet.getCell('C9').value = metadata.semestre;
@@ -151,19 +154,48 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       for (const edit of weeks) {
         const rowIndex = 14 + edit.numero;
         const row = worksheet.getRow(rowIndex);
-        
+
         if (edit.fecha !== undefined) row.getCell('B').value = edit.fecha;
         if (edit.objetivos !== undefined) row.getCell('C').value = edit.objetivos;
         if (edit.contenidos !== undefined) row.getCell('D').value = edit.contenidos;
         if (edit.horas !== undefined) row.getCell('E').value = edit.horas;
-        
+
         if (edit.evaluacion) {
           if (edit.evaluacion.actividad !== undefined) row.getCell('H').value = edit.evaluacion.actividad;
           if (edit.evaluacion.peso !== undefined) row.getCell('J').value = edit.evaluacion.peso;
-          // Actualizamos la fecha de evaluación también
           row.getCell('F').value = edit.fecha || row.getCell('B').value;
         }
         row.commit();
+      }
+    }
+
+    if (customCells && Array.isArray(customCells)) {
+      for (const item of customCells) {
+        if (item.cell && item.value !== undefined) {
+          worksheet.getCell(item.cell).value = item.value;
+        }
+      }
+    }
+
+    const finalPath = outputPath || excelPath;
+    await workbook.xlsx.writeFile(finalPath);
+
+    return {
+      content: [{ type: "text", text: `Planilla editada con éxito en: ${finalPath}` }],
+    };
+  }
+
+  if (request.params.name === "edit_custom_cells") {
+    const { excelPath, outputPath, cells } = request.params.arguments;
+    const workbook = new ExcelJS.Workbook();
+    await workbook.xlsx.readFile(excelPath);
+    const worksheet = workbook.getWorksheet(1);
+
+    if (cells && Array.isArray(cells)) {
+      for (const item of cells) {
+        if (item.cell && item.value !== undefined) {
+          worksheet.getCell(item.cell).value = item.value;
+        }
       }
     }
 
@@ -171,10 +203,28 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     await workbook.xlsx.writeFile(finalPath);
     
     return {
-      content: [{ type: "text", text: `Planilla editada con éxito en: ${finalPath}` }],
+      content: [{ type: "text", text: `Celdas modificadas con éxito en: ${finalPath}` }],
     };
   }
-  
+
+  if (request.params.name === "read_custom_cells") {
+    const { excelPath, cells } = request.params.arguments;
+    const workbook = new ExcelJS.Workbook();
+    await workbook.xlsx.readFile(excelPath);
+    const worksheet = workbook.getWorksheet(1);
+
+    const results = {};
+    if (cells && Array.isArray(cells)) {
+      for (const cellId of cells) {
+        results[cellId] = worksheet.getCell(cellId).value;
+      }
+    }
+
+    return {
+      content: [{ type: "text", text: JSON.stringify(results, null, 2) }],
+    };
+  }
+
   throw new Error("Herramienta no encontrada");
 });
 
@@ -291,9 +341,61 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
                 },
                 required: ["numero"]
               }
+            },
+            customCells: {
+              type: "array",
+              description: "Lista de celdas personalizadas a modificar (ej: [{cell: 'A1', value: 'Test'}])",
+              items: {
+                type: "object",
+                properties: {
+                  cell: { type: "string", description: "Coordenada de la celda (ej: 'H10')" },
+                  value: { type: "string", description: "Nuevo valor para la celda" }
+                },
+                required: ["cell", "value"]
+              }
             }
           },
           required: ["excelPath"]
+        }
+      },
+      {
+        name: "edit_custom_cells",
+        description: "Modifica una o más celdas específicas en una planilla usando sus coordenadas (ej: A1, H10)",
+        inputSchema: {
+          type: "object",
+          properties: {
+            excelPath: { type: "string", description: "Ruta del archivo .xlsx a modificar" },
+            outputPath: { type: "string", description: "Ruta opcional para guardar los cambios" },
+            cells: {
+              type: "array",
+              description: "Lista de celdas a modificar",
+              items: {
+                type: "object",
+                properties: {
+                  cell: { type: "string", description: "Coordenada (ej: 'H10')" },
+                  value: { type: "string", description: "Nuevo valor" }
+                },
+                required: ["cell", "value"]
+              }
+            }
+          },
+          required: ["excelPath", "cells"]
+        }
+      },
+      {
+        name: "read_custom_cells",
+        description: "Lee los valores de una o más celdas específicas usando sus coordenadas (ej: A1, H10)",
+        inputSchema: {
+          type: "object",
+          properties: {
+            excelPath: { type: "string", description: "Ruta del archivo .xlsx a leer" },
+            cells: {
+              type: "array",
+              description: "Lista de coordenadas de celdas a leer (ej: ['A1', 'H10'])",
+              items: { type: "string" }
+            }
+          },
+          required: ["excelPath", "cells"]
         }
       }
     ]
