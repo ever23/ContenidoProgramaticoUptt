@@ -17,7 +17,7 @@ La revisión del modelo tradicional de Programación II revela factores de obsol
 
 ---
 
-## 📅 Trimestre 1: Paradigma de Objetos e interfaces (Unidades 1-5, 7)
+## 📅 Trimestre 1: Paradigma de Objetos e interfaces (Unidades 1-5, 6)
 **Meta:** Migrar de la lógica procedural a la arquitectura de objetos y diseño visual.
 
 ### Unidad 1: Paradigma de Programación Orientada a Objetos
@@ -41,7 +41,7 @@ La revisión del modelo tradicional de Programación II revela factores de obsol
 
 ---
 
-## 📅 Trimestre 2: Arquitectura Web y Lógica de Script (Unidades 6, 8, 9)
+## 📅 Trimestre 2: Arquitectura Web y Lógica de Script (Unidades 7, 8, 9)
 **Meta:** Construir el puente entre el cliente y el servidor.
 
 ### Unidad 7: Arquitectura de Sistemas Web
@@ -61,7 +61,7 @@ La revisión del modelo tradicional de Programación II revela factores de obsol
 
 ---
 
-## 📅 Trimestre 3: Persistencia, Seguridad y Despliegue (Unidades 10-12)
+## 📅 Trimestre 3: Persistencia, Seguridad y Despliegue (Unidades 11 a 14)
 **Meta:** Profesionalización, base de datos y puesta en producción.
 
 ### Unidad 11: Gestión de Bases de Datos Relacionales (SQL)
