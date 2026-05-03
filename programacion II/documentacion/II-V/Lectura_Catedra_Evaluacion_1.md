@@ -4,10 +4,12 @@
 
 ---
 
-## 🧭 Introducción: Saliendo del Navegador
-Hasta el trimestre pasado, todo tu código JavaScript vivía y moría dentro del navegador web (Frontend). Sin embargo, una aplicación real (como Facebook o un banco) no puede guardar todos sus datos en tu computadora local; necesita centralizar la información.
+## 🧭 Introducción: De Entidades Locales a Sistemas Distribuidos
 
-Aquí es donde entra el **Backend** y la **Arquitectura Cliente-Servidor**. Aprenderemos a usar JavaScript *fuera* del navegador usando **Node.js** para construir el cerebro central de nuestra aplicación: el Servidor.
+En el trimestre anterior (**II-IV**), dominamos la **Programación Orientada a Objetos (POO)**, aprendiendo a modelar el mundo real mediante clases, atributos y métodos que viven en la memoria local de nuestra computadora. Logramos que nuestro código fuera ordenado y escalable, pero aún seguía siendo un software "aislado".
+
+En este nuevo trimestre (**II-V**), daremos el salto hacia la **Ingeniería de Software Distribuida**. El código ya no solo gestionará objetos en tu PC; ahora aprenderemos a comunicar esos objetos a través de una red mundial. Pasaremos de crear simples scripts a construir **Servidores de Aplicaciones** capaces de servir a miles de usuarios simultáneamente. Aquí es donde la lógica que aprendiste (Backend) se separa de la interfaz (Frontend), dando vida a la **Arquitectura Cliente-Servidor**.
+
 
 ---
 
