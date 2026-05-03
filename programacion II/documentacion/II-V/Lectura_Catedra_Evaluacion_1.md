@@ -1,6 +1,7 @@
 # Manual de Estudio Profundo: Evaluación 1
 ## Materia: Programación II (Trayecto II)
 ### Eje Temático: Arquitectura Cliente-Servidor con Express.js
+#### Unidades Curriculares: Unidad 7 y Unidad 10
 
 ---
 
