@@ -84,7 +84,8 @@
     }
 
     ::-webkit-scrollbar-thumb {
-      background: rgba(71, 85, 105, 0.5); /* Más sutil */
+      background: rgba(71, 85, 105, 0.5);
+      /* Más sutil */
       border-radius: 10px;
       border: 2px solid transparent;
       background-clip: content-box;
@@ -171,14 +172,17 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 272px; /* Ajustado al ancho real del sidebar */
+      width: 272px;
+      /* Ajustado al ancho real del sidebar */
       height: 100vh;
       z-index: 5;
       pointer-events: none;
       overflow: hidden;
-      background: var(--sidebar-background); /* Fondo sólido para tapar el contenido */
+      background: var(--sidebar-background);
+      /* Fondo sólido para tapar el contenido */
       transition: transform 0.25s ease-out;
-      border-right: 1px solid rgba(0, 242, 255, 0.1); /* Línea divisoria sutil */
+      border-right: 1px solid rgba(0, 242, 255, 0.1);
+      /* Línea divisoria sutil */
     }
 
     /* Ocultar/Mover cuando el sidebar se cierra */
@@ -189,7 +193,8 @@
     /* Asegurar que el contenido del sidebar esté por encima del matrix */
     .sidebar {
       position: relative;
-      background: transparent !important; /* Permitir ver el fondo Matrix que está debajo */
+      background: transparent !important;
+      /* Permitir ver el fondo Matrix que está debajo */
     }
 
     .sidebar>* {
@@ -297,16 +302,20 @@
         transform: translateX(-100vw) !important;
         /* Escondido */
         transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        z-index: 1000 !important; /* Bajamos el sidebar para que el botón gane */
-        background-color: transparent !important; /* Transparente para ver el Matrix */
+        z-index: 1000 !important;
+        /* Bajamos el sidebar para que el botón gane */
+        background-color: transparent !important;
+        /* Transparente para ver el Matrix */
         border: none !important;
       }
 
       #matrix-bg {
         width: 100vw !important;
-        z-index: 999 !important; /* Justo detrás del sidebar móvil */
+        z-index: 999 !important;
+        /* Justo detrás del sidebar móvil */
         transform: translateX(-100vw);
-        opacity: 1 !important; /* Asegurar que sea opaco en móvil */
+        opacity: 1 !important;
+        /* Asegurar que sea opaco en móvil */
       }
 
       body.close #matrix-bg {
@@ -372,25 +381,30 @@
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
-        left: 15px !important; /* Esquina superior izquierda */
+        left: 15px !important;
+        /* Esquina superior izquierda */
         right: auto !important;
         top: 15px !important;
         width: 40px !important;
         height: 40px !important;
-        background: transparent !important; /* Sin círculo de fondo */
-        border: none !important; /* Sin bordes */
+        background: transparent !important;
+        /* Sin círculo de fondo */
+        border: none !important;
+        /* Sin bordes */
         border-radius: 0 !important;
-        box-shadow: none !important; /* Sin sombras */
+        box-shadow: none !important;
+        /* Sin sombras */
         z-index: 99999 !important;
         cursor: pointer !important;
         justify-content: center !important;
         align-items: center !important;
-        transform: none !important; 
+        transform: none !important;
         max-width: 40px !important;
       }
 
       .sidebar-toggle span {
-        background-color: var(--theme-color) !important; /* Barras cian */
+        background-color: var(--theme-color) !important;
+        /* Barras cian */
         height: 2px !important;
         width: 20px !important;
         box-shadow: 0 0 5px var(--theme-color);
@@ -401,9 +415,11 @@
       body.close .sidebar-toggle span:nth-child(1) {
         transform: rotate(45deg) translate(5px, 5px) !important;
       }
+
       body.close .sidebar-toggle span:nth-child(2) {
         opacity: 0 !important;
       }
+
       body.close .sidebar-toggle span:nth-child(3) {
         transform: rotate(-45deg) translate(5px, -5px) !important;
       }
@@ -500,7 +516,7 @@
           "ip route add 10.0.0.0/8 via 192.168.1.254",
           "document.getElementById('app').innerHTML",
           "try { await db.query(sql); } catch(e) {}",
-          "std::cout << 'Hola Mundo' << std::endl;",
+          "<html> <head></head><body> </body></html>",
           "if (ip_address == '127.0.0.1') return;"
         ];
 

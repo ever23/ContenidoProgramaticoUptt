@@ -28,4 +28,5 @@ Thumbs.db
 *.swp
 *.swo
 
-
+# Academic security
+examen*.md
