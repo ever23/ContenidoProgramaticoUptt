@@ -1,6 +1,6 @@
 {
   "name": "saga-pnfi-pwa",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Portal Académico UPTT con soporte offline (PWA)",
   "main": "index.html",
   "scripts": {
