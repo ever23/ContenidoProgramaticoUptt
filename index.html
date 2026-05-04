@@ -483,7 +483,33 @@
       // Plugins personalizados de Docsify
       plugins: [
         function (hook, vm) {
-          // Ya no necesitamos mover el fondo manualmente
+          hook.afterEach(function (html, next) {
+            // Inyectar el botón de instalación al final de cada página o en el sidebar
+            next(html);
+          });
+
+          hook.doneEach(function () {
+            // Si no estamos en modo standalone, añadir botón al sidebar
+            if (!window.matchMedia('(display-mode: standalone)').matches) {
+              const nav = document.querySelector('.sidebar-nav');
+              if (nav && !document.getElementById('sidebar-install-btn')) {
+                const hr = document.createElement('hr');
+                const btn = document.createElement('li');
+                btn.id = 'sidebar-install-btn';
+                btn.innerHTML = `
+                  <a style="color: #39ff14 !important; font-weight: bold; cursor: pointer;">
+                    📲 Instalar App (Offline)
+                  </a>
+                `;
+                btn.onclick = () => {
+                  const installBtn = document.getElementById('install-btn');
+                  if (installBtn) installBtn.click();
+                };
+                nav.appendChild(hr);
+                nav.appendChild(btn);
+              }
+            }
+          });
         }
       ]
     }
@@ -597,7 +623,11 @@
                     cursor: pointer; animation: slideIn 0.5s ease-out;
                   `;
                   toast.innerHTML = `🚀 Nueva versión disponible (${remoteManifest.version}). Haz clic para actualizar.`;
-                  toast.onclick = updateCache;
+                  toast.onclick = () => {
+                    toast.innerHTML = '⏳ Descargando actualización...';
+                    toast.style.pointerEvents = 'none';
+                    updateCache();
+                  };
                   document.body.appendChild(toast);
                 }
               }
@@ -622,15 +652,21 @@
     installBtn.innerHTML = `📲 Instalar PNFI DOC`;
     document.body.appendChild(installBtn);
 
-    // Mostrar botón de ayuda si no se dispara el prompt automático en 3 segundos
-    setTimeout(() => {
-      if (!deferredPrompt) {
-        installBtn.style.display = 'block';
-        installBtn.innerHTML = '❓ ¿Cómo instalar?';
-      }
-    }, 3000);
+    // No mostrar botón de instalación si ya estamos en modo "App instalada"
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+    
+    // Mostrar botón de ayuda solo si no está instalada
+    if (!isStandalone) {
+      setTimeout(() => {
+        if (!deferredPrompt) {
+          installBtn.style.display = 'block';
+          installBtn.innerHTML = '❓ ¿Cómo instalar?';
+        }
+      }, 3000);
+    }
 
     window.addEventListener('beforeinstallprompt', (e) => {
+      if (isStandalone) return;
       console.log('✨ Evento beforeinstallprompt disparado');
       e.preventDefault();
       deferredPrompt = e;
