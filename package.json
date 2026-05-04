@@ -1,0 +1,14 @@
+{
+  "name": "saga-pnfi-pwa",
+  "version": "1.0.0",
+  "description": "Portal Académico UPTT con soporte offline (PWA)",
+  "main": "index.html",
+  "scripts": {
+    "build:manifest": "node tools/generate-manifest.js",
+    "serve": "npx serve .",
+    "version:up": "npm version patch"
+  },
+  "dependencies": {
+    "glob": "^10.3.10"
+  }
+}

@@ -7,6 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Manuales de Cátedra Universitarios">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#12121e">
 
   <!-- Tipografías Premium de Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -554,6 +556,62 @@
         setInterval(createCodeLine, 800);
       }
     });
+  </script>
+
+  <!-- Lógica PWA y Gestión de Versiones -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').then(registration => {
+          console.log('✅ SW registrado:', registration.scope);
+          
+          // Verificar actualizaciones
+          fetch('assets-manifest.json?t=' + Date.now())
+            .then(res => res.json())
+            .then(remoteManifest => {
+              const localVersion = localStorage.getItem('saga_version');
+              
+              if (localVersion !== remoteManifest.version) {
+                console.log('🔄 Nueva versión detectada:', remoteManifest.version);
+                
+                // Notificar al usuario (puedes mejorar este UI)
+                const toast = document.createElement('div');
+                toast.style.cssText = `
+                  position: fixed; bottom: 20px; right: 20px; 
+                  background: #00f2ff; color: #000; padding: 15px; 
+                  border-radius: 8px; z-index: 10000; font-weight: bold;
+                  box-shadow: 0 4px 15px rgba(0,242,255,0.4);
+                  cursor: pointer; animation: slideIn 0.5s ease-out;
+                `;
+                toast.innerHTML = `🚀 Nueva versión disponible (${remoteManifest.version}). Haz clic para actualizar.`;
+                
+                toast.onclick = () => {
+                  // Guardar todos los assets en caché
+                  Promise.all(remoteManifest.assets.map(url => caches.open('saga-pnfi-cache-v_current').then(c => c.add(url))))
+                    .then(() => {
+                      localStorage.setItem('saga_version', remoteManifest.version);
+                      window.location.reload();
+                    });
+                };
+                
+                document.body.appendChild(toast);
+              }
+            });
+        }).catch(error => {
+          console.log('❌ SW registro falló:', error);
+        });
+      });
+    }
+
+    // Estilo para la notificación
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+      }
+    `;
+    document.head.appendChild(style);
   </script>
 </body>
 
