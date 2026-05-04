@@ -11,7 +11,7 @@ La adopción de un ecosistema unificado basado en Node.js y el entorno de interf
 Tras un proceso de observación y evaluación de resultados académicos, se identifican las siguientes debilidades estructurales que esta propuesta busca superar:
 
 - Fragmentación Tecnológica: La enseñanza de lenguajes inconexos genera una interrupción en el flujo de aprendizaje. Al mantener un stack unificado, el estudiante optimiza su energía mental hacia la profundización lógica en lugar de la memorización de múltiples sintaxis.
-- Déficit de Rigor Analítico: El modelo tradicional omitía a menudo una metodología formal de análisis previo a la codificación. Esta propuesta institucionaliza las 4 Fases (Declaración, Entrada, Cálculo y Salida) como un proceso heurístico que garantiza la trazabilidad del pensamiento lógico.
+
 - Brecha con los Estándares de la Industria: Mantener herramientas y lenguajes aislados de la web moderna dificulta la integración en los Proyectos Socio-Tecnológicos. Esta actualización alinea la formación con los estándares contemporáneos de desarrollo de software, facilitando la aplicabilidad inmediata del conocimiento.
 
 ---
