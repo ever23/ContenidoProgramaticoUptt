@@ -696,6 +696,13 @@
         to { transform: translateX(0); opacity: 1; }
       }
       #install-btn:hover { transform: scale(1.05); background: #00f2ff; }
+
+      /* OCULTAR AUTOMÁTICAMENTE SI YA ESTÁ INSTALADA */
+      @media (display-mode: standalone) {
+        #install-btn, #sidebar-install-btn {
+          display: none !important;
+        }
+      }
     `;
     document.head.appendChild(style);
   </script>
