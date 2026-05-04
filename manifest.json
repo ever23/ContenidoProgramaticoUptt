@@ -1,7 +1,7 @@
 {
-  "name": "SAGA-PNFI: Prof. Enyerber Franco",
-  "short_name": "SAGA-PNFI",
-  "description": "Portal Académico de Gestión Automatizada - PNFI UPTT",
+  "name": "PNFI DOC",
+  "short_name": "PNFI DOC",
+  "description": "Documentación Académica PNFI - UPTT",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -9,7 +9,7 @@
   "theme_color": "#00f2ff",
   "icons": [
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/201/201614.png",
+      "src": "img/pwa-icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

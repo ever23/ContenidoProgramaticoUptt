@@ -1,11 +1,12 @@
 {
-  "version": "1.0.1",
-  "timestamp": "2026-05-04T16:14:57.945Z",
+  "version": "1.0.2",
+  "timestamp": "2026-05-04T16:19:10.250Z",
   "assets": [
     "index.html",
     "_sidebar.md",
     "inicio.md",
     "sw.js",
+    "img/pwa-icon.png",
     "programacion II/Propuesta_Contenido_Programatico_2026.md",
     "programacion II/Planificacion_Trimestre_II-VI.md",
     "programacion II/Planificacion_Trimestre_II-V.md",

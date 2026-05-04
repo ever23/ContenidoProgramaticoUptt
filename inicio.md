@@ -1,5 +1,5 @@
-# 👨‍🏫 Repositorio Oficial de Cátedras
-## Universidad Politécnica Territorial de Trujillo (UPTT) 1.0.1
+# 👨‍🏫 PNFI DOC: Repositorio Oficial
+## Universidad Politécnica Territorial de Trujillo (UPTT) 1.0.2
 
 Bienvenido al portal oficial de contenidos programáticos y manuales de estudio. Este repositorio ha sido diseñado bajo los estándares modernos de la industria para centralizar toda la información teórica y de laboratorio de las materias de ingeniería.
 
