@@ -100,3 +100,11 @@ Tras un proceso de observación y evaluación de resultados académicos, se iden
 - Pruebas de Lógica (50%): Resolución de algoritmos en papel/pizarra para validar el pensamiento analítico.
 - Laboratorios de Implementación (25%): Traducción de lógica a programas funcionales.
 - Retos de Algoritmia Avanzada (25%): Resolución de problemas de alta complejidad en tiempo real.
+
+## Referencias Bibliográficas
+- Haverbeke, M. (2018). *Eloquent JavaScript: A Modern Introduction to Programming*. [https://eloquentjavascript.net/](https://eloquentjavascript.net/)
+- Simpson, K. (2015). *You Don't Know JS: Up & Going*. [https://github.com/getify/You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS)
+- Wirth, N. (1987). *Algoritmos + Estructuras de Datos = Programas*. Ediciones del Castillo.
+- Ministerio del Poder Popular para la Educación Universitaria. *Documento Rector del PNFI*. Caracas, Venezuela.
+- Mozilla Developer Network (MDN). *JavaScript Reference and Web APIs*. [https://developer.mozilla.org/es/docs/Web/JavaScript](https://developer.mozilla.org/es/docs/Web/JavaScript)
+- Node.js Foundation. *Official Node.js Documentation and Best Practices*. [https://nodejs.org/docs/latest/api/](https://nodejs.org/docs/latest/api/)

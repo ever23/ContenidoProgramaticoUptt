@@ -104,3 +104,11 @@ La evaluación es continua y orientada a resultados funcionales:
     - Laboratorios Técnicos (50%): Implementación de funcionalidades específicas (ej: un CRUD, un Login).
     - Exámenes de Lógica/Arquitectura (25%): Validación de conceptos teóricos y diseño de esquemas de datos.
     - Proyecto Final (25%): Prototipo Totalmente Funcional de un sistema integral Full-Stack, desplegado en un servidor real (VPS) y validado mediante casos de uso reales.
+
+## Referencias Bibliográficas
+- Martin, R. C. (2008). *Clean Code: A Handbook of Agile Software Craftsmanship*. Prentice Hall.
+- Gamma, E., et al. (1994). *Design Patterns: Elements of Reusable Object-Oriented Software*. Addison-Wesley.
+- Flanagan, D. (2020). *JavaScript: The Definitive Guide*. O'Reilly Media.
+- Ministerio del Poder Popular para la Educación Universitaria. *Documento Rector del PNFI*. Caracas, Venezuela.
+- Mozilla Developer Network (MDN). *HTTP and Express.js Documentation*. [https://expressjs.com/](https://expressjs.com/)
+- Ley de Infogobierno (2013). *Gaceta Oficial de la República Bolivariana de Venezuela*. [https://www.conati.gob.ve/](https://www.conati.gob.ve/)
