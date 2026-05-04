@@ -617,21 +617,34 @@
     installBtn.innerHTML = `📲 Instalar App SAGA`;
     document.body.appendChild(installBtn);
 
+    // Mostrar botón de ayuda si no se dispara el prompt automático en 3 segundos
+    setTimeout(() => {
+      if (!deferredPrompt) {
+        installBtn.style.display = 'block';
+        installBtn.innerHTML = '❓ ¿Cómo instalar?';
+      }
+    }, 3000);
+
     window.addEventListener('beforeinstallprompt', (e) => {
+      console.log('✨ Evento beforeinstallprompt disparado');
       e.preventDefault();
       deferredPrompt = e;
       installBtn.style.display = 'block';
+      installBtn.innerHTML = '📲 Instalar App SAGA';
     });
 
     installBtn.addEventListener('click', () => {
-      installBtn.style.display = 'none';
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('User accepted the install prompt');
-        }
-        deferredPrompt = null;
-      });
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            installBtn.style.display = 'none';
+          }
+          deferredPrompt = null;
+        });
+      } else {
+        alert('Para instalar:\n\n💻 PC: Clic en el icono (⊕) en la barra de direcciones.\n📱 Android: Menú (⋮) -> Instalar App.\n🍎 iOS: Botón Compartir -> Añadir a pantalla de inicio.');
+      }
     });
 
     // Estilo para la notificación
