@@ -7,6 +7,9 @@
 ## 🧭 Introducción: La Programación como el Arte de la Abstracción
 La **Programación** es, en su esencia más pura, el arte de darle instrucciones a una computadora para que realice tareas específicas. Sin embargo, para un estudiante de ingeniería, esta definición debe ir un paso más allá: programar es el proceso de **modelar la realidad**. Es tomar un problema del mundo real, abstraer sus componentes fundamentales y diseñar una solución sistemática que una máquina pueda ejecutar a velocidades sobrehumanas.
 
+## ¿Qué es la programación?
+La programación es el proceso de diseñar, escribir, probar y mantener el código fuente de programas computacionales. Sin embargo, más allá de la simple redacción de instrucciones o el dominio de la sintaxis de un lenguaje, es el arte de estructurar el pensamiento lógico para resolver problemas complejos. Es la capacidad de tomar un problema del mundo real (como administrar el registro académico de una institución o gestionar un control presupuestario) y descomponerlo en una serie de pasos lógicos finitos y deterministas. El programador actúa como un traductor entre las necesidades humanas y la ejecución mecánica, creando algoritmos que la máquina puede procesar.
+
 Para entenderlo de forma sencilla, solemos usar la analogía de escribir una **receta de cocina** o un manual de instrucciones: tú (el programador) defines los pasos exactos y secuenciales que el procesador (el cocinero) debe seguir para obtener un resultado. Ya sea procesar una nómina bancaria, calcular el clima de mañana o simular la física de un movimiento, todo se reduce a instrucciones lógicas.
 
 Este proceso requiere una transición cognitiva fundamental en el estudiante: debes dejar de pensar como un usuario pasivo de la tecnología para empezar a razonar como un **arquitecto de soluciones**.
@@ -24,7 +27,20 @@ Para entender cómo funciona la informática, es imperativo separar la máquina 
 ### 1.2 La Torre de Babel Tecnológica: Niveles de Lenguaje
 Las computadoras no entienden el español, el inglés ni ningún lenguaje humano. Su "cerebro" (el procesador) opera abriendo y cerrando millones de micro-interruptores (transistores). Por lo tanto, ellas solo hablan en **Código Binario** (cadenas de ceros y unos, que representan ausencia o presencia de voltaje).
 
+#### ¿Qué es un lenguaje de programación?
+Un lenguaje de programación es un conjunto de reglas, símbolos y palabras clave que usamos para darle instrucciones precisas a una computadora o dispositivo.
+
+En esencia, funciona como un puente de comunicación. Las computadoras en su nivel físico solo entienden "lenguaje máquina" (impulsos eléctricos representados como ceros y unos). Como escribir en ceros y unos es increíblemente lento y propenso a errores para un humano, se crearon los lenguajes de programación. Estos nos permiten escribir comandos usando una estructura lógica y palabras (generalmente en inglés) que nosotros podemos entender, para luego traducirlas a ese código binario mediante herramientas llamadas compiladores o intérpretes.
+
+#### Componentes Clave
+Para que este puente de comunicación funcione, todo lenguaje se apoya en dos pilares fundamentales:
+
+1. **Sintaxis:** Es el equivalente a la gramática y ortografía. Define exactamente cómo deben escribirse y organizarse los símbolos y las palabras. Si abres una llave { y no la cierras }, o escribes mal un comando, la computadora no podrá procesar la instrucción (esto genera un "error de sintaxis").
+
+2. **Semántica:** Es el significado o la lógica detrás de esa instrucción. Es posible escribir una oración gramaticalmente perfecta (sintaxis correcta) pero que no tenga sentido o no logre el objetivo deseado (error semántico).
+
 Como escribir un programa complejo dictando ceros y unos sería una pesadilla logística para la mente humana, la ingeniería de software inventó los **Lenguajes de Programación**. Estos actúan como un idioma artificial, un puente que nos permite comunicar procesos complejos. Se clasifican según su "nivel" de proximidad al hardware:
+
 
 1. **Lenguaje de Máquina (Nivel más bajo):** El código binario puro. Es el único que la máquina entiende de forma nativa. Es completamente ilegible para un humano de forma eficiente.
 2. **Lenguaje de Bajo Nivel (Ensamblador):** Creado para aliviar la carga del binario. Utiliza códigos mnemotécnicos (abreviaturas en inglés como `MOV` para mover, `ADD` para sumar, `SUB` para restar). Aunque es más legible, está atado a la arquitectura física del procesador específico.
@@ -87,7 +103,7 @@ Inicio
 
   // Fase 2: Entrada
   Escribir "Ingresa la cantidad de personas:";
-   personas = Leer();
+  personas = Leer();
 
   // Fase 3: Proceso (Cálculo)
   tazas_harina = personas * 0.5;
