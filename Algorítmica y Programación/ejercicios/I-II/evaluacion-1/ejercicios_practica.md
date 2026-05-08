@@ -29,7 +29,15 @@ Escriba un algoritmo para calcular el pago de varios empleados en una pequeña e
 8. **Calculadora Multifuncional con Menú**
 Diseñe un programa que simule una calculadora básica mediante el uso de **múltiples funciones especializadas**. El sistema debe solicitar al usuario dos números y luego mostrar un menú con las opciones: 1. Sumar, 2. Restar, 3. Multiplicar y 4. Dividir. Implemente una función independiente para cada operación matemática. El programa principal debe capturar la opción elegida por el usuario, invocar la función correspondiente y mostrar el resultado final, asegurándose de validar (mediante lógica o una función extra) que no se realicen divisiones entre cero.
 
+
+9. **Conversor de Medidas de Longitud**
+Diseñe un programa que permita convertir una cantidad en metros a otras unidades mediante un **menú de selección**. El sistema debe solicitar la cantidad en metros y mostrar las opciones: 1. Convertir a Kilómetros, 2. Convertir a Centímetros y 3. Convertir a Milímetros. Implemente una **función para cada conversión**. El programa principal debe invocar la función adecuada y mostrar el resultado con su respectiva unidad.
+
+10. **Sistema de Control de Inventario Simple**
+Desarrolle un programa que gestione el stock de un único producto mediante un **menú interactivo**. El sistema debe iniciar con una cantidad inicial de productos. Muestre un menú con las opciones: 1. Ver Stock, 2. Agregar Mercancía (Entrada), 3. Retirar Mercancía (Salida) y 4. Salir. Utilice una **función para procesar las entradas y salidas**, validando que no se retire más de lo que existe en stock. El programa debe usar un bucle para permitir al usuario realizar múltiples operaciones hasta que elija la opción de salir.
+
 ---
 
 ### 💡 Requerimientos Técnicos:
 - Todas las soluciones deben implementar al menos una función con parámetros y retorno (`return`).
+
