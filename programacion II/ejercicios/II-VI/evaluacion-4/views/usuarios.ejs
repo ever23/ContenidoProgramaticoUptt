@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Usuarios</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .grupo { margin-bottom: 1rem; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: bold; color: #1a3a5c; }
+        input { width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+        .btn-primario { width: 100%; font-weight: bold; font-size: 1.1rem; padding: 0.8rem; background-color: #27ae60; color: white; border: none; cursor: pointer; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { padding: 10px; border-bottom: 1px solid #ccc; text-align: left; }
+        th { background: #f8f9fa; }
+        .btn-accion { padding: 5px 10px; border: none; color: white; cursor: pointer; border-radius: 3px; font-size: 0.9rem;}
+        .btn-borrar { background: #e74c3c; }
+        .btn-salir { background: #e74c3c; color: white; padding: 5px 15px; text-decoration: none; border-radius: 4px; font-weight: bold; }
+        .layout { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; padding: 20px; }
+        @media (max-width: 768px) { .layout { grid-template-columns: 1fr; } }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body style="background: #f4f7f6; font-family: sans-serif; margin: 0;">
+    <header style="background: #2c3e50; color: white; padding: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+            <h1 style="margin: 0; font-size: 1.5rem;">🛡️ Gestión de Usuarios (JWT)</h1>
+            <p style="margin: 5px 0 0 0; font-size: 0.9rem; color: #bdc3c7;">Bienvenido, <%= miPerfil.nombre %> (<%= miPerfil.email %>)</p>
+        </div>
+        <a href="/logout" class="btn-salir">Salir</a>
+    </header>
+
+    <main class="layout">
+        <!-- FORMULARIO DE REGISTRO DE USUARIOS -->
+        <section class="card">
+            <h2>Añadir Usuario</h2>
+            <form action="/usuarios" method="POST">
+                <div class="grupo">
+                    <label>Nombre:</label>
+                    <input type="text" name="nombre" required placeholder="María Pérez">
+                </div>
+                <div class="grupo">
+                    <label>Email:</label>
+                    <input type="email" name="email" required placeholder="maria@ejemplo.com">
+                </div>
+                <div class="grupo">
+                    <label>Contraseña:</label>
+                    <input type="password" name="password" required placeholder="Clave secreta">
+                    <small style="color: #7f8c8d;">Se guardará encriptada (Hash)</small>
+                </div>
+                <button type="submit" class="btn-primario">💾 Guardar Usuario</button>
+            </form>
+        </section>
+
+        <!-- TABLA DE USUARIOS PROTEGIDA -->
+        <section class="card">
+            <h2>Usuarios en el Sistema</h2>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Hash (Protegido)</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% usuarios.forEach(function(u) { %>
+                            <tr>
+                                <td><%= u.id %></td>
+                                <td><%= u.nombre %></td>
+                                <td><%= u.email %></td>
+                                <td style="font-size: 0.75rem; color: #7f8c8d; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="<%= u.password_hash %>">
+                                    <%= u.password_hash %>
+                                </td>
+                                <td>
+                                    <% if (u.id != miPerfil.id) { %>
+                                        <form action="/eliminar-usuario/<%= u.id %>" method="POST" style="margin: 0;">
+                                            <button type="submit" class="btn-accion btn-borrar" onclick="return confirm('¿Borrar usuario?')">🗑️</button>
+                                        </form>
+                                    <% } else { %>
+                                        <span style="color: #27ae60; font-size: 0.8rem; font-weight: bold;">(Tú)</span>
+                                    <% } %>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

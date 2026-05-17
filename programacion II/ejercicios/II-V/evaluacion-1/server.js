@@ -19,6 +19,9 @@ let estudiantes = [
 // 3. Configurar Middleware para servir archivos estáticos (Fase 1 de la arquitectura)
 // Esto le dice al servidor: "Si alguien pide un archivo HTML o CSS, búscalo en la carpeta 'public'"
 app.use(express.static('public'));
+
+// Middleware para leer los datos que vienen de un formulario HTML (req.body)
+app.use(express.urlencoded({ extended: true }));
 // 4. Crear una Ruta Básica (Método GET)
 
 // 4. Crear una Ruta Básica (Método GET)  
@@ -39,7 +42,7 @@ app.get('/leer', (req, res) => {
     res.send("¡Hola desde el Backend! Tu servidor está vivo. El nombre es " + nombre);
 });
 
-http://localhost:3000/registrar?ci=234&nombre=luis
+//http://localhost:3000/registrar?ci=234&nombre=luis
 app.get('/registrar', (req, res) => {
     leerbd()
     let ci = Number(req.query.ci)
@@ -60,6 +63,30 @@ app.get('/registrar', (req, res) => {
 // 5. Ejemplo de SSR Profesional usando un Motor de Plantillas (EJS)
 // Pre-configuración necesaria:
 app.set('view engine', 'ejs');
+
+// --- NUEVO: FORMULARIO ---
+
+// 1. Ruta para MOSTRAR el formulario HTML
+app.get('/nuevo-alumno', (req, res) => {
+    res.render('formulario');
+});
+
+// 2. Ruta (Endpoint POST) para RECIBIR y guardar los datos
+app.post('/guardar-alumno', (req, res) => {
+    leerbd(); // Leemos la base de datos actual
+    
+    // Extraemos los datos que el usuario escribió en el formulario
+    let ci = Number(req.body.ci);
+    let nombre = req.body.nombre;
+    
+    // Guardamos en el arreglo y luego en el archivo JSON
+    estudiantes.push({ ci: ci, nombre: nombre });
+    guardarbd();
+    
+    // Renderizamos la nueva vista de éxito
+    res.render('exito', { ci: ci, nombre: nombre });
+});
+
 app.get('/perfil', (req, res) => {
     // Simulamos un dato que nació en el servidor (ej. de una Base de Datos)
     const nombreUsuario = "Estudiante de Ingeniería II-V";

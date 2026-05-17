@@ -1,0 +1,162 @@
+/* =========================================
+   Estilos Base y Reset (Modelo de Caja)
+========================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6; /* Color de fondo claro */
+    color: #333;
+    line-height: 1.6;
+}
+
+/* =========================================
+   Encabezado (Header)
+========================================= */
+.header-principal {
+    background-color: #2c3e50; /* Azul oscuro elegante */
+    color: white;
+    text-align: center;
+    padding: 2rem 1rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.header-principal p {
+    color: #bdc3c7;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+/* =========================================
+   Contenedor Principal (Grid / Flexbox)
+========================================= */
+.contenedor {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    
+    /* Usamos Grid para poner las tarjetas lado a lado en pantallas grandes */
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+/* Responsive: Si la pantalla es mayor a 768px, dividir en 2 columnas */
+@media (min-width: 768px) {
+    .contenedor {
+        grid-template-columns: 1fr 2fr; /* El form ocupa 1 parte, la tabla 2 partes */
+    }
+}
+
+/* =========================================
+   Tarjetas (Cards)
+========================================= */
+.tarjeta {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.tarjeta h2 {
+    color: #2c3e50;
+    border-bottom: 2px solid #ecf0f1;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* =========================================
+   Formularios
+========================================= */
+.grupo-input {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+input, select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #3498db; /* Borde azul al hacer clic */
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+.btn-guardar {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #27ae60; /* Verde éxito */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-guardar:hover {
+    background-color: #219a52;
+}
+
+/* =========================================
+   Tablas
+========================================= */
+.tabla-responsiva {
+    overflow-x: auto; /* Permite scroll horizontal en móviles */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+th {
+    background-color: #f8f9fa;
+    color: #2c3e50;
+}
+
+tr:hover {
+    background-color: #f1f4f8; /* Efecto hover en las filas */
+}
+
+.btn-accion {
+    padding: 0.4rem 0.8rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* =========================================
+   Pie de página
+========================================= */
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: #7f8c8d;
+    font-size: 0.85rem;
+    margin-top: auto;
+}

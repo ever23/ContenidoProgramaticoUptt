@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Alumno</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .grupo { margin-bottom: 1rem; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: bold; color: #1a3a5c; }
+        input { width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+        input:focus { outline: none; border-color: #2563eb; }
+        form button { margin-top: 1rem; width: 100%; font-weight: bold; font-size: 1.1rem; background-color: #f39c12; color: white; border: none; padding: 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>✏️ Editar Alumno</h1>
+    </header>
+
+    <main>
+        <section class="card" style="max-width: 500px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <form action="/actualizar-alumno/<%= alumno.id %>" method="POST">
+                
+                <div class="grupo">
+                    <label for="ci">Cédula de Identidad:</label>
+                    <input type="number" id="ci" name="ci" value="<%= alumno.ci %>" required>
+                </div>
+
+                <div class="grupo">
+                    <label for="nombre">Nombre Completo:</label>
+                    <input type="text" id="nombre" name="nombre" value="<%= alumno.nombre %>" required>
+                </div>
+
+                <button type="submit">💾 Guardar Cambios</button>
+                <br><br>
+                <a href="/" style="display:block; text-align:center; text-decoration:none; color:#e74c3c;">❌ Cancelar</a>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Alumnos (ORM)</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .grupo { margin-bottom: 1rem; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: bold; color: #1a3a5c; }
+        input { width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
+        .btn-primario { width: 100%; font-weight: bold; font-size: 1.1rem; padding: 0.8rem; background-color: #27ae60; color: white; border: none; cursor: pointer; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { padding: 10px; border-bottom: 1px solid #ccc; text-align: left; }
+        th { background: #f8f9fa; }
+        .btn-accion { padding: 5px 10px; border: none; color: white; cursor: pointer; border-radius: 3px; text-decoration: none; font-size: 0.9rem;}
+        .btn-editar { background: #f39c12; }
+        .btn-borrar { background: #e74c3c; }
+        .layout { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; padding: 20px; }
+        @media (max-width: 768px) { .layout { grid-template-columns: 1fr; } }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body style="background: #f4f7f6; font-family: sans-serif; margin: 0;">
+    <header style="background: #2c3e50; color: white; text-align: center; padding: 2rem;">
+        <h1>🎓 Sistema CRUD con ORM</h1>
+        <p>Active Record (Evaluación 2)</p>
+    </header>
+
+    <main class="layout">
+        <!-- FORMULARIO DE REGISTRO -->
+        <section class="card">
+            <h2>Registrar Alumno</h2>
+            <form action="/guardar-alumno" method="POST">
+                <div class="grupo">
+                    <label>Cédula de Identidad:</label>
+                    <input type="number" name="ci" required placeholder="Ej: 30123456">
+                </div>
+                <div class="grupo">
+                    <label>Nombre Completo:</label>
+                    <input type="text" name="nombre" required placeholder="Ej: Juan Pérez">
+                </div>
+                <button type="submit" class="btn-primario">💾 Guardar</button>
+            </form>
+        </section>
+
+        <!-- TABLA DE ALUMNOS (LISTA, EDITAR, ELIMINAR) -->
+        <section class="card">
+            <h2>Directorio de Alumnos</h2>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cédula</th>
+                            <th>Nombre</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if(alumnos && alumnos.length > 0) { %>
+                            <% alumnos.forEach(function(alumno) { %>
+                                <tr>
+                                    <td><%= alumno.ci %></td>
+                                    <td><%= alumno.nombre %></td>
+                                    <td style="display: flex; gap: 5px;">
+                                        <!-- Botón Editar -->
+                                        <a href="/editar-alumno/<%= alumno.id %>" class="btn-accion btn-editar">✏️ Editar</a>
+                                        
+                                        <!-- Botón Eliminar (Formulario) -->
+                                        <form action="/eliminar-alumno/<%= alumno.id %>" method="POST" style="margin: 0;">
+                                            <button type="submit" class="btn-accion btn-borrar" onclick="return confirm('¿Seguro que deseas eliminar a <%= alumno.nombre %>?')">🗑️ Borrar</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        <% } else { %>
+                            <tr><td colspan="3" style="text-align:center;">No hay alumnos registrados.</td></tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>

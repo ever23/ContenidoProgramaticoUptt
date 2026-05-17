@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Notas - Interactivo</title>
+    <!-- Vinculamos el archivo CSS externo -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header class="header-principal">
+        <h1>🎓 Gestión de Estudiantes</h1>
+        <p>Aplicación Interactiva (DOM y Eventos) - Evaluación 4</p>
+    </header>
+
+    <main class="contenedor">
+        
+        <!-- Tarjeta del Formulario -->
+        <section class="tarjeta">
+            <h2>Registrar Nuevo Estudiante</h2>
+            <!-- Agregamos un ID al formulario para capturarlo desde JavaScript -->
+            <form id="formularioEstudiante">
+                <div class="grupo-input">
+                    <label for="cedula">Cédula de Identidad:</label>
+                    <input type="number" id="cedula" placeholder="Ej: 30123456" required>
+                </div>
+                
+                <div class="grupo-input">
+                    <label for="nombre">Nombre Completo:</label>
+                    <input type="text" id="nombre" placeholder="Ej: María López" required>
+                </div>
+
+                <div class="grupo-input">
+                    <label for="carrera">Carrera:</label>
+                    <select id="carrera">
+                        <option value="Informática">Informática</option>
+                        <option value="Administración">Administración</option>
+                        <option value="Mantenimiento">Mantenimiento</option>
+                    </select>
+                </div>
+
+                <!-- type="submit" disparará el evento 'submit' en el form -->
+                <button type="submit" class="btn-guardar">💾 Guardar Estudiante</button>
+            </form>
+        </section>
+
+        <!-- Tarjeta de la Lista -->
+        <section class="tarjeta">
+            <h2>Directorio de Estudiantes</h2>
+            <div class="tabla-responsiva">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cédula</th>
+                            <th>Nombre</th>
+                            <th>Carrera</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <!-- Agregamos un ID al cuerpo de la tabla para inyectar filas desde JS -->
+                    <tbody id="cuerpoTabla">
+                        <!-- Las filas se generarán dinámicamente con JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Programación II · Trayecto II · UPTT</p>
+    </footer>
+
+    <!-- Scripts: Primero cargamos las Clases, luego la lógica que usa esas Clases -->
+    <script src="js/Clases.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

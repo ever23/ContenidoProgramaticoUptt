@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servidor UPTT</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>🎓 Servidor Express - UPTT</h1>
+        <p>Archivo estático servido desde la carpeta <code>public/</code></p>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>¿Qué es esto?</h2>
+            <p>
+                Este archivo HTML fue servido por <strong>Express.js</strong> usando el middleware
+                <code>express.static('public')</code>. No necesitó ninguna ruta programada manualmente.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Rutas disponibles en este servidor</h2>
+            <ul>
+                <li><a href="/">/ — Esta página (estático)</a></li>
+                <li><a href="/saludo">/saludo — Respuesta de texto plano</a></li>
+                <li><a href="/perfil">/perfil — Vista SSR con EJS</a></li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>Interacción con JavaScript</h2>
+            <p>La hora actual (calculada en el <strong>navegador</strong>):</p>
+            <p id="hora-cliente" class="hora">--:--:--</p>
+            <button id="btn-actualizar">🔄 Actualizar hora</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>Programación II · Trayecto II · UPTT</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
