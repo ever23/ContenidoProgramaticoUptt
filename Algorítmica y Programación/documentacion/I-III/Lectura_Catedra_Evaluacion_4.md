@@ -66,39 +66,89 @@ Es la variante más famosa. Sus reglas son:
 
 ---
 
-## 💻 Laboratorio: Implementando una Pila en JS
+## 💻 Laboratorio: Implementando una Pila en JS (Sin Arreglos)
 
-Aunque podemos crear una Pila usando Objetos y Nodos manuales, en JS es muy común aprovechar un Arreglo para simularla, ya que los métodos nativos `push` y `pop` respetan la filosofía LIFO.
+Para dominar verdaderamente cómo funciona la memoria, está prohibido usar el objeto nativo `Array` de JavaScript (`[]`). Construiremos nuestras estructuras a bajo nivel utilizando **Nodos enlazados** (objetos literales) y **Factory Functions**.
+
+### Ejemplo de Pila (Stack) LIFO
 
 ```javascript
-class Pila {
-    constructor() {
-        this.items = []; // Usaremos un arreglo interno como almacenamiento
-    }
+// Factory Function para el Nodo
+function crearNodo(dato) {
+    return { dato: dato, siguiente: null };
+}
 
-    // Apilar (Push)
-    apilar(elemento) {
-        this.items.push(elemento); // Se añade al final del arreglo
-    }
+// Puntero global al tope de la pila
+let tope = null;
 
-    // Desapilar (Pop)
-    desapilar() {
-        if (this.estaVacia()) return "La pila está vacía";
-        return this.items.pop(); // Retira del final
-    }
+// Apilar (Push): El nuevo nodo entra por arriba
+function apilar(dato) {
+    let nuevoNodo = crearNodo(dato);
+    nuevoNodo.siguiente = tope;
+    tope = nuevoNodo;
+}
 
-    estaVacia() {
-        return this.items.length === 0;
-    }
+// Desapilar (Pop): Sale el que está más arriba
+function desapilar() {
+    if (tope === null) return "La pila está vacía";
+    let datoExtraido = tope.dato;
+    tope = tope.siguiente; // El tope baja al siguiente nodo
+    return datoExtraido;
 }
 
 // Uso:
-const historial = new Pila();
-historial.apilar("Página Inicio");
-historial.apilar("Página Contacto");
-historial.apilar("Página Productos");
+apilar("Página Inicio");
+apilar("Página Contacto");
+apilar("Página Productos");
 
-console.log(historial.desapilar()); // Sale "Página Productos" (El último que entró)
+console.log(desapilar()); // Sale "Página Productos" (El último que entró)
+```
+
+### Ejemplo de Cola (Queue) FIFO
+
+```javascript
+// Factory Function (la misma de la pila sirve)
+function crearNodo(dato) {
+    return { dato: dato, siguiente: null };
+}
+
+// Necesitamos dos punteros para una cola eficiente
+let frente = null;
+let final = null;
+
+// Encolar (Enqueue): Entra por el final de la fila
+function encolar(dato) {
+    let nuevoNodo = crearNodo(dato);
+    if (final === null) {
+        // Si la cola estaba vacía, el nuevo es tanto el frente como el final
+        frente = nuevoNodo;
+        final = nuevoNodo;
+    } else {
+        // Se añade detrás del último y se actualiza el puntero final
+        final.siguiente = nuevoNodo;
+        final = nuevoNodo;
+    }
+}
+
+// Desencolar (Dequeue): Sale por el frente de la fila
+function desencolar() {
+    if (frente === null) return "La cola está vacía";
+    let datoExtraido = frente.dato;
+    frente = frente.siguiente; // El frente avanza al siguiente
+    
+    // Si al sacar el elemento la cola quedó vacía, limpiamos el final
+    if (frente === null) {
+        final = null;
+    }
+    return datoExtraido;
+}
+
+// Uso:
+encolar("Cliente 1");
+encolar("Cliente 2");
+encolar("Cliente 3");
+
+console.log(desencolar()); // Sale "Cliente 1" (El primero que llegó)
 ```
 
 ---

@@ -61,46 +61,41 @@ Son listas donde el último nodo (la cola), en lugar de apuntar a `null`, apunta
 Construyamos una Lista Simplemente Enlazada manual usando programación orientada a objetos básica para entender el motor interno.
 
 ```javascript
-// Clase que representa la unidad básica
-class Nodo {
-    constructor(dato) {
-        this.dato = dato;     // El valor
-        this.siguiente = null; // Referencia al siguiente Nodo (Empieza apuntando a la nada)
-    }
+// Función creadora (Factory Function) que representa la unidad básica
+function crearNodo(dato) {
+    return {
+        dato: dato,          // El valor
+        siguiente: null      // Referencia al siguiente Nodo (Empieza apuntando a la nada)
+    };
 }
 
-// Clase gestora de la estructura
-class ListaEnlazada {
-    constructor() {
-        this.head = null; // La entrada a la lista
-    }
+// Variable global que representará la entrada a nuestra lista
+let head = null;
 
-    // Operación: Añadir al inicio (O(1))
-    insertarInicio(dato) {
-        let nuevoNodo = new Nodo(dato);
-        nuevoNodo.siguiente = this.head; // El nuevo apunta al viejo inicio
-        this.head = nuevoNodo;           // El nuevo es ahora el inicio oficial
-    }
+// Operación: Añadir al inicio (O(1))
+function insertarInicio(dato) {
+    let nuevoNodo = crearNodo(dato);
+    nuevoNodo.siguiente = head; // El nuevo apunta al viejo inicio
+    head = nuevoNodo;           // El nuevo es ahora el inicio oficial
+}
 
-    // Operación: Recorrer e Imprimir (O(n))
-    imprimir() {
-        let actual = this.head;
-        let resultado = "";
-        while (actual !== null) {
-            resultado += `[ ${actual.dato} ] -> `;
-            actual = actual.siguiente; // Saltar al siguiente nodo
-        }
-        console.log(resultado + "null");
+// Operación: Recorrer e Imprimir (O(n))
+function imprimirLista() {
+    let actual = head;
+    let resultado = "";
+    while (actual !== null) {
+        resultado += `[ ${actual.dato} ] -> `;
+        actual = actual.siguiente; // Saltar al siguiente nodo
     }
+    console.log(resultado + "null");
 }
 
 // Uso práctico:
-const miLista = new ListaEnlazada();
-miLista.insertarInicio(10);
-miLista.insertarInicio(20);
-miLista.insertarInicio(30);
+insertarInicio(10);
+insertarInicio(20);
+insertarInicio(30);
 
-miLista.imprimir(); 
+imprimirLista(); 
 // Salida: [ 30 ] -> [ 20 ] -> [ 10 ] -> null
 ```
 
