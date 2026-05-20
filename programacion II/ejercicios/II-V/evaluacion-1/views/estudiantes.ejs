@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumno Registrado</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>✅ Lista de estudiantes </h1>
+    </header>
+
+    <main>
+        <section class="card">
+            <table>
+                <thead>
+                    <th>
+                        <tr>cedula</tr>
+                        <tr>nombre</tr>
+                        <tr>n1</tr>
+                        <tr>n2</tr>
+                        <tr>n3</tr>
+                        <tr>n4</tr>
+                    </th>
+                </thead>
+                <tbody>
+                    <% for (let est in estudiantes){ %>
+                        <td>
+                            <tr>
+                                <%= est.ci %>
+                            </tr>
+                            <tr>
+                                <%= est.nombre %>
+                            </tr>
+                            <tr>
+                                <%= est.notas[0] %>
+                            </tr>
+                            <tr>
+                                <%= est.notas[1] %>
+                            </tr>
+                            <tr>
+                                <%= est.notas[2] %>
+                            </tr>
+                            <tr>
+                                <%= est.notas[3] %>
+                            </tr>
+                        </td>
+                        <% } %>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="card">
+            <h2>¿Qué deseas hacer ahora?</h2>
+            <ul>
+                <li><a href="/nuevo-alumno">➕ Registrar otro alumno</a></li>
+                <li><a href="/">🏠 Volver al inicio</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>Programación II · Trayecto II · UPTT</p>
+    </footer>
+</body>
+
+</html>

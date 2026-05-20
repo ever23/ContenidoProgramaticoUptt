@@ -1,1 +1,74 @@
-{"estudiantes":[{"ci":234,"nombre":"luis"},{"ci":244,"nombre":"luis"},{"ci":23781625,"nombre":"asdsda"},{"ci":24234,"nombre":"sdfsdf"}]}
+{
+  "estudiantes": [
+    {
+      "ci": 234,
+      "nombre": "luis",
+      "notas": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "ci": 244,
+      "nombre": "luis",
+      "notas": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "ci": 23781625,
+      "nombre": "asdsda",
+      "notas": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "ci": 24234,
+      "nombre": "sdfsdf",
+      "notas": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "ci": 2434,
+      "nombre": "qwdqwd",
+      "notas": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "ci": 243432423,
+      "nombre": "sdfsdfsedfsd",
+      "notas": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "ci": 234234234,
+      "nombre": "wefwe",
+      "notas": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ]
+}

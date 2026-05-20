@@ -1,21 +1,12 @@
 // 1. Importar el framework Express
 const express = require('express');
 const fs = require("fs")
+const { Estudiantes } = require("./Estudiantes.js")
 
-function leerbd() {
-    let textJson = fs.readFileSync("bd.json", "utf8")
-    estudiantes = JSON.parse(textJson).estudiantes
-    return estudiantes
-}
-function guardarbd() {
-    let obj = JSON.stringify({ estudiantes: estudiantes })
-    fs.writeFileSync("bd.json", obj)
-}
+
 // 2. Instanciar la aplicación (Crear el servidor)
 const app = express();
-let estudiantes = [
 
-]
 // 3. Configurar Middleware para servir archivos estáticos (Fase 1 de la arquitectura)
 // Esto le dice al servidor: "Si alguien pide un archivo HTML o CSS, búscalo en la carpeta 'public'"
 app.use(express.static('public'));
@@ -24,33 +15,6 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 // 4. Crear una Ruta Básica (Método GET)
 
-// 4. Crear una Ruta Básica (Método GET)  
-app.get('/saludo', (req, res) => {
-    // req (Request): Trae la información de quién pide esto.
-    // res (Response): Herramienta para responder.
-    res.send("¡Hola desde el Backend! Tu servidor está vivo.");
-});
-
-//http://localhost:3000/leer?ci=123
-app.get('/leer', (req, res) => {
-
-    let ci = Number(req.query.ci)
-    leerbd()
-
-
-    let nombre = estudiantes.find(e => e.ci == ci).nombre
-    res.send("¡Hola desde el Backend! Tu servidor está vivo. El nombre es " + nombre);
-});
-
-//http://localhost:3000/registrar?ci=234&nombre=luis
-app.get('/registrar', (req, res) => {
-    leerbd()
-    let ci = Number(req.query.ci)
-    let nombre = req.query.nombre
-    estudiantes.push({ ci: ci, nombre: nombre })
-    guardarbd()
-    res.send("sus datos an sido registrados ci:" + ci + " Nombre:" + nombre);
-});
 /** req.query 
  * En caso de una ruta como: 
  * /login?usuario=admin&password=123
@@ -67,25 +31,38 @@ app.set('view engine', 'ejs');
 // --- NUEVO: FORMULARIO ---
 
 // 1. Ruta para MOSTRAR el formulario HTML
-app.get('/nuevo-alumno', (req, res) => {
+app.get('/insertar', (req, res) => {
     res.render('formulario');
 });
 
 // 2. Ruta (Endpoint POST) para RECIBIR y guardar los datos
-app.post('/guardar-alumno', (req, res) => {
-    leerbd(); // Leemos la base de datos actual
-    
+app.post('/insertar', (req, res) => {
+    const baseDatos = new Estudiantes("bd.json");
+
     // Extraemos los datos que el usuario escribió en el formulario
     let ci = Number(req.body.ci);
     let nombre = req.body.nombre;
-    
-    // Guardamos en el arreglo y luego en el archivo JSON
-    estudiantes.push({ ci: ci, nombre: nombre });
-    guardarbd();
-    
+    baseDatos.registrarAlumno(ci, nombre)
+    baseDatos.guardar()
     // Renderizamos la nueva vista de éxito
     res.render('exito', { ci: ci, nombre: nombre });
 });
+app.get('/estudiantes', (req, res) => {
+    const baseDatos = new Estudiantes("bd.json");
+
+
+    // Renderizamos la nueva vista de éxito
+    res.render('estudiantes', { estudiantes: baseDatos.todasLasNotas() });
+});
+app.get('/eliminar', (req, res) => {
+    leerbd(); // Leemos la base de datos actual
+    estudiantes.find(e => e == req.body.ci)
+    // Renderizamos la nueva vista de éxito
+    res.render('estudiantes', estudiantes);
+});
+
+
+
 
 app.get('/perfil', (req, res) => {
     // Simulamos un dato que nació en el servidor (ej. de una Base de Datos)
