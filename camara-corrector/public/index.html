@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control - Captura de Exámenes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(22, 30, 49, 0.7);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --accent-color: #4f46e5;
+            --accent-hover: #4338ca;
+            --text-color: #f3f4f6;
+            --text-muted: #9ca3af;
+            --success-color: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
+                              radial-gradient(circle at 90% 80%, rgba(79, 70, 229, 0.05) 0%, transparent 40%);
+        }
+
+        header {
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            background-color: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(12px);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #a5b4fc 0%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        main {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.8rem;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .server-info-card {
+            align-self: start;
+        }
+
+        .card h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.8rem;
+            color: #a5b4fc;
+        }
+
+        .qr-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        #qr-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 8px;
+            background-color: white;
+            padding: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        .link-text {
+            word-break: break-all;
+            text-align: center;
+            font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0.6rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .link-text a {
+            color: #818cf8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .link-text a:hover {
+            text-decoration: underline;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--success-color);
+            background-color: rgba(16, 185, 129, 0.1);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            align-self: center;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--success-color);
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        .files-card {
+            min-height: 500px;
+        }
+
+        .files-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.8rem;
+        }
+
+        .files-header h2 {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .refresh-btn {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+        }
+
+        .refresh-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .file-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.2rem;
+            overflow-y: auto;
+            max-height: 65vh;
+            padding-right: 0.5rem;
+        }
+
+        .file-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .file-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            border-color: rgba(99, 102, 241, 0.2);
+        }
+
+        .file-thumbnail {
+            width: 100%;
+            height: 150px;
+            border-radius: 8px;
+            object-fit: cover;
+            background-color: #111827;
+            border: 1px solid rgba(255,255,255,0.05);
+            cursor: pointer;
+        }
+
+        .file-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .file-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #e5e7eb;
+        }
+
+        .file-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .file-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 0.5rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .empty-state {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 5rem 2rem;
+            color: var(--text-muted);
+            text-align: center;
+            gap: 1rem;
+        }
+
+        .empty-state svg {
+            width: 64px;
+            height: 64px;
+            stroke: rgba(255,255,255,0.1);
+        }
+
+        /* Modal Preview */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+            object-fit: contain;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .modal-close:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        @media (max-width: 900px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+            .server-info-card {
+                align-self: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Panel de Control de Captura</h1>
+        <p>Servidor local para digitalizar exámenes físicos de estudiantes</p>
+    </header>
+
+    <main>
+        <section class="card server-info-card">
+            <h2>Conexión del Teléfono</h2>
+            
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                <span>Servidor Activo</span>
+            </div>
+
+            <div class="qr-container">
+                <img id="qr-image" src="" alt="Cargando código QR...">
+                <p style="font-size: 0.85rem; color: var(--text-muted); text-align: center;">
+                    Escanea este código QR con la cámara de tu teléfono para abrir la aplicación de captura.
+                </p>
+            </div>
+
+            <div class="link-text">
+                <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.25rem;">Enlace directo:</p>
+                <a id="mobile-link" href="#" target="_blank">Cargando...</a>
+            </div>
+        </section>
+
+        <section class="card files-card">
+            <div class="files-header">
+                <h2>Exámenes Recibidos (.temp_fotos)</h2>
+                <button class="refresh-btn" onclick="fetchFiles()">Actualizar Lista</button>
+            </div>
+
+            <div id="file-list-container" class="file-list">
+                <!-- Se llenará dinámicamente -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal para ver foto completa -->
+    <div id="preview-modal" class="modal" onclick="closeModal()">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+        <img id="modal-img" class="modal-content" src="" alt="Previsualización" onclick="event.stopPropagation()">
+    </div>
+
+    <script>
+        // Obtener la IP real de la PC desde el servidor
+        async function initConnectionDetails() {
+            try {
+                const response = await fetch('/ip');
+                const data = await response.json();
+                const port = window.location.port || '3000';
+                
+                // Si accedemos por localhost en la PC, sustituir con la IP Wi-Fi real de la PC
+                const hostname = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+                    ? data.ip
+                    : window.location.hostname;
+                    
+                const mobileURL = `http://${hostname}:${port}/mobile.html`;
+
+                document.getElementById('mobile-link').href = mobileURL;
+                document.getElementById('mobile-link').textContent = mobileURL;
+                document.getElementById('qr-image').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(mobileURL)}`;
+            } catch (error) {
+                console.error("Error al obtener la IP del servidor", error);
+                // Fallback clásico
+                const hostname = window.location.hostname;
+                const port = window.location.port || '3000';
+                const mobileURL = `http://${hostname}:${port}/mobile.html`;
+                document.getElementById('mobile-link').href = mobileURL;
+                document.getElementById('mobile-link').textContent = mobileURL;
+                document.getElementById('qr-image').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(mobileURL)}`;
+            }
+        }
+        initConnectionDetails();
+
+        // Función para formatear el tamaño del archivo
+        function formatBytes(bytes, decimals = 2) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const dm = decimals < 0 ? 0 : decimals;
+            const sizes = ['Bytes', 'KB', 'MB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+        }
+
+        // Obtener archivos del servidor
+        async function fetchFiles() {
+            try {
+                const response = await fetch('/files');
+                if (!response.ok) throw new Error('Error al conectar con el servidor.');
+                
+                const files = await response.json();
+                const container = document.getElementById('file-list-container');
+                
+                if (files.length === 0) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375 0 11-.75 0 .375 0 01.75 0z" />
+                            </svg>
+                            <p>No se han recibido fotos de exámenes todavía.</p>
+                            <p style="font-size: 0.85rem;">Escanea el código QR y sube fotos desde tu móvil.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = files.map(file => {
+                    const date = new Date(file.mtime);
+                    const dateFormatted = date.toLocaleTimeString() + ' - ' + date.toLocaleDateString();
+                    
+                    return `
+                        <div class="file-item">
+                            <img class="file-thumbnail" src="${file.url}" alt="${file.name}" onclick="openModal('${file.url}')">
+                            <div class="file-info">
+                                <div class="file-name" title="${file.name}">${file.name}</div>
+                                <div class="file-meta">
+                                    <span>${formatBytes(file.size)}</span>
+                                    <span>${dateFormatted}</span>
+                                </div>
+                            </div>
+                            <div class="file-actions">
+                                <button class="btn btn-primary" onclick="openModal('${file.url}')">Ver Completo</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+            } catch (error) {
+                console.error(error);
+                document.getElementById('file-list-container').innerHTML = `
+                    <div class="empty-state">
+                        <p style="color: #ef4444;">Error al cargar las fotos. Verifica la conexión con el servidor.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Modal triggers
+        function openModal(url) {
+            document.getElementById('modal-img').src = url;
+            document.getElementById('preview-modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('preview-modal').style.display = 'none';
+        }
+
+        // Cargar archivos al inicio y configurar consulta automática cada 3 segundos
+        fetchFiles();
+        setInterval(fetchFiles, 3000);
+    </script>
+</body>
+</html>

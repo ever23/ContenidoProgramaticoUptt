@@ -1,5 +1,4 @@
-import PromptSync from 'prompt-sync';
-const prompt = PromptSync();
+const prompt = require('prompt-sync')();
 
 /**
  * Ejercicio 10: Sistema de Control de Inventario Simple

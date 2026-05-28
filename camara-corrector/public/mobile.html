@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Captura de Exámenes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #090c15;
+            --card-bg: rgba(26, 32, 53, 0.6);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --accent-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            --accent-hover: #4338ca;
+            --text-color: #f3f4f6;
+            --text-muted: #9ca3af;
+            --danger-color: #ef4444;
+            --success-color: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 1.2rem;
+            background-image: radial-gradient(circle at 50% 10%, rgba(99, 102, 241, 0.08) 0%, transparent 60%);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-top: 0.5rem;
+        }
+
+        header h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #a5b4fc 0%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+        }
+
+        .main-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.5rem;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            flex: 1;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-group label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #a5b4fc;
+        }
+
+        .input-group input {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.8rem 1rem;
+            color: var(--text-color);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+            width: 100%;
+        }
+
+        .input-group input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25);
+        }
+
+        .camera-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            border: 2px dashed var(--border-color);
+            padding: 2rem 1rem;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.01);
+            transition: border-color 0.2s;
+        }
+
+        .camera-section.has-photos {
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-capture {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 0.9rem 1.8rem;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+            transition: transform 0.1s;
+        }
+
+        .btn-capture:active {
+            transform: scale(0.98);
+        }
+
+        .btn-capture svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Galería de vistas previas */
+        .gallery-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            width: 100%;
+        }
+
+        .gallery-header {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .photo-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.6rem;
+            width: 100%;
+        }
+
+        .photo-wrapper {
+            position: relative;
+            aspect-ratio: 3/4;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background-color: #000;
+        }
+
+        .photo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .btn-delete {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: rgba(239, 68, 68, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Botón de envío */
+        .btn-submit {
+            background-color: var(--success-color);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 1rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            margin-top: auto;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+        }
+
+        .btn-submit.active {
+            display: flex;
+        }
+
+        /* Pantallas de Estado (Éxito / Carga) */
+        .status-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(9, 12, 21, 0.95);
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+            gap: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Spinner de carga */
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(99, 102, 241, 0.1);
+            border-top-color: #6366f1;
+            border-radius: 50%;
+            animation: spin 1s infinite linear;
+        }
+
+        /* Checkmark de éxito animado */
+        .success-checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--success-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .success-checkmark svg {
+            width: 44px;
+            height: 44px;
+            fill: none;
+            stroke: white;
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .status-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .status-msg {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            max-width: 280px;
+            line-height: 1.4;
+        }
+
+        .btn-continue {
+            background-color: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.8rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Capturar Examen</h1>
+        <p>Toma fotos y súbelas al instante</p>
+    </header>
+
+    <main class="main-card">
+        <div class="input-group">
+            <label for="student-name">Nombre del Estudiante</label>
+            <input type="text" id="student-name" placeholder="Ej. Sebastián Olmos" autocomplete="off" required>
+        </div>
+
+        <input type="file" id="camera-input" accept="image/*" capture="environment" style="display: none" multiple>
+
+        <section class="camera-section" id="camera-section">
+            <button class="btn-capture" onclick="triggerCamera()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
+                </svg>
+                <span>Tomar Foto</span>
+            </button>
+
+            <div class="gallery-container" id="gallery-container" style="display: none;">
+                <div class="gallery-header">
+                    <span>Fotos capturadas:</span>
+                    <span id="photo-counter">0</span>
+                </div>
+                <div class="photo-list" id="photo-list">
+                    <!-- Se llenará con las fotos cargadas -->
+                </div>
+            </div>
+        </section>
+
+        <button class="btn-submit" id="btn-submit" onclick="uploadFiles()">
+            <svg style="width: 20px; height: 20px" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+            </svg>
+            <span id="submit-text">Enviar Examen</span>
+        </button>
+    </main>
+
+    <!-- Pantallas de Carga y Éxito -->
+    <div class="status-overlay" id="loading-overlay">
+        <div class="spinner"></div>
+        <div class="status-title">Subiendo Fotos...</div>
+        <div class="status-msg">Enviando las capturas a la computadora. Por favor espera.</div>
+    </div>
+
+    <div class="status-overlay" id="success-overlay">
+        <div class="success-checkmark">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M4.5 12.75l6 6 9-13.5" />
+            </svg>
+        </div>
+        <div class="status-title">¡Examen Subido!</div>
+        <div class="status-msg" id="success-msg">Las fotos se guardaron exitosamente en tu PC.</div>
+        <button class="btn-continue" onclick="prepareForNextStudent()">Siguiente Estudiante</button>
+    </div>
+
+    <script>
+        const studentNameInput = document.getElementById('student-name');
+        const cameraInput = document.getElementById('camera-input');
+        const galleryContainer = document.getElementById('gallery-container');
+        const photoList = document.getElementById('photo-list');
+        const photoCounter = document.getElementById('photo-counter');
+        const btnSubmit = document.getElementById('btn-submit');
+        const submitText = document.getElementById('submit-text');
+        const cameraSection = document.getElementById('camera-section');
+
+        let photosArray = []; // Guardará objetos { file, dataUrl }
+
+        function triggerCamera() {
+            // Validar que se haya escrito el nombre antes de tomar la foto
+            if (!studentNameInput.value.trim()) {
+                studentNameInput.focus();
+                studentNameInput.reportValidity();
+                alert("Por favor, ingresa el nombre del estudiante primero.");
+                return;
+            }
+            cameraInput.click();
+        }
+
+        // Manejar la captura de archivos
+        cameraInput.addEventListener('change', (e) => {
+            const files = Array.from(e.target.files);
+            
+            files.forEach(file => {
+                // Leer archivo localmente para mostrar la miniatura
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    photosArray.push({
+                        file: file,
+                        dataUrl: event.target.result
+                    });
+                    renderGallery();
+                };
+                reader.readAsDataURL(file);
+            });
+            
+            // Resetear input file para permitir seleccionar el mismo archivo de nuevo
+            cameraInput.value = '';
+        });
+
+        // Dibujar la galería de vistas previas
+        function renderGallery() {
+            if (photosArray.length === 0) {
+                galleryContainer.style.display = 'none';
+                btnSubmit.classList.remove('active');
+                cameraSection.classList.remove('has-photos');
+                return;
+            }
+
+            galleryContainer.style.display = 'flex';
+            btnSubmit.classList.add('active');
+            cameraSection.classList.add('has-photos');
+            photoCounter.textContent = `${photosArray.length}`;
+            submitText.textContent = `Enviar Examen (${photosArray.length} foto${photosArray.length > 1 ? 's' : ''})`;
+
+            photoList.innerHTML = photosArray.map((photo, index) => `
+                <div class="photo-wrapper">
+                    <img src="${photo.dataUrl}" alt="Captura ${index + 1}">
+                    <button class="btn-delete" onclick="deletePhoto(${index})">&times;</button>
+                </div>
+            `).join('');
+        }
+
+        // Eliminar una foto de la lista de envío
+        window.deletePhoto = function(index) {
+            photosArray.splice(index, 1);
+            renderGallery();
+        };
+
+        // Subir las fotos capturadas al servidor PC
+        async function uploadFiles() {
+            const studentName = studentNameInput.value.trim();
+            if (!studentName) {
+                studentNameInput.focus();
+                return;
+            }
+
+            if (photosArray.length === 0) {
+                alert("Por favor, toma al menos una foto del examen.");
+                return;
+            }
+
+            // Mostrar pantalla de carga
+            document.getElementById('loading-overlay').style.display = 'flex';
+
+            const formData = new FormData();
+            // IMPORTANTE: Agregar studentName PRIMERO en el FormData
+            // Esto asegura que multer en Node.js ya tenga el req.body.studentName cuando procese los archivos
+            formData.append('studentName', studentName);
+            
+            photosArray.forEach((photo, index) => {
+                formData.append('photos', photo.file, `${studentName}_pag${index + 1}.jpg`);
+            });
+
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                // Ocultar pantalla de carga
+                document.getElementById('loading-overlay').style.display = 'none';
+
+                if (response.ok && result.success) {
+                    // Mostrar pantalla de éxito
+                    document.getElementById('success-msg').textContent = `Las ${photosArray.length} fotos de ${studentName} se subieron con éxito.`;
+                    document.getElementById('success-overlay').style.display = 'flex';
+                } else {
+                    alert('Error en el servidor: ' + (result.message || 'No se pudieron subir las imágenes.'));
+                }
+            } catch (error) {
+                document.getElementById('loading-overlay').style.display = 'none';
+                console.error(error);
+                alert('Error de conexión. Asegúrate de estar conectado al mismo Wi-Fi de tu PC.');
+            }
+        }
+
+        // Limpiar para capturar el siguiente examen
+        window.prepareForNextStudent = function() {
+            photosArray = [];
+            studentNameInput.value = '';
+            renderGallery();
+            document.getElementById('success-overlay').style.display = 'none';
+            studentNameInput.focus();
+        };
+    </script>
+</body>
+</html>

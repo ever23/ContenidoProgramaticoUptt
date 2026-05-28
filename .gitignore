@@ -33,3 +33,7 @@ examen*.md
 evaluacion*.md
 examen.md
 evaluacion.md
+
+# Servidor local de cámara y fotos temporales
+camara-corrector/node_modules/
+.temp_fotos/
