@@ -349,6 +349,159 @@
                 align-self: stretch;
             }
         }
+
+        /* Estilos de grupos y botones nuevos */
+        .btn-clear {
+            background-color: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #f87171;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+        }
+
+        .btn-clear:hover {
+            background-color: rgba(239, 68, 68, 0.3);
+            border-color: rgba(239, 68, 68, 0.5);
+            color: #ef4444;
+        }
+
+        .group-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .group-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.6rem;
+        }
+
+        .group-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #a5b4fc;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .group-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-copy-group {
+            background-color: var(--accent-color);
+            border: none;
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.2s;
+            gap: 0.25rem;
+        }
+
+        .btn-copy-group:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 0.8rem;
+        }
+
+        .file-item-mini {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .file-item-mini:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .file-thumbnail-mini {
+            width: 100%;
+            height: 110px;
+            border-radius: 6px;
+            object-fit: cover;
+            background-color: #111827;
+            border: 1px solid rgba(255,255,255,0.05);
+            cursor: pointer;
+        }
+
+        .file-name-mini {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: center;
+        }
+
+        .file-actions-mini {
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        .btn-mini {
+            flex: 1;
+            padding: 0.3rem 0;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .btn-copy-file {
+            background-color: rgba(99, 102, 241, 0.15);
+            color: #a5b4fc;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-copy-file:hover {
+            background-color: rgba(99, 102, 241, 0.3);
+            color: white;
+        }
+
+        .btn-view-file {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-view-file:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
     </style>
 </head>
 <body>
@@ -383,10 +536,13 @@
         <section class="card files-card">
             <div class="files-header">
                 <h2>Exámenes Recibidos (.temp_fotos)</h2>
-                <button class="refresh-btn" onclick="fetchFiles()">Actualizar Lista</button>
+                <div style="display: flex; gap: 0.8rem;">
+                    <button class="btn-clear" onclick="clearAllFiles()">Borrar Temporales</button>
+                    <button class="refresh-btn" onclick="fetchFiles()">Actualizar Lista</button>
+                </div>
             </div>
 
-            <div id="file-list-container" class="file-list">
+            <div id="file-list-container" style="overflow-y: auto; max-height: 65vh; padding-right: 0.5rem;">
                 <!-- Se llenará dinámicamente -->
             </div>
         </section>
@@ -461,22 +617,77 @@
                     return;
                 }
 
-                container.innerHTML = files.map(file => {
-                    const date = new Date(file.mtime);
-                    const dateFormatted = date.toLocaleTimeString() + ' - ' + date.toLocaleDateString();
+                // Agrupar archivos por studentName_dateStr
+                const groups = {};
+                files.forEach(file => {
+                    const parts = file.name.split('_pag');
+                    const groupKey = parts[0] || 'Anonimo';
                     
+                    if (!groups[groupKey]) {
+                        groups[groupKey] = [];
+                    }
+                    groups[groupKey].push(file);
+                });
+
+                // Renderizar los grupos
+                container.innerHTML = Object.keys(groups).map(groupKey => {
+                    const groupFiles = groups[groupKey];
+                    // Ordenar por número de página
+                    groupFiles.sort((a, b) => {
+                        const aPage = parseInt((a.name.match(/_pag(\d+)/) || [, 0])[1]);
+                        const bPage = parseInt((b.name.match(/_pag(\d+)/) || [, 0])[1]);
+                        return aPage - bPage;
+                    });
+
+                    // Prettify el nombre del grupo
+                    const nameParts = groupKey.split('_');
+                    const studentName = nameParts[0].replace(/_/g, ' ');
+                    let dateFormatted = '';
+                    if (nameParts[1] && nameParts[2]) {
+                        const dateStr = nameParts[1];
+                        const timeStr = nameParts[2].replace(/-/g, ':');
+                        dateFormatted = `${dateStr} ${timeStr}`;
+                    }
+
+                    // Convertimos la lista del grupo a cadena segura para pasar a la función
+                    const groupFilesData = groupFiles.map(f => ({ name: f.name, url: f.url }));
+
                     return `
-                        <div class="file-item">
-                            <img class="file-thumbnail" src="${file.url}" alt="${file.name}" onclick="openModal('${file.url}')">
-                            <div class="file-info">
-                                <div class="file-name" title="${file.name}">${file.name}</div>
-                                <div class="file-meta">
-                                    <span>${formatBytes(file.size)}</span>
-                                    <span>${dateFormatted}</span>
+                        <div class="group-card">
+                            <div class="group-header">
+                                <div class="group-title">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px;stroke:currentColor;fill:none;" viewBox="0 0 24 24" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                                    </svg>
+                                    <span>${studentName} <span style="font-size:0.8rem;color:var(--text-muted);font-weight:400;margin-left:0.5rem;">(${dateFormatted})</span></span>
+                                </div>
+                                <div class="group-actions">
+                                    <button class="btn-copy-group" onclick='copyGroupToClipboard(${JSON.stringify(groupFilesData)})'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" style="width:14px;height:14px;fill:none;stroke:currentColor;" viewBox="0 0 24 24" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5A3.375 3.375 0 006.375 7.5H5.25a2.25 2.25 0 00-2.25 2.25v6.75A2.25 2.25 0 005.25 19.5h10.5a.75.75 0 00.75-.75z" />
+                                        </svg>
+                                        Copiar Grupo
+                                    </button>
                                 </div>
                             </div>
-                            <div class="file-actions">
-                                <button class="btn btn-primary" onclick="openModal('${file.url}')">Ver Completo</button>
+                            <div class="file-grid">
+                                ${groupFiles.map(file => {
+                                    const pageName = file.name.match(/_pag(\d+)/) ? `Página ${file.name.match(/_pag(\d+)/)[1]}` : file.name;
+                                    return `
+                                        <div class="file-item-mini">
+                                            <img class="file-thumbnail-mini" src="${file.url}" alt="${file.name}" onclick="openModal('${file.url}')">
+                                            <div class="file-name-mini" title="${file.name}">${pageName}</div>
+                                            <div class="file-actions-mini">
+                                                <button class="btn-mini btn-copy-file" onclick="copyImageToClipboard('${file.url}')">
+                                                    Copiar
+                                                </button>
+                                                <button class="btn-mini btn-view-file" onclick="openModal('${file.url}')">
+                                                    Ver
+                                                </button>
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('')}
                             </div>
                         </div>
                     `;
@@ -490,6 +701,152 @@
                     </div>
                 `;
             }
+        }
+
+        // Función para copiar una foto al portapapeles en formato PNG
+        async function copyImageToClipboard(imgUrl) {
+            try {
+                alertToast("Convirtiendo y copiando imagen...", false, 1500);
+                const pngBlob = await convertToPng(imgUrl);
+                
+                await navigator.clipboard.write([
+                    new ClipboardItem({ [pngBlob.type]: pngBlob })
+                ]);
+                
+                alertToast("¡Foto copiada al portapapeles!");
+            } catch (err) {
+                console.error("Error al copiar imagen:", err);
+                alertToast("Error al copiar imagen. Intenta con clic derecho -> copiar.", true);
+            }
+        }
+
+        // Convertir imagen a PNG usando un Canvas
+        function convertToPng(imgSrc) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.crossOrigin = "Anonymous";
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.naturalWidth;
+                    canvas.height = img.naturalHeight;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0);
+                    canvas.toBlob((blob) => {
+                        if (blob) {
+                            resolve(blob);
+                        } else {
+                            reject(new Error("No se pudo convertir a blob PNG"));
+                        }
+                    }, 'image/png');
+                };
+                img.onerror = (e) => reject(new Error("Error al cargar la imagen para conversión: " + e.message));
+                img.src = imgSrc;
+            });
+        }
+
+        // Copiar un grupo entero de fotos al portapapeles como HTML con imágenes base64
+        async function copyGroupToClipboard(files) {
+            try {
+                alertToast("Procesando grupo de fotos...", false, 5000);
+                
+                const promises = files.map(async (file) => {
+                    const response = await fetch(file.url);
+                    const blob = await response.blob();
+                    const base64 = await blobToBase64(blob);
+                    return `<img src="${base64}" alt="${file.name}" style="max-width:100%; margin-bottom:10px;"><br>`;
+                });
+                
+                const imgTags = await Promise.all(promises);
+                const htmlContent = imgTags.join('');
+                
+                const htmlBlob = new Blob([htmlContent], { type: 'text/html' });
+                const textBlob = new Blob([files.map(f => window.location.origin + f.url).join('\n')], { type: 'text/plain' });
+                
+                await navigator.clipboard.write([
+                    new ClipboardItem({
+                        'text/html': htmlBlob,
+                        'text/plain': textBlob
+                    })
+                ]);
+                
+                alertToast("¡Grupo copiado al portapapeles en formato enriquecido!");
+            } catch (err) {
+                console.error("Error al copiar grupo:", err);
+                alertToast("Fallo al copiar grupo como imágenes. Copiando enlaces como texto...", true);
+                try {
+                    const urls = files.map(f => window.location.origin + f.url).join('\n');
+                    await navigator.clipboard.writeText(urls);
+                } catch (e) {
+                    console.error("Fallback fallido:", e);
+                }
+            }
+        }
+
+        // Convertir Blob a Base64
+        function blobToBase64(blob) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(blob);
+            });
+        }
+
+        // Borrar todos los archivos temporales en el servidor
+        async function clearAllFiles() {
+            if (!confirm("¿Estás seguro de que deseas borrar permanentemente todas las fotos en la carpeta temporal?")) {
+                return;
+            }
+            
+            try {
+                const response = await fetch('/clear', { method: 'POST' });
+                const data = await response.json();
+                if (data.success) {
+                    alertToast(data.message);
+                    fetchFiles();
+                } else {
+                    alertToast("Error: " + data.message, true);
+                }
+            } catch (error) {
+                console.error("Error al borrar archivos:", error);
+                alertToast("Error de conexión al intentar borrar los archivos.", true);
+            }
+        }
+
+        // Notificaciones Toast estilo Premium
+        function alertToast(message, isError = false, duration = 3000) {
+            let toast = document.getElementById('toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'toast';
+                toast.style.position = 'fixed';
+                toast.style.bottom = '20px';
+                toast.style.right = '20px';
+                toast.style.padding = '12px 24px';
+                toast.style.borderRadius = '8px';
+                toast.style.color = 'white';
+                toast.style.fontWeight = '600';
+                toast.style.zIndex = '9999';
+                toast.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                toast.style.transform = 'translateY(100px)';
+                toast.style.opacity = '0';
+                toast.style.boxShadow = '0 10px 25px -5px rgba(0, 0, 0, 0.5)';
+                toast.style.fontFamily = "'Outfit', sans-serif";
+                toast.style.fontSize = '0.9rem';
+                document.body.appendChild(toast);
+            }
+            
+            toast.style.backgroundColor = isError ? '#ef4444' : '#10b981';
+            toast.style.border = isError ? '1px solid rgba(239, 68, 68, 0.2)' : '1px solid rgba(16, 185, 129, 0.2)';
+            toast.textContent = message;
+            toast.style.transform = 'translateY(0)';
+            toast.style.opacity = '1';
+            
+            // Forzar reflow antes de ocultar
+            setTimeout(() => {
+                toast.style.transform = 'translateY(100px)';
+                toast.style.opacity = '0';
+            }, duration);
         }
 
         // Modal triggers

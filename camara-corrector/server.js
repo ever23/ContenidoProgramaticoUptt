@@ -97,6 +97,30 @@ app.get('/files', (req, res) => {
     });
 });
 
+// Endpoint para borrar todas las fotos temporales
+app.post('/clear', (req, res) => {
+    fs.readdir(uploadDir, (err, files) => {
+        if (err) {
+            return res.status(500).json({ success: false, message: 'No se pudo leer la carpeta de fotos.' });
+        }
+        
+        let deletedCount = 0;
+        files.forEach(file => {
+            if (!file.startsWith('.')) {
+                try {
+                    fs.unlinkSync(path.join(uploadDir, file));
+                    deletedCount++;
+                } catch (e) {
+                    console.error(`Error al eliminar ${file}:`, e);
+                }
+            }
+        });
+        
+        console.log(`[Limpieza] Eliminados ${deletedCount} archivos temporales.`);
+        res.json({ success: true, message: `Se eliminaron ${deletedCount} fotos con éxito.` });
+    });
+});
+
 // Endpoint para obtener la IP del servidor
 app.get('/ip', (req, res) => {
     res.json({ ip: localIP });
