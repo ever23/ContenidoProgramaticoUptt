@@ -1,7 +1,6 @@
 {
   "name": "algoritmica-i-ii",
   "version": "1.0.0",
-  "type": "module",
   "description": "Ejercicios de Algorítmica y Programación - Trimestre 2",
   "dependencies": {
     "prompt-sync": "^4.2.0"

@@ -7,8 +7,17 @@ const app = express();
 app.use(express.json());
 app.use(express.static('public'));
 
-// Hacer pública la carpeta de fotos para poder verlas en el navegador
-app.use('/fotos', express.static('uploads'));
+// Ruta específica para servir las fotos bajo demanda (sin exponer toda la carpeta públicamente)
+app.get('/fotos/:nombreArchivo', (req, res) => {
+    const nombreArchivo = req.params.nombreArchivo;
+    const rutaAbsoluta = path.join(__dirname, 'uploads', nombreArchivo);
+
+    res.sendFile(rutaAbsoluta, (err) => {
+        if (err) {
+            res.status(404).json({ success: false, mensaje: "Foto no encontrada." });
+        }
+    });
+});
 
 // --- CONFIGURACIÓN DE MULTER ---
 const storage = multer.diskStorage({

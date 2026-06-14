@@ -3,7 +3,7 @@
 ### Eje Temático: Almacenamiento y Gestión de Archivos
 #### Unidades Curriculares: Unidades 8, 9 y 10
 
----
+--- 
 
 ## 🧭 Introducción: El Problema de la Memoria Volátil
 En el estado actual de nuestra aplicación, hemos logrado que el Frontend envíe datos (como un nuevo usuario registrado) a nuestro servidor Backend en Node.js, y que el servidor los reciba e incluso los procese.
@@ -46,9 +46,121 @@ En Express.js, recibir estos "pedazos" binarios y volver a ensamblarlos para gua
 
 Multer se encarga automáticamente de interceptar las peticiones `multipart`, agarrar el archivo subido y guardarlo en una carpeta física de nuestro servidor (ej. `/uploads/`), dejando un registro en el objeto request (`req.file`) con la información (nombre original, peso, ruta final) para que nosotros podamos guardarlo lógicamente.
 
+### 2.3 Implementación del Cliente (Frontend con Fetch y FormData)
+Para enviar un archivo desde el navegador al servidor, no usamos JSON. Usamos la interfaz nativa `FormData`, la cual construye automáticamente un cuerpo de petición en formato `multipart/form-data`.
+
+```html
+<!-- index.html -->
+<form id="formularioRegistro">
+    <input type="text" id="nombre" placeholder="Tu Nombre" required>
+    <input type="file" id="fotoPerfil" accept="image/*" required>
+    <button type="submit">Registrar y Subir Foto</button>
+</form>
+
+<script>
+document.getElementById('formularioRegistro').addEventListener('submit', async (e) => {
+    e.preventDefault(); // Evitamos que la página se recargue
+
+    // 1. Obtenemos el archivo seleccionado
+    const inputFoto = document.getElementById('fotoPerfil');
+    const archivo = inputFoto.files[0];
+    const nombre = document.getElementById('nombre').value;
+
+    // 2. Construimos el FormData
+    const formData = new FormData();
+    formData.append('nombreUsuario', nombre); // Dato de texto
+    formData.append('foto', archivo);         // Dato binario (el archivo)
+
+    // 3. Enviamos mediante Fetch
+    try {
+        const respuesta = await fetch('/api/subir-perfil', {
+            method: 'POST',
+            // IMPORTANTE: NO configuramos 'Content-Type'. 
+            // Fetch establece automáticamente 'multipart/form-data' al enviar un objeto FormData.
+            body: formData
+        });
+
+        const resultado = await respuesta.json();
+        console.log("Respuesta del servidor:", resultado);
+    } catch (error) {
+        console.error("Error al enviar:", error);
+    }
+});
+</script>
+```
+
+### 2.4 Recepción y Envío de Archivos (Backend)
+En el servidor, usaremos `multer` para interceptar el archivo y guardarlo físicamente en disco. Luego, crearemos una ruta específica que tome ese archivo y lo envíe al cliente de forma controlada.
+
+```javascript
+// Servidor Node.js (Backend con Multer)
+const express = require('express');
+const multer = require('multer');
+const path = require('path');
+
+const app = express();
+
+// 1. Configurar Multer: Dónde y cómo guardar los archivos
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        // Carpeta donde se guardarán (debe existir o Node lanzará error)
+        cb(null, 'uploads/'); 
+    },
+    filename: (req, file, cb) => {
+        // Renombramos el archivo para evitar colisiones (ej. usando un número aleatorio)
+        const sufijoUnico = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        const extension = path.extname(file.originalname);
+        cb(null, file.fieldname + '-' + sufijoUnico + extension);
+    }
+});
+
+const upload = multer({ storage: storage });
+
+// 3. Ruta POST que recibe el FormData
+// upload.single('foto') intercepta el archivo que vino con el nombre 'foto'
+app.post('/api/subir-perfil', upload.single('foto'), (req, res) => {
+    
+    // req.file contiene la información del archivo guardado físicamente
+    // req.body contiene los campos de texto normales (nombreUsuario)
+    
+    if (!req.file) {
+        return res.status(400).json({ error: "No se subió ninguna imagen" });
+    }
+
+    const nombreUsuario = req.body.nombreUsuario;
+    const rutaImagen = `/uploads/${req.file.filename}`;
+
+    // ¡Aquí se combinaría con el módulo 'fs' para guardar estos datos en un JSON!
+
+    res.status(201).json({ 
+        mensaje: "Perfil creado exitosamente",
+        usuario: nombreUsuario,
+        rutaFoto: rutaImagen
+    });
+});
+
+// 4. Ruta GET para servir el archivo bajo demanda
+// No exponemos toda la carpeta públicamente, servimos un archivo específico
+app.get('/uploads/:nombreArchivo', (req, res) => {
+    const nombreArchivo = req.params.nombreArchivo;
+    
+    // Construimos la ruta absoluta al archivo
+    const rutaAbsoluta = path.join(__dirname, 'uploads', nombreArchivo);
+
+    // Enviamos el archivo al cliente
+    res.sendFile(rutaAbsoluta, (err) => {
+        if (err) {
+            res.status(404).json({ error: "Archivo no encontrado" });
+        }
+    });
+});
+
+app.listen(3000, () => console.log('Servidor de Archivos Inicializado.'));
+```
+
 ---
 
-## 💻 Laboratorio: Servidor Node con Persistencia Base
+## 💻 Laboratorio: Servidor Node con Persistencia Base JSON
 
 Vamos a programar una ruta POST en el backend que reciba datos de un formulario y los guarde permanentemente en un archivo JSON en el disco duro, garantizando que sobrevivan a reinicios del sistema.
 
@@ -109,3 +221,5 @@ app.listen(3000, () => console.log('Servidor con Persistencia Inicializado.'));
 - **Bloqueo del Hilo Principal (Thread Blocking):** Anti-patrón severo en entornos asíncronos monohilo (como Node.js) donde el uso de funciones síncronas de I/O de disco (`writeFileSync`) detiene la ejecución completa del servidor, causando degradación extrema de la concurrencia.
 - **Multipart/form-data:** Encodificación estándar de tipo de medio (MIME) utilizada en HTTP para envíos complejos que amalgaman datos de texto plano con contenido de formato binario (como archivos pesados o imágenes) en una única transacción multipartita.
 - **Stream (Flujo de Datos):** Abstracción de programación para secuencias continuas y asíncronas de datos, procesados progresivamente en fragmentos (chunks) en lugar de cargarse enteramente en memoria RAM, vital para la manipulación eficiente de archivos grandes.
+- **FormData:** Interfaz nativa de JavaScript que permite construir un conjunto de pares clave/valor que representan los campos de un formulario y sus valores, ideal para enviar datos binarios vía Fetch.
+- **Envío de Archivos (`res.sendFile`):** Método de Express que transfiere un archivo físico desde la ruta especificada en el servidor hacia la conexión HTTP del cliente, permitiendo servir contenido multimedia de forma controlada sin exponer carpetas completas.
