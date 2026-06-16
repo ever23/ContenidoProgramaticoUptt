@@ -1,9 +1,9 @@
 # Propuesta de Innovación Curricular: Programación II (2026)
-**Campo de Investigación:** Informática
-**Área de Investigación:** Informática Aplicada
-**Línea de Investigación Principal:** Desarrollo de Aplicaciones
-**Línea de Investigación Secundaria:** Ingeniería del Software
-**Enfoque:** Profesionalización del Desarrollo mediante Arquitectura de Capas, Persistencia y Despliegue Real
+### **Campo de Investigación:** Informática
+### **Área de Investigación:** Informática Aplicada
+### **Línea de Investigación Principal:** Desarrollo de Aplicaciones
+### **Línea de Investigación Secundaria:** Ingeniería del Software
+### **Enfoque:** Profesionalización del Desarrollo mediante Arquitectura de Capas, Persistencia y Despliegue Real
 
 ## Justificación Pedagógica e Investigativa
 
