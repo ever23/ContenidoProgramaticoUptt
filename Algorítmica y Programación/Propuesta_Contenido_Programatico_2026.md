@@ -1,9 +1,9 @@
 # Propuesta de Innovación Curricular: Algorítmica y Programación (2026)
-**Campo de Investigación:** Informática
-**Área de Investigación:** Informática Aplicada
-**Línea de Investigación Principal:** Ingeniería del Software
-**Línea de Investigación Secundaria:** Desarrollo de Aplicaciones
-**Enfoque:** Construcción del Pensamiento Lógico-Algorítmico mediante un Ecosistema Unificado
+### **Campo de Investigación:** Informática
+### **Área de Investigación:** Informática Aplicada
+### **Línea de Investigación Principal:** Ingeniería del Software
+### **Línea de Investigación Secundaria:** Desarrollo de Aplicaciones
+### **Enfoque:** Construcción del Pensamiento Lógico-Algorítmico mediante un Ecosistema Unificado
 
 ## Justificación Pedagógica e Investigativa
 
