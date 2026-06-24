@@ -84,8 +84,8 @@ Solo retorna `true` si **ambas** condiciones se cumplen obligatoriamente.
 | `false` | `true`  | `false`  |
 | `false` | `false` | `false`  |
 
-#### 🟢 Tabla de la Verdad: Operador OR (`||`) - *La Flexibilidad*
-Retorna `true` si **al menos una** de las condiciones se cumple.
+#### 🟢 Tabla de la Verdad: Operador OR (`&#124;&#124;`) - *La Flexibilidad*
+Retorna `true` si **al menos una** de las condiciones se cumple 1.
 
 | Condición A | Condición B | Resultado (`A &#124;&#124; B`) |
 | :---: | :---: | :---: |
