@@ -49,14 +49,14 @@ Al ejecutar la comparación, estos operadores **siempre formulan una pregunta ce
 
 | Operador | Denominación | Comportamiento en JavaScript |
 | :---: | :--- | :--- |
-| `==` | Igualdad Abstracta | Compara valores tras realizar una coerción de tipos implícita. |
-| `===` | **Igualdad Estricta** | Compara tanto el valor como el tipo de dato; no permite conversión. *(Recomendado)* |
-| `!=` | Desigualdad Abstracta | Verdadero si los valores difieren tras la coerción de tipos. |
-| `!==` | **Desigualdad Estricta**| Verdadero si el valor o el tipo de dato son diferentes. |
-| `>` / `<` | Mayor / Menor que | Evaluación de magnitud numérica o comparación lexicográfica de cadenas. |
-| `>=` / `<=`| Mayor/Menor o igual | Evaluación inclusiva del valor de frontera. |
+| <code>=&zwnj;=</code> | Igualdad Abstracta | Compara valores tras realizar una coerción de tipos implícita. |
+| <code>=&zwnj;=&zwnj;=</code> | **Igualdad Estricta** | Compara tanto el valor como el tipo de dato; no permite conversión. *(Recomendado)* |
+| <code>!&zwnj;=</code> | Desigualdad Abstracta | Verdadero si los valores difieren tras la coerción de tipos. |
+| <code>!&zwnj;=&zwnj;=</code> | **Desigualdad Estricta** | Verdadero si el valor o el tipo de dato son diferentes. |
+| <code>&gt;</code> / <code>&lt;</code> | Mayor / Menor que | Evaluación de magnitud numérica o comparación lexicográfica de cadenas. |
+| <code>&gt;&zwnj;=</code> / <code>&lt;&zwnj;=</code> | Mayor/Menor o igual | Evaluación inclusiva del valor de frontera. |
 
-> **⚠️ Advertencia Profesional:** En el desarrollo con JavaScript, el uso de la igualdad estricta (`===`) es el **estándar obligatorio de la industria** para evitar comportamientos impredecibles derivados de la coerción automática. Por ejemplo, `1 == "1"` retorna `true`, pero `1 === "1"` retorna `false`.
+> **⚠️ Advertencia Profesional:** En el desarrollo con JavaScript, el uso de la igualdad estricta (<code>=&zwnj;=&zwnj;=</code>) es el **estándar obligatorio de la industria** para evitar comportamientos impredecibles derivados de la coerción automática. Por ejemplo, <code>1 =&zwnj;= "1"</code> retorna `true`, pero <code>1 =&zwnj;=&zwnj;= "1"</code> retorna `false`.
 
 ### 3.2 Conectores Lógicos: AND, OR y NOT
 
@@ -87,7 +87,7 @@ Solo retorna `true` si **ambas** condiciones se cumplen obligatoriamente.
 #### 🟢 Tabla de la Verdad: Operador OR (`||`) - *La Flexibilidad*
 Retorna `true` si **al menos una** de las condiciones se cumple.
 
-| Condición A | Condición B | Resultado (`A || B`) |
+| Condición A | Condición B | Resultado (`A &#124;&#124; B`) |
 | :---: | :---: | :---: |
 | `true`  | `true`  | **`true`** |
 | `true`  | `false` | **`true`** |
